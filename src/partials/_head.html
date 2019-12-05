@@ -21,7 +21,7 @@
 <meta name="twitter:title" content="<%= project.title %>">
 <meta name="twitter:site" content="@nprviz">
 <meta name="twitter:url" content="<%= project.url %>">
-<meta name="twitter:image" content="<%= project.url + project.image %>">
+<meta name="twitter:image" content="<%= project.socialImage || project.url + project.image %>">
 <meta name="twitter:description" content="<%= project.description %>">
 
 <!-- Social sharing meta -->
@@ -29,7 +29,7 @@
 <meta property="og:title" content="<%= project.title %>">
 <meta property="og:site_name" content="NPR Visuals">
 <meta property="og:url" content="<%= project.url %>">
-<meta property="og:image" content="<%= project.url + project.image %>">
+<meta property="og:image" content="<%= project.socialImage || project.url + project.image %>">
 <meta property="og:description" content="<%= project.description %>">
 
 <!-- Facebook-specific meta -->

@@ -1,2 +1,2 @@
 require("./lib/pym");
-require("./update");
+require("./liveblog");

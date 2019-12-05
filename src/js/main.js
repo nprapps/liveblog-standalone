@@ -5,4 +5,4 @@ TODO:
 
 */
 
-require("./update");
+require("./liveblog");

@@ -5,7 +5,11 @@
 %>
 <html lang="en-US">
   <head>
-    <%= t.include("partials/_head.html", grunt.data.json) %>
+    <%= t.include("partials/_head.html", { project: Object.assign(grunt.data.json.project, {
+      title: config.socialHeadline,
+      description: config.socialDescription,
+      socialImage: config.socialImage
+    })}) %>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
