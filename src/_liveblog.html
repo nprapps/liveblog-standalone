@@ -1,7 +1,9 @@
 <%
 var { typogrify } = require("typogr");
-var doc = grunt.data.archieml.liveblog;
-var config = doc.config;
+%>
+<main class="liveblog">
+  <h1><%= config.headline %></h1>
+<%
 var lookup = {};
 var posts = doc.posts.filter(function(post) {
   lookup[post.slug] = post;
@@ -30,3 +32,4 @@ posts.sort((a, b) => b.published - a.published).forEach(function(post) {
 <%
 });
 %>
+</main>

@@ -13,9 +13,10 @@
     "src/css/seed.less": "build/style.css"
   },
   "scripts": {
-    "src/js/main.js": "build/app.js"
+    "src/js/main.js": "build/app.js",
+    "src/js/embedded.js": "build/embedded.js"
   },
-  "title": "",
+  "title": "Liveblog",
   "description": "",
   "url": "",
   "image": "assets/logo.png",
