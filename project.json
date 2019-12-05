@@ -1,0 +1,33 @@
+{
+  "s3": {
+    "stage": {
+      "bucket": "stage-apps.npr.org",
+      "path": "liveblog-standalone"
+    },
+    "live": {
+      "bucket": "apps.npr.org",
+      "path": "liveblog-standalone"
+    }
+  },
+  "styles": {
+    "src/css/seed.less": "build/style.css"
+  },
+  "scripts": {
+    "src/js/main.js": "build/app.js"
+  },
+  "title": "",
+  "description": "",
+  "url": "",
+  "image": "assets/logo.png",
+  "analytics": {
+    "topicIDs": [],
+    "primaryTopic": "",
+    "secondaryTopics": []
+  },
+  "sheets": [],
+  "docs": {
+    "liveblog": "1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM"
+  },
+  "embedded": false,
+  "production": false
+}
