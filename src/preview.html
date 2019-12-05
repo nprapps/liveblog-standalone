@@ -11,7 +11,7 @@
     </header>
 
     <main class="liveblog">
-      <%= t.include("_liveblog.html", { flags: {} }) %>
+      <%= t.include("_liveblog.html", { flags: { unpublished: true } }) %>
     </main>
 
     <script src="app.js" async></script>

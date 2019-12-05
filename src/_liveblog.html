@@ -1,0 +1,32 @@
+<%
+var { typogrify } = require("typogr");
+var doc = grunt.data.archieml.liveblog;
+var config = doc.config;
+var lookup = {};
+var posts = doc.posts.filter(function(post) {
+  lookup[post.slug] = post;
+  if (typeof post.published == "string") post.published = Date.parse(post.published);
+  return flags.unpublished || post.published;
+});
+var featured = lookup[config.featured];
+if (featured) {
+%>
+<article class="featured post" id="<%= featured.slug %>">
+  <h2><%= typogrify(featured.headline) %></h2>
+  <div class="contents">
+    <%= t.renderMarkdown(featured.text) %>
+  </div>
+</article>
+<%
+}
+posts.sort((a, b) => b.published - a.published).forEach(function(post) {
+%>
+<article class="post" id="<%= post.slug %>">
+  <h2><%= typogrify(post.headline) %></h2>
+  <div class="contents">
+    <%= t.renderMarkdown(post.text) %>
+  </div>
+</article>
+<%
+});
+%>
