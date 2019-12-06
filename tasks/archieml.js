@@ -20,6 +20,8 @@ module.exports = function(grunt) {
     files.forEach(function(f) {
       var name = path.basename(f).replace(/(\.docs)?\.txt$/, "");
       var contents = grunt.file.read(f);
+      // force fields to be lower-case
+      contents = contents.replace(/^[A-Z]\w+\:/gm, w => w[0].toLowerCase() + w.slice(1));
       var parsed = archieml.load(contents);
       grunt.data.archieml[name] = parsed;
     });

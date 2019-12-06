@@ -45,6 +45,7 @@ module.exports = function(grunt) {
         body.forEach(function(block) {
           if (!block.paragraph) return;
           block.paragraph.elements.forEach(function(element) {
+            if (!element.textRun) return;
             var { content, textStyle } = element.textRun;
             if (content.trim()) for (var f in formatters) {
               if (textStyle[f]) {
@@ -55,8 +56,6 @@ module.exports = function(grunt) {
           });
         });
 
-        // force fields to be lower-case
-        text = text.replace(/^[A-Z]\w+\:/m, w => w[0].toLowerCase() + w.slice(1));
         console.log(`Writing document as data/${name}`);
         grunt.file.write(path.join("data", name), text);
       },
