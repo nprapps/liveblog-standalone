@@ -5,3 +5,66 @@ main.liveblog {
   max-width: 800px;
 }
 
+article.post {
+  display: flex;
+  padding: 10px;
+  font-family: @serif;
+  font-size: 16px;
+  margin: 10px 0;
+  border-top: 1px solid #ddd;
+
+  &.featured {
+    display: block;
+    background: #EEE;
+    .gotham();
+    border-top: none;
+
+    h2 {
+      font-size: 16px;
+    }
+  }
+
+  &.draft {
+    background: #FFC;
+  }
+
+  .metadata {
+    flex: 0 0 150px;
+    color: #f03828;
+    .gotham();
+    font-size: 14px;
+
+    .time {
+      font-weight: bold;
+    }
+  }
+
+  .contents {
+    flex: 1;
+  }
+
+  h2 {
+    margin: 0 0 16px;
+    .gotham();
+    font-weight: bold;
+  }
+
+  .author {
+    .gotham();
+    font-weight: bold;
+    font-size: 14px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .back-to-top {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: #888;
+    .gotham();
+    font-size: 13px;
+  }
+}

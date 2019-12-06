@@ -1,19 +1,33 @@
 <%
 var { typogrify } = require("typogr");
+var { format } = require("date-fns-tz");
 %>
 <main class="liveblog">
   <h1><%= config.headline %></h1>
 <%
 var lookup = {};
-var posts = doc.posts.filter(function(post) {
+var posts = doc.posts.filter(function(post, index) {
   lookup[post.slug] = post;
-  if (typeof post.published == "string") post.published = Date.parse(post.published);
+  post.index = index;
+  // only do this one time through the template
+  if (typeof post.published == "string") {
+    post.published = post.published.trim() == "false" ? false : Date.parse(post.published);
+    if (post.published) post.date = new Date(post.published);
+  }
   return flags.unpublished || post.published;
 });
+posts.sort(function(a, b) {
+  if (!a.published && !b.published) {
+    // put unpublished at the top in order
+    return a.index - b.index;
+  }
+  return (b.published || Infinity) - (a.published || Infinity);
+});
 var featured = lookup[config.featured];
+posts = posts.filter(p => p != featured);
 if (featured) {
 %>
-<article class="featured post" id="<%= featured.slug %>">
+<article class="featured post" id="featured">
   <h2><%= typogrify(featured.headline) %></h2>
   <div class="contents">
     <%= t.renderMarkdown(featured.text) %>
@@ -21,12 +35,28 @@ if (featured) {
 </article>
 <%
 }
-posts.sort((a, b) => b.published - a.published).forEach(function(post) {
+posts.forEach(function(post) {
 %>
-<article class="post" id="<%= post.slug %>">
-  <h2><%= typogrify(post.headline) %></h2>
+<article class="post <%= post.published ? "published" : "draft" %>" id="<%= post.slug %>">
+  <div class="metadata">
+    <div class="time">
+      <%= post.date
+        ? format(post.date, "h:mm a 'EST'", { timeZone: "Americas/New York" })
+        : "unpublished" %>
+    </div>
+    <div class="date">
+      <%= post.date
+        ? format(post.date, "MMM. d", { timeZone: "Americas/New York" }) 
+        : "" %>
+    </div>
+  </div>
   <div class="contents">
-    <%= t.renderMarkdown(post.text) %>
+    <h2><%= typogrify(post.headline) %></h2>
+    <%= t.renderMarkdown(`
+${post.text}
+
+<span class="author">&mdash; ${post.author}</span>`) %>
+  <a class="back-to-top" href="#featured">&uarr; Back to top</a>
   </div>
 </article>
 <%

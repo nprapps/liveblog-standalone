@@ -19,14 +19,14 @@ var getDocument = function(url) {
 var updatePage = async function() {
   console.log("Running update...");
   try {
-    var updated = await getDocument("index.html");
+    var updated = await getDocument(window.location.href);
     var from = document.querySelector(diffSelector);
     var to = updated.querySelector(diffSelector);
     if (!to) return console.log("Remote document was missing liveblog content.");
     morphdom(from, to, {
       onBeforeElChildrenUpdated: function(from, to) {
         // do not update the children of custom elements
-        // this lets us prevent re-init for tweets, images, etc.
+        // this lets us prevent re-init for tweets, lazy images, videos, etc.
         if (from.tagName.match(/-/)) {
           return false;
         }
