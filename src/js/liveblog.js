@@ -1,5 +1,6 @@
 // load custom element behaviors
 require("./tags/twitter-embed");
+require("./tags/image-embed");
 
 var diffSelector = "main.liveblog";
 var morphdom = require("morphdom");
@@ -17,15 +18,24 @@ var getDocument = function(url) {
 
 var updatePage = async function() {
   console.log("Running update...");
-  var updated = await getDocument("index.html");
-  morphdom(document.querySelector(diffSelector), updated.querySelector(diffSelector), {
-    onBeforeElChildrenUpdated: function(from, to) {
-      // do not update the children of custom elements
-      // this lets us prevent re-init for tweets, images, etc.
-      if (from.tagName.match(/-/)) return false;
-      return true;
-    }
-  });
+  try {
+    var updated = await getDocument("index.html");
+    var from = document.querySelector(diffSelector);
+    var to = updated.querySelector(diffSelector);
+    if (!to) return console.log("Remote document was missing liveblog content.");
+    morphdom(from, to, {
+      onBeforeElChildrenUpdated: function(from, to) {
+        // do not update the children of custom elements
+        // this lets us prevent re-init for tweets, images, etc.
+        if (from.tagName.match(/-/)) {
+          return false;
+        }
+        return true;
+      }
+    });
+  } catch (err) {
+    console.error(err.message);
+  }
 }
 
 setInterval(updatePage, 1000 * 3);
