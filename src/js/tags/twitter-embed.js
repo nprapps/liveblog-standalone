@@ -12,6 +12,10 @@ class TwitterEmbed extends HTMLElement {
     this.readyState = 4;
   }
 
+  static get observedAttributes() {
+    return ["href"];
+  }
+
   attributeChangedCallback() {
     this.populate();
   }

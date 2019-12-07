@@ -30,6 +30,6 @@ module.exports = function(grunt) {
   ]);
   grunt.registerTask("serve", "Start the dev server", ["connect:dev", "watch"]);
   grunt.registerTask("default", ["clean", "static", "serve"]);
-  grunt.registerTask("local", "Begin a local cron cycle", ["static", "connect:dev", "cron:10"]);
+  grunt.registerTask("local", "Begin a local cron cycle", ["clean", "static", "connect:dev", "cron:10"]);
   grunt.registerTask("deploy", "Start deploying on a timer", ["static", "cron:15:publish"]);
 };

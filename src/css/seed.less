@@ -5,6 +5,21 @@ main.liveblog {
   max-width: 800px;
 }
 
+.show-new {
+  background: #f24e40;
+  color: white;
+  .gotham();
+  font-size: 22px;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+
+  &.hidden {
+    display: none;
+  }
+}
+
 article.post {
   display: flex;
   padding: 10px;
@@ -26,6 +41,10 @@ article.post {
 
   &.draft {
     background: #FFC;
+  }
+
+  &.hidden {
+    display: none;
   }
 
   .metadata {

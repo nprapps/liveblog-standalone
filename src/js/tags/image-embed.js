@@ -17,7 +17,7 @@ img:after {
   z-index: 999;
   position: relative;
 }
-`
+`;
 
 class ImageEmbed extends HTMLElement {
   constructor() {
@@ -46,6 +46,10 @@ class ImageEmbed extends HTMLElement {
 
   disconnectedCallback() {
     this.observer.disconnect(this);
+  }
+
+  static get observedAttributes() {
+    return ["src"]
   }
 
   attributeChangedCallback() {

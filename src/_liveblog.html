@@ -35,6 +35,9 @@ if (featured) {
 </article>
 <%
 }
+%>
+<button class="show-new hidden">Show <span class="count">0</span> new posts</button>
+<%
 posts.forEach(function(post) {
 %>
 <article class="post <%= post.published ? "published" : "draft" %>" id="<%= post.slug %>">

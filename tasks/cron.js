@@ -6,7 +6,7 @@ Runs tasks on an automated basis
 
 /** config variables **/
 var tasks = {
-  local: ["docs", "quick"],
+  local: ["docs", "static"],
   publish: ["docs", "quick", "publish:live"]
 };
 
