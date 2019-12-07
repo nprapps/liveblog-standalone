@@ -1,6 +1,7 @@
 <%
 var { typogrify } = require("typogr");
-var { format } = require("date-fns-tz");
+var moment = require("moment-timezone");
+var timezone = "America/New_York";
 %>
 <main class="liveblog">
   <h1><%= config.headline %></h1>
@@ -11,8 +12,7 @@ var posts = doc.posts.filter(function(post, index) {
   post.index = index;
   // only do this one time through the template
   if (typeof post.published == "string") {
-    post.published = post.published.trim() == "false" ? false : Date.parse(post.published);
-    if (post.published) post.date = new Date(post.published);
+    post.published = post.published.trim() == "false" ? false : moment(post.published).tz(timezone);
   }
   return flags.unpublished || post.published;
 });
@@ -43,13 +43,13 @@ posts.forEach(function(post) {
 <article class="post <%= post.published ? "published" : "draft" %>" id="<%= post.slug %>">
   <div class="metadata">
     <div class="time">
-      <%= post.date
-        ? format(post.date, "h:mm a 'EST'", { timeZone: "Americas/New York" })
+      <%= post.published
+        ? post.published.format("h:mm a z")
         : "unpublished" %>
     </div>
     <div class="date">
-      <%= post.date
-        ? format(post.date, "MMM. d", { timeZone: "Americas/New York" }) 
+      <%= post.published
+        ? post.published.format("MMM. D, YYYY")
         : "" %>
     </div>
   </div>

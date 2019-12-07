@@ -44,7 +44,12 @@ module.exports = function(grunt) {
 
         body.forEach(function(block) {
           if (!block.paragraph) return;
+          if (block.paragraph.bullet) {
+            var indent = "  ".repeat(block.paragraph.bullet.nestingLevel || 0);
+            text += indent + "* ";
+          }
           block.paragraph.elements.forEach(function(element) {
+            // console.log(element);
             if (!element.textRun) return;
             var { content, textStyle } = element.textRun;
             if (content.trim()) for (var f in formatters) {
