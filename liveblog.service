@@ -6,10 +6,10 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=5
-User=vagrant
+User=ubuntu
 Environment=NODE_VERSION=12
-WorkingDirectory=/home/vagrant/host/npr/liveblog-standalone
-ExecStart=/home/vagrant/.nvm/nvm-exec grunt local
+WorkingDirectory=~/apps/liveblog-standalone
+ExecStart=/home/ubuntu/.nvm/nvm-exec grunt local
 
 [Install]
 WantedBy=multi-user.target
