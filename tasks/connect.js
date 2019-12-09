@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     connect: {
       dev: {
         options: {
-          hostname: "localhost",
+          // hostname: "localhost",
           useAvailablePort: true,
           port: grunt.option("port") || 8000,
           livereload: grunt.option("reloadport") * 1 || 35739,
