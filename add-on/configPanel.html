@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include("styles.html") ?>
+  </head>
+  <body>
+    <form class="configuration">
+      <fieldset>
+        <label for="authorSheet">Author spreadsheet</label>
+        <input id="authorSheet" value="<?= data.authorSheet ?>">
+      </fieldset>
+      <fieldset>
+        <label for="mediaPrefix">Media prefix</label>
+        <input id="mediaPrefix" value="<?= data.mediaPrefix ?>">
+      </fieldset>
+      <button class="save">Save config</button>
+    </form>
+    <script>
+var save = document.querySelector(".save");
+save.addEventListener("click", function(e) {
+  e.preventDefault();
+  var inputs = document.querySelectorAll(".configuration input");
+  var config = {};
+  for (var input of inputs) {
+    config[input.id] = input.value;
+  }
+  google.script.run
+    .withSuccessHandler(function() {
+      google.script.host.close();
+    })
+    .setConfig(config);
+});
+    </script>
+  </body>
+</html>
+
+

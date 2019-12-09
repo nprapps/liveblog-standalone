@@ -17,7 +17,6 @@ var getDocument = function(url) {
   });
 }
 
-var unseen = 0;
 var showUnseenButton = $.one(".show-new");
 
 showUnseenButton.addEventListener("click", function() {
@@ -76,6 +75,7 @@ var updatePage = async function() {
   } catch (err) {
     console.error(err.message);
   }
+  var unseen = $("article.post.hidden").length;
   if (unseen) {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
     showUnseenButton.classList.remove("hidden");

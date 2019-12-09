@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include("styles.html") ?>
+  </head>
+  <body>
+    <fieldset>
+      <label for="type">Select embed type:</label>
+      <select id="type">
+        <option value="twitter">Tweet</option>
+        <option value="image">Image</option>
+      </select>
+    </fieldset>
+    
+    <form id="twitter">
+      <h2>Twitter</h2>
+      <fieldset>
+        <label for="tweet">Tweet URL</label>
+        <input id="tweet">
+      </fieldset>
+      <button class="add-embed">Add Tweet Embed</button>
+    </form>
+    
+    <form id="image">
+      <h2>Image</h2>
+    </form>
+    
+    <script>
+var typeSelect = document.querySelector("#type");
+var forms = document.querySelectorAll("form");
+var onSelectType = function() {
+  for (var form of forms) {
+    if (form.id == typeSelect.value) {
+      form.removeAttribute("hidden");
+    } else {
+      form.setAttribute("hidden", "");
+    }
+  }
+};
+typeSelect.addEventListener("change", onSelectType);
+onSelectType();
+
+var onClickSubmit = function(e) {
+  e.preventDefault();
+  var button = this;
+  var form = button.closest("form");
+  var inputs = form.querySelectorAll("input, select");
+  var data = {
+    type: typeSelect.value
+  };
+  for (var input of inputs) {
+    data[input.id] = input.value;
+  }
+  google.script.run
+    .withSuccessHandler(function() {
+      google.script.host.close();
+    })
+    .addEmbed(data);
+}
+var buttons = document.querySelectorAll(".add-embed");
+for (var button of buttons) {
+  button.addEventListener("click", onClickSubmit);
+}
+    </script>
+  </body>
+</html>

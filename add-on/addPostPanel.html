@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include("styles.html") ?>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <label for="headline">Headline</label>
+        <input id="headline">
+      </fieldset>
+      <fieldset>
+        <label for="author">Author</label>
+        <select id="author">
+        <? data.authors.forEach(function(row) { ?>
+          <option value="<?= row.key ?>"><?= row.name ?></option>
+        <? }); ?>
+          <option value="other">Other</option>
+        </select>
+        <input id="other" placeholder="Enter name for 'other'">
+      </fieldset>
+      <fieldset>
+        <label for="tags">Tags</label>
+        <input id="tags">
+      </fieldset>
+      <fieldset>
+        <input id="factcheck" type="checkbox">
+        <label for="factcheck">Fact check?</label>
+      </fieldset>
+      <button class="add-post">Add draft</button>
+    </form>
+    <script>
+var otherInput = document.querySelector("#other");
+var authorSelect = document.querySelector("#author");
+var onSelectAuthor = function() {
+  if (authorSelect.value == "other") {
+    otherInput.removeAttribute("hidden");
+  } else {
+    otherInput.setAttribute("hidden", "");
+  }
+};
+authorSelect.addEventListener("change", onSelectAuthor);
+onSelectAuthor();
+
+var addButton = document.querySelector(".add-post");
+addButton.addEventListener("click", function(e) {
+  e.preventDefault();
+  var inputs = document.querySelectorAll("select, input");
+  var postData = {};
+  for (var input of inputs) {
+    postData[input.id] = input.checked || input.value;
+  }
+  google.script.run
+    .withSuccessHandler(function() {
+      google.script.host.close();
+    })
+    .addDraftPost(postData);
+});
+    </script>
+  </body>
+</html>
+
+
