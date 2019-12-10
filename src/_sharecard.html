@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= headline %></title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="robots" content="NOINDEX">
+<head>
+  <title><%= headline %></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="NOINDEX">
 
-        <meta property="og:title" content="<%= headline %>" />
-        <meta name="twitter:title" content="<%= headline %>" />
-        <meta name="description" content="<%= lede %>" />
-        <meta property="og:description" content="<%= lede %>" />
-        <meta name="twitter:description" content="<%= lede %>" />
+  <meta property="og:title" content="<%= headline %>" />
+  <meta name="twitter:title" content="<%= headline %>" />
+  
+  <meta name="description" content="<%= lede %>" />
+  <meta property="og:description" content="<%= lede %>" />
+  <meta name="twitter:description" content="<%= lede %>" />
 
-        <meta property="og:image" content="<%= image %>" />
-        <meta name="twitter:image" content="<%= image %>" />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="512" />
+  <meta property="og:image" content="<%= image %>" />
+  <meta name="twitter:image" content="<%= image %>" />
 
-        <meta property="og:url" content="<%= here %>" />
-        <meta name="twitter:url" content="<%= there %>#<%= slug %>" />
+  <meta property="og:url" content="<%= here %>" />
+  <meta name="twitter:url" content="<%= there %>#<%= slug %>" />
 
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@NPR">
-        <meta name="twitter:creator" content="@NPR">
-        <meta property="fb:app_id" content="138837436154588" />
-        <meta property="fb:admins" content="1594068001" />
-        <meta property="fb:pages" content="10643211755" />
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="NPR.org" />
-    </head>
-    <body>
-        <p>If you are not automatically redirected, <a href="<%= there %>#<%= slug %>">visit the NPR live coverage here</a></p>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NPR">
+  <meta name="twitter:creator" content="@NPR">
+  <meta property="fb:app_id" content="138837436154588">
+  <meta property="article:opinion" content="false">
+  <meta property="article:content_tier" content="free">
+  <meta property="fb:pages" content="10643211755">
+  <meta property="og:site_name" content="NPR.org" />
+</head>
+<body>
+  <p>If you are not automatically redirected, <a href="<%= there %>#<%= slug %>">visit the NPR live coverage here</a></p>
 
-        <script>
-            // Make sure we capture any UTM query parameters passed
-            var redirectURL = '<%= there %>#<%= slug %>' + window.location.search;
+  <script>
+    // Make sure we capture any UTM query parameters passed
+    var redirectURL = '<%= there %>#<%= slug %>' + window.location.search;
 
-            // Using `location.replace()` means that users won't be able to
-            // navigate "back" to this stub page
-            window.location.replace(redirectURL);
-        </script>
-    </body>
+    // Using `location.replace()` means that users won't be able to
+    // navigate "back" to this stub page
+    window.location.replace(redirectURL);
+  </script>
+</body>
 </html>

@@ -71,7 +71,7 @@ module.exports = function(grunt) {
       var there = grunt.data.json.project.url;
       var data = Object.assign({}, post, {
         there,
-        here: `${there}/share/${slug}.html`,
+        here: `${there}share/${slug}.html`,
         lede: post.text.trim().split("\n").shift().replace(/<[^>]+>/g, ""),
         image: there + grunt.data.json.project.image
       });
