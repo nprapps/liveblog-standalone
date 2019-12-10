@@ -62,6 +62,22 @@ module.exports = function(grunt) {
       var output = process(input, data, src);
       grunt.file.write(file.dest, output);
     });
+
+    //output sharecards
+    var posts = grunt.data.archieml.liveblog.posts.filter(p => p.published);
+    var share = template(grunt.file.read("src/_sharecard.html"));
+    posts.forEach(function(post) {
+      var { slug } = post;
+      var there = grunt.data.json.project.url;
+      var data = Object.assign({}, post, {
+        there,
+        here: `${there}/share/${slug}.html`,
+        lede: post.text.trim().split("\n").shift().replace(/<[^>]+>/g, ""),
+        image: there + grunt.data.json.project.image
+      });
+      var output = share(data);
+      grunt.file.write(`build/share/${slug}.html`, output);
+    })
   });
 
 }

@@ -10,7 +10,6 @@ if (window.Notification) {
 var request = async function() {
   if (!window.Notification || Notification.permission == "denied") return;
   var permission = await Notification.requestPermission();
-  console.log(permission);
   if (permission == "granted") {
     enabled = true;
     document.body.classList.add("enabled-notifications");
