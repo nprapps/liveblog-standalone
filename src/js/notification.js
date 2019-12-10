@@ -30,7 +30,7 @@ var alert = async function(text) {
 
 var checkbox = $.one("#enable-notifications");
 checkbox.checked = enabled;
-checkbox.addEventListener("change", function() {
+checkbox.addEventListener("change", async function() {
   var value = this.checked;
   if (!value) {
     enabled = false;
@@ -38,7 +38,7 @@ checkbox.addEventListener("change", function() {
     if (Notification.permission == "granted") {
       enabled = true;
     } else {
-      request();
+      await request();
       this.checked = enabled;
     }
     if (enabled) alert("Notifications are enabled!");

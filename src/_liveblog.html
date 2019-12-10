@@ -52,6 +52,13 @@ posts.forEach(function(post) {
         ? post.published.format("MMM. D, YYYY")
         : "" %>
     </div>
+    <a
+      href="#<%= post.slug %>"
+      class="permalink"
+      data-copy="<%= grunt.data.json.project.url + "#" + post.slug %>">
+        Permalink
+        <div class="copy-message" aria-hidden>Copied!</div>
+    </a>
   </div>
   <div class="contents">
     <h2><%= typogrify(post.headline) %></h2>

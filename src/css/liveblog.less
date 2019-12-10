@@ -18,6 +18,11 @@ main.liveblog {
   }
 }
 
+@keyframes fade-on-copy {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 article.post {
   display: flex;
   padding: 10px;
@@ -53,6 +58,28 @@ article.post {
 
     .time {
       font-weight: bold;
+    }
+
+    .permalink {
+      display: block;
+      position: relative;
+      color: @true;
+
+      .copy-message {
+        display: none;
+        position: absolute;
+        top: calc(~"100% + 4px");
+        background: #333;
+        color: white;
+        padding: 8px;
+        border-radius: 4px;
+        animation: fade-on-copy 2s ease 1s both;
+        pointer-events: none;
+      }
+
+      &.copied .copy-message {
+        display: block;
+      }
     }
   }
 

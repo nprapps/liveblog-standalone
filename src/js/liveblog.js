@@ -2,6 +2,9 @@
 require("./tags/twitter-embed");
 require("./tags/image-embed");
 
+// load independent modules
+require("./clipboard");
+
 var $ = require("./lib/qsa");
 var notifications = require("./notification");
 

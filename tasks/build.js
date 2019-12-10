@@ -76,6 +76,7 @@ module.exports = function(grunt) {
         image: there + grunt.data.json.project.image
       });
       var output = share(data);
+      grunt.log.writeln(`Generated share card: #${slug}`);
       grunt.file.write(`build/share/${slug}.html`, output);
     })
   });
