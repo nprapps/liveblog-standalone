@@ -3,6 +3,7 @@ require("./tags/twitter-embed");
 require("./tags/image-embed");
 
 var $ = require("./lib/qsa");
+var notifications = require("./notification");
 
 var morphdom = require("morphdom");
 
@@ -79,6 +80,7 @@ var updatePage = async function() {
   if (unseen) {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
     showUnseenButton.classList.remove("hidden");
+    notifications.alert(`${unseen} new liveblog posts`);
   }
 }
 

@@ -16,6 +16,11 @@
 
     <header>
       <!-- NPR-specific liveblog stuff goes here -->
+      <div class="notification-options">
+        We can notify you when new posts come in while this tab is open.
+        <input type="checkbox" id="enable-notifications">
+        <label for="enable-notifications">Enable notifications:</label>
+      </div>
     </header>
 
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>

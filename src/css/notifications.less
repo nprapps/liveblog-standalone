@@ -1,0 +1,26 @@
+.notification-options {
+  max-width: 600px;
+  margin: auto;
+  padding: 8px;
+
+  input {
+    .sr-only()
+  }
+
+  input + label {
+    background: @true;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+  }
+
+  input + label:after {
+    content: "✘";
+    display: inline-block;
+    margin-left: 4px;
+  }
+
+  input:checked + label:after {
+    content: "✔";
+  }
+}
