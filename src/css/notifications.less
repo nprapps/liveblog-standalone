@@ -13,19 +13,23 @@
   }
 
   input + label {
-    background: @true;
+    background: #333;
     color: white;
     padding: 4px;
     border-radius: 4px;
+
+    &:after {
+      content: "✘";
+      display: inline-block;
+      margin-left: 4px;
+    }
   }
 
-  input + label:after {
-    content: "✘";
-    display: inline-block;
-    margin-left: 4px;
-  }
-
-  input:checked + label:after {
-    content: "✔";
+  input:checked + label {
+    background: @true;
+    
+    &:after {
+      content: "✔";
+    }
   }
 }

@@ -1,7 +1,13 @@
 var $ = require("./lib/qsa");
 
-var enabled = window.Notification && window.Notification.permission == "granted";
-if (enabled) document.body.classList.add("enabled-notifications");
+var enabled = window.Notification && window.Notification.permission == "granted" && localStorage.enableNotifications;
+
+var setEnabled = function(state) {
+  enabled = localStorage.enableNotifications = Number(state);
+  document.body.classList.toggle("enabled-notifications", state);
+};
+
+setEnabled(enabled);
 
 if (window.Notification) {
   document.body.classList.add("supports-notifications");
@@ -11,8 +17,7 @@ var request = async function() {
   if (!window.Notification || Notification.permission == "denied") return;
   var permission = await Notification.requestPermission();
   if (permission == "granted") {
-    enabled = true;
-    document.body.classList.add("enabled-notifications");
+    setEnabled(true);
   }
 };
 
@@ -33,10 +38,10 @@ checkbox.checked = enabled;
 checkbox.addEventListener("change", async function() {
   var value = this.checked;
   if (!value) {
-    enabled = false;
+    setEnabled(false);
   } else {
     if (Notification.permission == "granted") {
-      enabled = true;
+      setEnabled(true);
     } else {
       await request();
       this.checked = enabled;
