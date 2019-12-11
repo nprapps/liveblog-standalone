@@ -31,6 +31,10 @@ article.post {
   margin: 10px 0;
   border-top: 1px solid #ddd;
 
+  @media @mobile {
+    display: block;
+  }
+
   &.featured {
     display: block;
     background: #EEE;
@@ -67,6 +71,30 @@ article.post {
     .gotham();
     font-size: 13px;
 
+    .datetime {
+      padding-bottom: 8px;
+    }
+
+    @media @mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+
+      .datetime {
+        padding-bottom: 0;
+      }
+
+      .date, .time {
+        display: inline;
+      }
+
+      .time:after {
+        content: "•";
+        margin: 0 4px;
+      }
+    }
+
     .time {
       font-weight: bold;
     }
@@ -75,8 +103,11 @@ article.post {
       display: block;
       position: relative;
       color: #888;
-      margin-top: 10px;
       text-decoration: none;
+
+      @media @mobile {
+        margin-top: 0;
+      }
 
       &:hover, &:focus {
         text-decoration: underline;

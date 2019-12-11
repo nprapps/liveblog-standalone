@@ -55,11 +55,13 @@ posts.forEach(function(post) {
 
 <article class="post <%= post.published ? "published" : "draft" %>" id="<%= post.slug %>">
   <div class="metadata">
-    <div class="time">
-      <%= post.timeString || "unpublished" %>
-    </div>
-    <div class="date">
-      <%= post.dateString || "" %>
+    <div class="datetime">
+      <div class="time">
+        <%= post.timeString || "unpublished" %>
+      </div>
+      <div class="date">
+        <%= post.dateString || "" %>
+      </div>
     </div>
     <a
       href="#<%= post.slug %>"
