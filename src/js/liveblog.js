@@ -54,6 +54,7 @@ var updatePosts = function(articles) {
       console.log(`Added new post!`);
     } else {
       morphdom(from, to, {
+        childrenOnly: true,
         onBeforeElChildrenUpdated: function(from, to) {
           // do not update the children of custom elements
           // this lets us prevent re-init for tweets, lazy images, videos, etc.
@@ -87,6 +88,7 @@ var updatePage = async function() {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
     showUnseenButton.classList.remove("hidden");
     notifications.alert(`${unseen} new liveblog posts`, function() {
+      window.focus();
       onClickUnseen();
       setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
     });
