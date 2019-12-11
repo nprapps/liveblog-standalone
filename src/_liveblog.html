@@ -2,10 +2,8 @@
 var { typogrify } = require("typogr");
 var moment = require("moment-timezone");
 var timezone = "America/New_York";
-%>
-<main class="liveblog">
-  <h1><%= config.headline %></h1>
-<%
+
+// clean up and index posts
 var lookup = {};
 var posts = doc.posts.filter(function(post, index) {
   lookup[post.slug] = post;
@@ -13,6 +11,10 @@ var posts = doc.posts.filter(function(post, index) {
   // only do this one time through the template
   if (typeof post.published == "string") {
     post.published = post.published.trim() == "false" ? false : moment(post.published).tz(timezone);
+    if (post.published) {
+      post.timeString = post.published.format("h:mm a z");
+      post.dateString = post.published.format("MMM. D, YYYY");
+    }
   }
   return flags.unpublished || post.published;
 });
@@ -23,34 +25,41 @@ posts.sort(function(a, b) {
   }
   return (b.published || Infinity) - (a.published || Infinity);
 });
+
+%>
+
+<main class="liveblog">
+  <h1><%= config.headline %></h1>
+<%
 var featured = lookup[config.featured];
 posts = posts.filter(p => p != featured);
 if (featured) {
 %>
+
 <article class="featured post" id="featured">
   <h2><%= typogrify(featured.headline) %></h2>
   <div class="contents">
     <%= t.renderMarkdown(featured.text) %>
   </div>
 </article>
+
 <%
 }
 %>
+
 <button class="show-new hidden">Show <span class="count">0</span> new posts</button>
+
 <%
 posts.forEach(function(post) {
 %>
+
 <article class="post <%= post.published ? "published" : "draft" %>" id="<%= post.slug %>">
   <div class="metadata">
     <div class="time">
-      <%= post.published
-        ? post.published.format("h:mm a z")
-        : "unpublished" %>
+      <%= post.timeString || "unpublished" %>
     </div>
     <div class="date">
-      <%= post.published
-        ? post.published.format("MMM. D, YYYY")
-        : "" %>
+      <%= post.dateString || "" %>
     </div>
     <a
       href="#<%= post.slug %>"
@@ -62,10 +71,17 @@ posts.forEach(function(post) {
   </div>
   <div class="contents">
     <h2><%= typogrify(post.headline) %></h2>
-    <%= t.renderMarkdown(`
-${post.text}
+    
+    <%= t.renderMarkdown(post.text) %>
 
-<span class="author">&mdash; ${post.author}</span>`) %>
+    <% if (post.page) { %>
+    <div class="author">
+      &mdash; <a href="<%= post.page %>"><%= post.author %></a>
+    </div>
+    <% } else { %>
+    <div class="author">&mdash; <%= post.author %></div>
+    <% } %>
+
   <a class="back-to-top" href="#featured">&uarr; Back to top</a>
   </div>
 </article>
