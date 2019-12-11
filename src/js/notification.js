@@ -34,20 +34,22 @@ var alert = async function(text) {
 
 
 var checkbox = $.one("#enable-notifications");
-checkbox.checked = enabled;
-checkbox.addEventListener("change", async function() {
-  var value = this.checked;
-  if (!value) {
-    setEnabled(false);
-  } else {
-    if (Notification.permission == "granted") {
-      setEnabled(true);
+if (checkbox) {
+  checkbox.checked = enabled;
+  checkbox.addEventListener("change", async function() {
+    var value = this.checked;
+    if (!value) {
+      setEnabled(false);
     } else {
-      await request();
-      this.checked = enabled;
+      if (Notification.permission == "granted") {
+        setEnabled(true);
+      } else {
+        await request();
+        this.checked = enabled;
+      }
+      if (enabled) alert("Notifications are enabled!");
     }
-    if (enabled) alert("Notifications are enabled!");
-  }
-});
+  });
+}
 
 module.exports = { request, alert };

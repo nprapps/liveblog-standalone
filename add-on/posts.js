@@ -1,10 +1,10 @@
-var props = PropertiesService.getScriptProperties();
+
 var doc = DocumentApp.getActiveDocument();
 var body = doc.getBody();
 var headings = DocumentApp.ParagraphHeading;
 
 function openDraftPanel() {
-  var sheetID = props.getProperty("authorSheet");
+  var sheetID = getConfig("authorSheet");
   var data = {
     authors: sheetID ? readSheetAsObjects(sheetID, "authors") : []
   };
@@ -60,7 +60,7 @@ function addDraftPost(postData) {
   if (postData.author == "other") {
     p("author: " + postData.other);
   } else {
-    var sheetID = props.getProperty("authorSheet");
+    var sheetID = getConfig("authorSheet");
     var authors = readSheetAsObjects(sheetID, "authors");
     var row = authors.filter(function(r) { return r.key == postData.author }).pop();
     p("author: " + row.name);
@@ -76,7 +76,7 @@ function addDraftPost(postData) {
   p();
   var placeholder = p(postData.text || "[ post contents go here ]");
   p();
-  p(":end").editAsText().setForegroundColor("#FF0000").setBold(true);
+  p(":end").editAsText().setForegroundColor("#FF0000");
   var builder = doc.newRange();
   builder.addElement(placeholder);
   doc.setSelection(builder.build());

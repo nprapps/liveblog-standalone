@@ -1,4 +1,4 @@
-var props = PropertiesService.getScriptProperties();
+var props = PropertiesService.getDocumentProperties();
 
 var configDefaults = {
   authorSheet: "1s0Vs4c41kp8mCvGnIFbdPK9YI9t18u0c2kvh6W1eZBw",
@@ -20,4 +20,8 @@ function setConfig(values) {
   for (var k in values) {
     props.setProperty(k, values[k]);
   }
+}
+
+function getConfig(key) {
+  return props.getProperty(key);
 }

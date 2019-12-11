@@ -1,6 +1,7 @@
 // load custom element behaviors
 require("./tags/twitter-embed");
 require("./tags/image-embed");
+require("@nprapps/sidechain");
 
 // load independent modules
 require("./clipboard");

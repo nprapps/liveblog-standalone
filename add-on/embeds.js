@@ -1,9 +1,13 @@
 // element functions (p, h3, h2) come from posts.gs, where they're used to add post
-var props = PropertiesService.getScriptProperties();
 
 var embedTemplates = {
   twitter: '<twitter-embed href="%tweet" id="tw-%counter">\n</twitter-embed>',
-  image: '<image-embed src="%image" id="img-%counter">\n</image-embed>'
+  image: '<image-embed src="%src" id="img-%counter">\n</image-embed>',
+  sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>'
+};
+
+var prefixed = {
+  image: "src"
 };
 
 function openEmbedPanel() {
@@ -18,7 +22,7 @@ function addEmbed(data) {
   data.counter = getCounterValue();
   for (var k in data) {
     var value = data[k];
-    if (type == "image" && k == "image") value = props.getProperty("mediaPrefix") + value;
+    if (prefixed[data.type] == k) value = getConfig("mediaPrefix") + value;
     embed = embed.replace("%" + k, value);
   }
   var doc = DocumentApp.getActiveDocument();

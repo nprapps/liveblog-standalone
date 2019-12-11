@@ -9,6 +9,7 @@
       <select id="type">
         <option value="twitter">Tweet</option>
         <option value="image">Image</option>
+        <option value="sidechain">Graphic embed</option>
       </select>
     </fieldset>
     
@@ -18,11 +19,25 @@
         <label for="tweet">Tweet URL</label>
         <input id="tweet">
       </fieldset>
-      <button class="add-embed">Add Tweet Embed</button>
+      <button class="add-embed">Add tweet</button>
     </form>
     
     <form id="image">
       <h2>Image</h2>
+      <fieldset>
+        <label for="src">Image filename</label>
+        <input id="src">
+      </fieldset>
+      <button class="add-embed">Add image</button>
+    </form>
+    
+    <form id="sidechain">
+      <h2>Graphic embed</h2>
+      <fieldset>
+        <label for="src">Embed URL</label>
+        <input id="src">
+      </fieldset>
+      <button class="add-embed">Add graphic</button>
     </form>
     
     <script>
