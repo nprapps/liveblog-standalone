@@ -24,12 +24,14 @@ var getDocument = function(url) {
 
 var showUnseenButton = $.one(".show-new");
 
-showUnseenButton.addEventListener("click", function() {
+var onClickUnseen = function() {
   var hidden = $("article.post.hidden");
   hidden.forEach(el => el.classList.remove("hidden"));
   unseen = 0;
   showUnseenButton.classList.add("hidden");
-});
+};
+
+showUnseenButton.addEventListener("click", onClickUnseen);
 
 var updateMisc = function(updated) {
 
@@ -78,13 +80,16 @@ var updatePage = async function() {
     if (!posts.length) return console.log("Remote document was missing liveblog content.");
     updatePosts(posts);
   } catch (err) {
-    console.error(err.message);
+    console.error("Unable to update the liveblog.");
   }
   var unseen = $("article.post.hidden").length;
   if (unseen) {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
     showUnseenButton.classList.remove("hidden");
-    notifications.alert(`${unseen} new liveblog posts`);
+    notifications.alert(`${unseen} new liveblog posts`, function() {
+      onClickUnseen();
+      setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
+    });
   }
 }
 

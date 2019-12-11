@@ -21,15 +21,19 @@ var request = async function() {
   }
 };
 
-var alert = async function(text) {
+var alert = async function(text, callback) {
   if (!window.Notification || !enabled) return console.log("Notifications not enabled");
   console.log(`Notification: ${text}`);
   var notification = new Notification(text, {
     tag: "NPR Liveblog",
     badge: "./assets/logo_lines.png",
     icon: "./assets/logo_lines.png",
-    requireInteraction: true
+    // requireInteraction: true
   });
+  if (callback) notification.onclick = function(e) {
+    notification.close();
+    callback(e);
+  }
 };
 
 
