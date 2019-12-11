@@ -18,7 +18,10 @@ var getDocument = function(url) {
     xhr.responseType = "document";
     xhr.send();
     xhr.onload = () => ok(xhr.response);
-    xhr.onerror = fail;
+    xhr.onerror = function(err) {
+      console.log(err);
+      fail();
+    }
   });
 }
 
@@ -50,7 +53,6 @@ var updatePosts = function(articles) {
       from.classList.add("hidden");
       container.insertBefore(from, first);
       first = from;
-      unseen++;
       console.log(`Added new post!`);
     } else {
       morphdom(from, to, {
@@ -81,7 +83,7 @@ var updatePage = async function() {
     if (!posts.length) return console.log("Remote document was missing liveblog content.");
     updatePosts(posts);
   } catch (err) {
-    console.error("Unable to update the liveblog.");
+    console.error(err);
   }
   var unseen = $("article.post.hidden").length;
   if (unseen) {
