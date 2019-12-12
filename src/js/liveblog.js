@@ -19,8 +19,8 @@ var getDocument = function(url) {
     xhr.send();
     xhr.onload = () => ok(xhr.response);
     xhr.onerror = function(err) {
-      console.log(err);
-      fail();
+      var message = xhr.statusText || `Request for ${url} failed without status.`
+      fail(message);
     }
   });
 }
