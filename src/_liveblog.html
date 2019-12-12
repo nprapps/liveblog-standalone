@@ -16,6 +16,12 @@ var posts = doc.posts.filter(function(post, index) {
       post.dateString = post.published.format("MMM. D, YYYY");
     }
   }
+  if (typeof post.tags == "string") {
+    post.tags = post.tags.split(/,\s*/g);
+  }
+  if (!post.tags) {
+    post.tags = [];
+  }
   return flags.unpublished || post.published;
 });
 posts.sort(function(a, b) {
@@ -53,7 +59,10 @@ if (featured) {
 posts.forEach(function(post) {
 %>
 
-<article class="post <%= post.published ? "published" : "draft" %>" id="<%= post.slug %>">
+<article
+  class="post <%= post.published ? "published" : "draft" %> <%= post.tags.join(" ") %>"
+  id="<%= post.slug %>"
+>
   <div class="metadata">
     <div class="datetime">
       <div class="time">
@@ -70,8 +79,15 @@ posts.forEach(function(post) {
         Copy link
         <div class="copy-message" aria-hidden>Copied!</div>
     </a>
+
+    <div class="tags">
+      <% post.tags.forEach(function(t) { %>
+      <div class="tag-marker" data-tag="<%= t %>"><%= t %></div>
+      <% }) %>
+    </div>
   </div>
   <div class="contents">
+
     <h2><%= typogrify(post.headline) %></h2>
     
     <%= t.renderMarkdown(post.text) %>

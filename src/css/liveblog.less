@@ -70,6 +70,7 @@ article.post {
     color: #f03828;
     .gotham();
     font-size: 13px;
+    padding-right: 16px;
 
     .datetime {
       padding-bottom: 8px;
@@ -77,6 +78,7 @@ article.post {
 
     @media @mobile {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       padding: 8px 0;
@@ -141,6 +143,21 @@ article.post {
 
       &.copied .copy-message {
         display: block;
+      }
+    }
+
+    .tags {
+      padding-top: 16px;
+      flex: 0 0 100%;
+
+      .tag-marker {
+        background: #555;
+        color: white;
+        display: inline-block;
+        padding: 2px 4px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        margin-bottom: 4px;
       }
     }
   }
