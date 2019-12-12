@@ -29,6 +29,9 @@
   "docs": {
     "liveblog": "1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM"
   },
+  "proxy": {
+    "livestream.m3u": "https://npr.org/streams/mp3/nprlive1.m3u"
+  },
   "embedded": false,
   "production": false
 }
