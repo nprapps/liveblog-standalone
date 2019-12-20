@@ -6,38 +6,28 @@ require("@nprapps/sidechain");
 // load independent modules
 require("./clipboard");
 
+// load local dependencies
 var $ = require("./lib/qsa");
-var notifications = require("./notification");
-
+var events = require("./events");
+var getDocument = require("./getDocument");
 var morphdom = require("morphdom");
-
-var getDocument = function(url) {
-  return new Promise(function(ok, fail) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    xhr.responseType = "document";
-    xhr.send();
-    xhr.onload = () => ok(xhr.response);
-    xhr.onerror = function(err) {
-      var message = xhr.statusText || `Request for ${url} failed without status.`
-      fail(message);
-    }
-  });
-}
+var notifications = require("./notification");
 
 var showUnseenButton = $.one(".show-new");
 
 var onClickUnseen = function() {
   var hidden = $("article.post.hidden");
   hidden.forEach(el => el.classList.remove("hidden"));
-  unseen = 0;
   showUnseenButton.classList.add("hidden");
+  events.send("unseen-posts", 0);
 };
 
 showUnseenButton.addEventListener("click", onClickUnseen);
 
 var updateMisc = function(updated) {
-
+  // update audio player state
+  // set title tag
+  // update headlines and "last updated" time
 };
 
 var updatePosts = function(articles) {
@@ -57,14 +47,9 @@ var updatePosts = function(articles) {
     } else {
       morphdom(from, to, {
         childrenOnly: true,
-        onBeforeElChildrenUpdated: function(from, to) {
-          // do not update the children of custom elements
-          // this lets us prevent re-init for tweets, lazy images, videos, etc.
-          if (from.tagName.match(/-/)) {
-            return false;
-          }
-          return true;
-        }
+        // do not update the contents of custom elements
+        // this lets us prevent re-init for tweets, lazy images, videos, etc.
+        onBeforeElChildrenUpdated: from => from.tagName.indexOf(/-/) == -1
       });
     }
   }
@@ -75,7 +60,7 @@ var updatePosts = function(articles) {
 };
 
 var updatePage = async function() {
-  console.log("Running update...");
+  events.send("updating");
   try {
     var updated = await getDocument(window.location.href);
     // get updates in reverse order (so we can add in reverse chron)
@@ -85,13 +70,15 @@ var updatePage = async function() {
   } catch (err) {
     console.error(err);
   }
+  events.send("updated-liveblog");
   var unseen = $("article.post.hidden").length;
   if (unseen) {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
     showUnseenButton.classList.remove("hidden");
+    events.send("unseen-posts", unseen);
     notifications.alert(`${unseen} new liveblog posts`, function() {
       window.focus();
-      onClickUnseen();
+      onClickUnseen;();
       setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
     });
   }
