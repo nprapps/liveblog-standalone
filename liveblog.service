@@ -1,3 +1,12 @@
+# This file defines a systemd service that runs the liveblog build process
+# To set up:
+# 1. Copy this file to /etc/systemd/system/liveblog.service
+# 2. Run `systemctl enable liveblog`
+# 3. Start the service with `systemctl start liveblog`
+# 4. Halt it with `systemctl stop liveblog`
+# 5. Get info with `systemctl status liveblog`
+# 6. Follow logs with `journalctl -u liveblog.service -f`
+
 [Unit]
 Description=NPR Liveblog
 StartLimitIntervalSec=0

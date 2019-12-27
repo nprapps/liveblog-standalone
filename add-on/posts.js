@@ -76,7 +76,7 @@ function addDraftPost(postData) {
   p();
   var placeholder = p(postData.text || "[ post contents go here ]");
   p();
-  p(":end").editAsText().setForegroundColor("#FF0000");
+  p(":end")//.editAsText().setForegroundColor("#FF0000");
   var builder = doc.newRange();
   builder.addElement(placeholder);
   doc.setSelection(builder.build());
