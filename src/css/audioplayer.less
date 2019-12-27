@@ -1,0 +1,79 @@
+.audio-player {
+  @blue: desaturate(@link-blue, 10%);
+  @dark-blue: darken(@blue, 10%);
+  background: @blue;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  color: white;
+  .gotham();
+  font-size: 14px;
+
+  &.hidden {
+    display: none;
+  }
+
+  .play-stream {
+    background: white;
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+    color: @blue;
+    border: 2px solid @blue;
+    position: relative;
+    padding: 2px;
+    cursor: pointer;
+    margin-right: 12px;
+    flex: 0 0 48px;
+
+    &:hover, &:focus {
+      border-color: @dark-blue;
+      box-shadow: 0 2px 8px fade(black, 30%);
+      outline: none;
+      color: @dark-blue;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .pause-icon {
+      display: none;
+    }
+
+    .seek-icon {
+      display: none;
+    }
+
+    &[aria-pressed="true"] {
+      .pause-icon { display: block; }
+      .play-icon { display: none; }
+    }
+
+    &.seeking {
+      .pause-icon, .play-icon { display: none; }
+      .seek-icon { display: block; }
+    }
+  }
+
+  &.no-audio {
+    background: #e0e0e0;
+    color: #333;
+    font-weight: bold;
+
+    .play-stream {
+      background: white;
+      pointer-events: none;
+      border-color: white;
+      color: #e0e0e0;
+    }
+  }
+}
+
+#jwplayer { display: none !important; }

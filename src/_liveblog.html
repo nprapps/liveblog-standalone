@@ -1,3 +1,9 @@
+<% if (doc.config.audioText) { %>
+<audio class="stream-source" preload="none" hidden src="<%= doc.config.audio %>">
+<%= doc.config.audioText %>
+</audio>
+<% } %>
+
 <%
 var { typogrify } = require("typogr");
 var moment = require("moment-timezone");
@@ -36,6 +42,9 @@ posts.sort(function(a, b) {
 
 <main class="liveblog">
   <h1><%= config.headline %></h1>
+
+  <%= t.include("_audioplayer.html") %>
+
 <%
 var featured = lookup[config.featured];
 posts = posts.filter(p => p != featured);

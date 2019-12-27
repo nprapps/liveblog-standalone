@@ -5,6 +5,7 @@ require("@nprapps/sidechain");
 
 // load independent modules
 require("./clipboard");
+var audio = require("./audioplayer");
 
 // load local dependencies
 var $ = require("./lib/qsa");
@@ -26,6 +27,14 @@ showUnseenButton.addEventListener("click", onClickUnseen);
 
 var updateMisc = function(updated) {
   // update audio player state
+  var audioUpdate = updated.querySelector("audio.stream-source");
+  if (audioUpdate) {
+    var text = audioUpdate.innerHTML.trim();
+    var source = audioUpdate.getAttribute("src");
+    audio.update(source, text);
+  } else {
+    audio.disable();
+  }
   // set title tag
   // update headlines and "last updated" time
 };
@@ -67,6 +76,7 @@ var updatePage = async function() {
     var posts = $("article.post", updated).reverse();
     if (!posts.length) return console.log("Remote document was missing liveblog content.");
     updatePosts(posts);
+    updateMisc(updated);
   } catch (err) {
     console.error(err);
   }
@@ -78,7 +88,7 @@ var updatePage = async function() {
     events.send("unseen-posts", unseen);
     notifications.alert(`${unseen} new liveblog posts`, function() {
       window.focus();
-      onClickUnseen;();
+      onClickUnseen();
       setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
     });
   }
