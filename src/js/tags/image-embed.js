@@ -17,6 +17,13 @@ img:after {
   z-index: 999;
   position: relative;
 }
+
+.credit {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  font-style: italic;
+}
 `;
 
 class ImageEmbed extends HTMLElement {
@@ -30,6 +37,9 @@ class ImageEmbed extends HTMLElement {
     this.image.setAttribute("alt", "");
     this.image.src = "broken";
     this.shadowRoot.appendChild(this.image);
+    this.credit = document.createElement("div");
+    this.credit.className = "credit";
+    this.shadowRoot.appendChild(this.credit);
     this.updateImage();
     this.readyState = 0;
     this.observer = new IntersectionObserver(([e]) => {
@@ -49,7 +59,7 @@ class ImageEmbed extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["src"]
+    return ["src", "credit"]
   }
 
   attributeChangedCallback() {
@@ -57,6 +67,7 @@ class ImageEmbed extends HTMLElement {
   }
 
   updateImage() {
+    this.credit.innerHTML = this.getAttribute("credit");
     if (this.readyState == 4) {
       this.image.src = this.getAttribute("src");
       this.observer.disconnect();
