@@ -1,5 +1,6 @@
 # This file defines a systemd service that runs the liveblog build process
 # To set up:
+# 0. Update paths as necessary (ExecStart must be an absolute path)
 # 1. Copy this file to /etc/systemd/system/liveblog.service
 # 2. Run `systemctl enable liveblog`
 # 3. Start the service with `systemctl start liveblog`

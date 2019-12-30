@@ -68,7 +68,7 @@ var updatePosts = function(articles) {
   if (removed.length) console.log(`Removed ${removed.length} posts!`);
 };
 
-var updatePage = async function() {
+var refresh = async function() {
   events.send("updating");
   try {
     var updated = await getDocument(window.location.href);
@@ -85,13 +85,13 @@ var updatePage = async function() {
   if (unseen) {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
     showUnseenButton.classList.remove("hidden");
-    events.send("unseen-posts", unseen);
     notifications.alert(`${unseen} new liveblog posts`, function() {
       window.focus();
       onClickUnseen();
       setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
     });
   }
+  events.send("unseen-posts", unseen || 0);
 }
 
-setInterval(updatePage, 1000 * 10);
+setInterval(refresh, 1000 * 10);
