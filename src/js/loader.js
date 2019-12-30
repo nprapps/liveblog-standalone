@@ -1,4 +1,4 @@
-// load Sidechain and the site shim
+// load Sidechain and the legacy browser shim
 require("@webcomponents/custom-elements");
 var Sidechain = require("@nprapps/sidechain");
 

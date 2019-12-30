@@ -14,7 +14,7 @@
   },
   "scripts": {
     "src/js/main.js": "build/app.js",
-    "src/js/embedded.js": "build/embedded.js",
+    "src/js/main-embedded.js": "build/embedded.js",
     "src/js/loader.js": "build/loader.js"
   },
   "title": "Liveblog",
