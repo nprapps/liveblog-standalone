@@ -23,7 +23,10 @@ side-chain {
       HELLO THIS IS A PREVIEW OF THE EMBED
     </header>
 
-    <side-chain src="./embed.html"></side-chain>
+    <textarea style="width: 100%;">&lt;p data-sidechain-src="<%= json.project.url %>embed.html"&gt;&lt;/p&gt;
+&lt;script src="<%= json.project.url %>loader.js" async defer&gt;&lt;/script&gt;</textarea>
+
+    <p data-sidechain-src="./embed.html">Loading...</p>
 
     <script src="loader.js" async></script>
   </body>
