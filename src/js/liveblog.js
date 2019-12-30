@@ -60,6 +60,11 @@ var updatePosts = function(articles) {
         // this lets us prevent re-init for tweets, lazy images, videos, etc.
         onBeforeElChildrenUpdated: from => from.tagName.indexOf(/-/) == -1
       });
+      // update posts on the preview page
+      if (to.classList.contains("published")) {
+        from.classList.remove("draft");
+        from.classList.add("published");
+      }
     }
   }
   // remove posts that were apparently deleted
