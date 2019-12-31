@@ -13,7 +13,11 @@ var tokenLocation = path.join(os.homedir(), ".google_oauth_token");
 var authenticate = function() {
   var tokens = fs.readFileSync(path.join(os.homedir(), ".google_oauth_token"), "utf-8");
   tokens = JSON.parse(tokens);
-  var auth = new google.auth.OAuth2(process.env.GOOGLE_OAUTH_CLIENT_ID, process.env.GOOGLE_OAUTH_CONSUMER_SECRET);
+  var auth = new google.auth.OAuth2({
+    clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_OAUTH_CONSUMER_SECRET,
+    forceRefreshOnFailure: true
+  });
   auth.setCredentials(tokens);
 
   auth.on("tokens", function(update) {
