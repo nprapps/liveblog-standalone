@@ -48,8 +48,9 @@ addButton.addEventListener("click", function(e) {
   var inputs = document.querySelectorAll("select, input");
   var postData = {};
   for (var input of inputs) {
-    postData[input.id] = input.checked || input.value;
+    postData[input.id] = input.type == "checkbox" ? input.checked * 1 : input.value;
   }
+  console.log(postData);
   google.script.run
     .withSuccessHandler(function() {
       google.script.host.close();
