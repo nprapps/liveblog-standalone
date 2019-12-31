@@ -38,6 +38,7 @@ module.exports = function(grunt) {
       async function(key) {
         var documentId = config.docs[key];
         var docResponse = await docs.get({ documentId });
+        console.log(`Got document response for ${key}`);
         var name = key + ".docs.txt";
         var body = docResponse.data.body.content;
         var text = "";
@@ -64,7 +65,13 @@ module.exports = function(grunt) {
         console.log(`Writing document as data/${name}`);
         grunt.file.write(path.join("data", name), text);
       },
-      done
+      function(err) {
+        if (err) {
+          console.log("Uncaught error in docs:")
+          console.log(err);
+        }
+        done();
+      }
     );
 
   });
