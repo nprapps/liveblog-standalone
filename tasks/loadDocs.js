@@ -6,15 +6,18 @@ var { authenticate } = require("./googleauth");
 
 module.exports = function(grunt) {
 
+  var auth = null;
+
   grunt.registerTask("docs", "Load Google Docs into the data folder", function() {
 
     var config = grunt.file.readJSON("project.json");
-    var auth = null;
-    try {
-      auth = authenticate();
-    } catch (err) {
-      console.log(err);
-      return grunt.fail.warn("Couldn't load access token for Docs, try running `grunt google-auth`");
+    if (!auth) {
+      try {
+        auth = authenticate();
+      } catch (err) {
+        console.log(err);
+        return grunt.fail.warn("Couldn't load access token for Docs, try running `grunt google-auth`");
+      }
     }
 
     var done = this.async();
