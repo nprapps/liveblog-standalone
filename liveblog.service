@@ -18,7 +18,7 @@ RestartSec=5
 User=ubuntu
 Environment=NODE_VERSION=12
 WorkingDirectory=/home/ubuntu/liveblog
-ExecStart=/home/ubuntu/.nvm/nvm-exec grunt local
+ExecStart=/home/ubuntu/.nvm/nvm-exec grunt deploy
 
 [Install]
 WantedBy=multi-user.target
