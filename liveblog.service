@@ -2,11 +2,10 @@
 # To set up:
 # 0. Update paths as necessary (ExecStart must be an absolute path)
 # 1. Copy this file to /etc/systemd/system/liveblog.service
-# 2. Run `systemctl enable liveblog`
-# 3. Start the service with `systemctl start liveblog`
-# 4. Halt it with `systemctl stop liveblog`
-# 5. Get info with `systemctl status liveblog`
-# 6. Follow logs with `journalctl -u liveblog.service -f`
+# 2. Start the service with `systemctl start liveblog`
+# 3. Halt it with `systemctl stop liveblog`
+# 4. Get info with `systemctl status liveblog`
+# 5. Follow logs with `journalctl -u liveblog.service -f`
 
 [Unit]
 Description=NPR Liveblog
@@ -18,7 +17,7 @@ Restart=always
 RestartSec=5
 User=ubuntu
 Environment=NODE_VERSION=12
-WorkingDirectory=~/apps/liveblog-standalone
+WorkingDirectory=/home/ubuntu/liveblog
 ExecStart=/home/ubuntu/.nvm/nvm-exec grunt local
 
 [Install]

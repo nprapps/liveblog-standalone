@@ -7,7 +7,8 @@ Runs tasks on an automated basis
 /** config variables **/
 var tasks = {
   local: ["docs", "static"],
-  publish: ["docs", "quick", "publish"]
+  publish: ["docs", "template", "publish"],
+  publishLive: ["docs", "template", "publish:live"]
 };
 
 /** end config **/
