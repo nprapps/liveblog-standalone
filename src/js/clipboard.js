@@ -1,6 +1,8 @@
 var input = document.createElement("input");
 input.style.position = "absolute";
 input.style.left = "-1000px";
+input.setAttribute("tabindex", "-1");
+input.setAttribute("hidden", "");
 document.body.appendChild(input);
 
 var copy = function(text) {
