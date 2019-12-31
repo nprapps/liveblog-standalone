@@ -1,7 +1,6 @@
 var stylesheet = `
 img {
   max-width: 100%;
-  width: 100%;
   height: auto;
   position: relative;
   display: block;
@@ -23,6 +22,10 @@ img:after {
   text-align: right;
   font-size: 13px;
   font-style: italic;
+}
+
+:host([narrow]) img {
+  max-width: 400px;
 }
 `;
 

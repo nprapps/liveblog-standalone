@@ -29,6 +29,10 @@
         <input id="src">
       </fieldset>
       <fieldset>
+        <input type="checkbox" id="narrow">
+        Narrow image?
+      </fieldset>
+      <fieldset>
         <label for="credit">Credit</label>
         <input id="credit">
       </fieldset>
@@ -68,7 +72,7 @@ var onClickSubmit = function(e) {
     type: typeSelect.value
   };
   for (var input of inputs) {
-    data[input.id] = input.value;
+    data[input.id] = input.type == "checkbox" ? input.checked * 1 : input.value;
   }
   google.script.run
     .withSuccessHandler(function() {

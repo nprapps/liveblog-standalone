@@ -2,12 +2,18 @@
 
 var embedTemplates = {
   twitter: '<twitter-embed href="%tweet" id="tw-%counter">\n</twitter-embed>',
-  image: '<image-embed src="%src" credit="%credit" id="img-%counter">\n</image-embed>',
+  image: '<image-embed src="%src" credit="%credit" %narrow id="img-%counter">\n</image-embed>',
   sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>'
 };
 
 var prefixed = {
   image: "src"
+};
+
+var binary = {
+  image: {
+    narrow: ["", "narrow"]
+  }
 };
 
 function openEmbedPanel() {
@@ -17,12 +23,14 @@ function openEmbedPanel() {
 }
 
 function addEmbed(data) {
+  Logger.log(data);
   var embed = embedTemplates[data.type];
   if (!embed) throw "No template for that embed type";
   data.counter = getCounterValue();
   for (var k in data) {
     var value = data[k];
     if (prefixed[data.type] == k) value = getConfig("mediaPrefix") + value;
+    if (binary[data.type] && binary[data.type][k]) value = binary[data.type][k][value * 1];
     embed = embed.replace("%" + k, value);
   }
   var doc = DocumentApp.getActiveDocument();

@@ -1,18 +1,3 @@
-/*
-
-TODO:
- - Counters for post slugs and embed IDs (maybe just the one counter? Doesn't really matter)
- - Make sure embeds do not insert URLs as links, that will screw up the parser
- - Add highlighting for embeds and HTML code
- - Create a standard document opener, including the link to CommonMark and ArchieML explainers
- - Config panel that loads existing params so that you don't have to debug for them
-   - media prefix
-   - author sheet
- - Reset doc and properties
- - Internal links are just regular links now
-
-
-*/
 
 function onOpen() {
   Logger.log("opened!");
@@ -32,6 +17,12 @@ function noop() {
 }
 
 function resetDocument() {
+  var ui = DocumentApp.getUi();
+  var confirmed = ui.alert("Are you sure? This will erase the whole document.", ui.ButtonSet.YES_NO);
+  if (confirmed != ui.Button.YES) return;
+  var reconfirmed = ui.alert("Are you really, really sure?", ui.ButtonSet.YES_NO);
+  if (reconfirmed != ui.Button.YES) return;
+  
   var blank = include("blankDocument");
   var doc = DocumentApp.getActiveDocument();
   var body = doc.getBody();
