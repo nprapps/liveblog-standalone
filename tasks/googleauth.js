@@ -19,6 +19,7 @@ var authenticate = function() {
   auth.on("tokens", function(update) {
     console.log("Updating Google OAuth tokens...");
     Object.assign(tokens, update);
+    auth.setCredentials(tokens);
     fs.writeFileSync(path.join(os.homedir(), ".google_oauth_token"), JSON.stringify(tokens, null, 2));
   });
 
