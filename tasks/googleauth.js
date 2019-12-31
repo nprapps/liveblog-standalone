@@ -11,6 +11,7 @@ var fs = require("fs");
 var tokenLocation = path.join(os.homedir(), ".google_oauth_token");
 
 var authenticate = function() {
+  console.log("Loading authentication tokens for Google...");
   var tokens = fs.readFileSync(path.join(os.homedir(), ".google_oauth_token"), "utf-8");
   tokens = JSON.parse(tokens);
   var auth = new google.auth.OAuth2({
