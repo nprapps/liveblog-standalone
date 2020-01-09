@@ -1,6 +1,6 @@
 main.liveblog {
   margin: auto;
-  max-width: 800px;
+  max-width: @max-width;
 }
 
 .show-new {
@@ -25,35 +25,55 @@ main.liveblog {
 
 article.post {
   display: flex;
-  padding: 10px;
+  padding: var(--side-margin);
   font-family: @serif;
   font-size: 16px;
   margin: 10px 0;
-  border-top: 1px solid #ddd;
+
+  + article.post {
+    border-top: 1px solid #ddd;
+  }
 
   @media @mobile {
     display: block;
   }
 
   &.featured {
+    .gotham();
     display: block;
     background: #EEE;
-    .gotham();
     border-top: none;
     overflow: hidden;
+    font-size: 14px;
 
     h2 {
       font-size: 16px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 0 0 0 1.3em;
+      padding: 0;
+
+      + li {
+        margin-top: .5em;
+      }
     }
 
     image-embed,
     facebook-video,
     npr-video,
     youtube-video {
-      float: right;
-      width: 50%;
-      margin-left: 8px;
-      margin-bottom: 8px;
+      @media @mobile-above {
+        float: right;
+        width: 50%;
+        margin-left: var(--side-margin);
+        margin-bottom: calc(var(--side-margin) / 2);
+      }
     }
   }
 
