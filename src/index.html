@@ -14,14 +14,34 @@
   </head>
   <body>
 
+    <nav>
+      <ul class="primary">
+        <li class="npr"><a href="https://npr.org"><img src="assets/logo.svg" alt="NPR" /></a></li>
+        <li class="election"><a href="https://www.npr.org/sections/elections/"><img src="assets/logo-2020-election.svg" alt="2020 Election" /></a></li>
+        <li><a href="https://www.npr.org/sections/elections/">News</a></li>
+        <li><a href="https://www.npr.org/series/758097234/election-2020-issue-tracker">Issues</a></li>
+        <li><a href="https://www.npr.org/podcasts/510310/npr-politics-podcast">Podcast</a></li>
+        <li><a href="https://www.npr.org/newsletter/politics">Newsletter</a></li>
+      </ul>
+
+      <ul class="secondary">
+        <li class="donate"><a href="https://www.npr.org/donations/support">Donate</a></li>
+      </ul>
+    </nav>
+
     <header>
-      <!-- NPR-specific liveblog stuff goes here -->
-      <div class="notification-options">
+      <div class="contain">
+        <h1><%= t.smarty(config.headline) %></h1>
+      </div>
+    </header>
+
+    <div class="notification-options">
+      <div class="contain">
         We can notify you when new posts come in while this tab is open.
         <input type="checkbox" id="enable-notifications">
         <label for="enable-notifications">Enable notifications:</label>
       </div>
-    </header>
+    </div>
 
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>
 
