@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/test"
+      "path": "liveblogs/20200114-debate-standalone"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/test"
+      "path": "liveblogs/20200114-debate-standalone"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/test/",
+  "url": "https://apps.npr.org/liveblogs/20200114-debate-standalone/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -31,5 +31,5 @@
     "liveblog": "1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM"
   },
   "embedded": false,
-  "production": false
+  "production": true
 }

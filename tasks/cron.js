@@ -8,7 +8,7 @@ Runs tasks on an automated basis
 var tasks = {
   local: ["docs", "static"],
   publish: ["docs", "template", "publish"],
-  publishLive: ["docs", "template", "publish:live"]
+  publishLive: ["docs", "clean", "template", "publish:live"]
 };
 
 /** end config **/

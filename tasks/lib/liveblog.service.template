@@ -17,7 +17,7 @@ RestartSec=5
 User=ubuntu
 %ENV%
 WorkingDirectory=%HERE%
-ExecStart=%HOME%/.nvm/nvm-exec grunt deploy
+ExecStart=%HOME%/.nvm/nvm-exec grunt docs static publish:live deploy-live
 
 [Install]
 WantedBy=multi-user.target
