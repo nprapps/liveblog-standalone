@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     }
 
     var home = os.homedir();
-    var here = path.resolve(".");
+    var here = process.cwd();
 
     template = template.replace(/%HOME%/g, home);
     template = template.replace(/%HERE%/g, home);
