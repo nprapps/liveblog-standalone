@@ -26,6 +26,7 @@ img:after {
 
 :host([narrow]) img {
   max-width: 400px;
+  width: 100%;
 }
 `;
 
