@@ -14,6 +14,7 @@ var getDocument = require("./getDocument");
 var morphdom = require("morphdom");
 var notifications = require("./notification");
 
+var h1 = $.one("h1");
 var showUnseenButton = $.one(".show-new");
 
 var onClickUnseen = function() {
@@ -35,8 +36,14 @@ var updateMisc = function(updated) {
   } else {
     audio.disable();
   }
+
   // set title tag
-  // update headlines and "last updated" time
+  var title = updated.querySelector("title").innerHTML;
+  document.title = title;
+  // update headline
+  var headline = updated.querySelector("h1").innerHTML;
+  h1.innerHTML = headline.trim();
+  // set "last updated" text?
 };
 
 var updatePosts = function(articles) {
