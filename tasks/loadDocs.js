@@ -47,7 +47,7 @@ module.exports = function(grunt) {
           if (!block.paragraph) return;
           if (block.paragraph.bullet) {
             var indent = "  ".repeat(block.paragraph.bullet.nestingLevel || 0);
-            text += indent + "* ";
+            text += indent + "- ";
           }
           block.paragraph.elements.forEach(function(element) {
             // console.log(element);
@@ -55,7 +55,8 @@ module.exports = function(grunt) {
             var { content, textStyle } = element.textRun;
             if (content.trim()) for (var f in formatters) {
               if (textStyle[f]) {
-                content = formatters[f](content, textStyle);
+                var [ _, before, inside, after ] = content.match(/^(\s*)(.*?)(\s*)$/);
+                content = before + formatters[f](inside, textStyle) + after;
               }
             }
             text += content;
