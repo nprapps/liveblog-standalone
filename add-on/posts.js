@@ -56,7 +56,9 @@ function addDraftPost(postData) {
     .replace(/^[\d]+-/, "") + "-" + getCounterValue();
   
   page();
-  h3("headline: " + postData.headline);
+  p("headline:");
+  h3(postData.headline);
+  p(":end");
   if (postData.author == "other") {
     p("author: " + postData.other);
   } else {
