@@ -65,7 +65,7 @@ if (featured) {
 <button class="show-new hidden">Show <span class="count">0</span> new posts</button>
 
 <%
-posts.forEach(function(post) {
+posts.forEach(function(post, i) {
 %>
 
 <article
@@ -112,6 +112,14 @@ posts.forEach(function(post) {
   <a class="back-to-top" href="#featured">&uarr; Back to top</a>
   </div>
 </article>
+
+<% if (i == 1) { %>
+<div class="ad-block" aria-hidden="true">
+  <div id="ad-centerstage-wrap">
+  </div>
+</div>
+<% } %>
+
 <%
 });
 %>

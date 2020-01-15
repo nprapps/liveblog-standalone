@@ -1,4 +1,5 @@
 require("./liveblog");
+require("./ads");
 var events = require("./events");
 
 // update title

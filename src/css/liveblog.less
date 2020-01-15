@@ -1,6 +1,14 @@
 main.liveblog {
   margin: auto;
-  max-width: @max-width;
+
+  & > * {
+    max-width: @max-width;
+    margin: auto;
+  }
+
+  .ad-block {
+    max-width: 100%;
+  }
 }
 
 .show-new {
@@ -28,7 +36,6 @@ article.post {
   padding: var(--side-margin);
   font-family: @serif;
   font-size: 16px;
-  margin: 10px 0;
 
   + article.post {
     border-top: 1px solid #ddd;
