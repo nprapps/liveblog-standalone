@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     var here = process.cwd();
 
     template = template.replace(/%HOME%/g, home);
-    template = template.replace(/%HERE%/g, home);
+    template = template.replace(/%HERE%/g, here);
     var envString = Object.keys(env).map(k => `Environment=${k}="${env[k]}"`).join("\n");
     template = template.replace("%ENV%", envString);
 
