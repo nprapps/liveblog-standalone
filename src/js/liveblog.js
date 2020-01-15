@@ -61,11 +61,15 @@ var updatePosts = function(articles) {
       first = from;
       console.log(`Added new post!`);
     } else {
+      var skipCustom = el => el.tagName.indexOf("-") == -1;
+
       morphdom(from, to, {
         childrenOnly: true,
         // do not update the contents of custom elements
         // this lets us prevent re-init for tweets, lazy images, videos, etc.
-        onBeforeElChildrenUpdated: from => from.tagName.indexOf(/-/) == -1
+        // onBeforeElUpdated: skipCustom,
+        onBeforeElChildrenUpdated: skipCustom
+
       });
       // update posts on the preview page
       if (to.classList.contains("published")) {

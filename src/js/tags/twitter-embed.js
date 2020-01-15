@@ -4,6 +4,7 @@ class TwitterEmbed extends HTMLElement {
     // this.attachShadow({ mode: "open" });
     // this.populate();
     this.readyState = 0;
+    this.href = null;
   }
 
   connectedCallback() {
@@ -16,8 +17,11 @@ class TwitterEmbed extends HTMLElement {
     return ["href"];
   }
 
-  attributeChangedCallback() {
-    this.populate();
+  attributeChangedCallback(_, past, value) {
+    if (this.href != value) {
+      this.populate();
+      this.href = value;
+    }
   }
 
   populate() {
