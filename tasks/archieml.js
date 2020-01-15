@@ -17,17 +17,23 @@ module.exports = function(grunt) {
 
     var files = grunt.file.expand("data/*.txt");
 
+
     files.forEach(function(f) {
       var name = path.basename(f).replace(/(\.docs)?\.txt$/, "");
       var contents = grunt.file.read(f);
-      // force fields to be lower-case
 
-      contents = contents.replace(/^[A-Z]\w+\:/gm, w => w[0].toLowerCase() + w.slice(1));
       // ignore false-positive keys inside of post text blocks
-      contents = contents.replace(/^text:([\s\S]+?)^:end/gm, function(all, inner) {
-        // console.log(all);
-        return `text:${inner.replace(/^(\S+:)/gm, "\\$1")}:end`;
-      });
+      var multiline = ["text", "headline"];
+      for (var m of multiline) {
+        var replacer = new RegExp(`^${m}: ?$([\\s\\S]*?):end$`, "gm");
+        contents = contents.replace(replacer, function(all, inner) {
+          return `${m}:${inner.replace(/^(\S+:)/gm, "\\$1")}:end`;
+        });
+      }
+
+      // force fields to be lower-case
+      contents = contents.replace(/^[A-Z]\w+\:/gm, w => w[0].toLowerCase() + w.slice(1));
+
       var parsed = archieml.load(contents);
       grunt.data.archieml[name] = parsed;
     });

@@ -63,6 +63,8 @@ module.exports = function(grunt) {
           });
         });
 
+        text = text.replace(/\x0b/g, "\n");
+
         console.log(`Writing document as data/${name}`);
         grunt.file.write(path.join("data", name), text);
       },
