@@ -5,6 +5,7 @@
 # 3. Halt it with `sudo systemctl stop liveblog`
 # 4. Get info with `sudo systemctl status liveblog`
 # 5. Follow logs with `journalctl -a -u liveblog.service -f`
+# 6. If you make any changes, run `sudo systemctl daemon-reload` before restarting
 
 [Unit]
 Description=NPR Liveblog
