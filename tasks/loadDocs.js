@@ -23,8 +23,8 @@ module.exports = function(grunt) {
 
     var formatters = {
       link: (text, style) => `[${text}](${style.link.url})`,
-      bold: text => `**${text}**`,
-      italic: text => `*${text}*`
+      bold: text => `<b>${text}</b>`,
+      italic: text => `<i>${text}</i>`
     };
 
     /*
