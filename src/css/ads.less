@@ -1,4 +1,7 @@
 #ad-centerstage-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+
   iframe {
     margin-left: auto;
     margin-right: auto;
@@ -12,17 +15,26 @@
     content: "";
   }
 
-  &.has-ad:before {
-    font-size: 14px;
-    content: "More NPR content after sponsor message";
-    display: block;
-    text-align: center;
-    line-height: 1.3;
-    font-weight: 600;
-    font-family: 'Gotham SSm', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    color: #9b9b9b;
-    border-top: 2px #f5f5f5 solid;
-    padding: 15px;
+  &.has-ad {
+    &:before {
+      font-size: 14px;
+      content: "More NPR content after sponsor message";
+      display: block;
+      text-align: center;
+      line-height: 1.3;
+      font-weight: 600;
+      font-family: 'Gotham SSm', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: #9b9b9b;
+      border-top: 2px #f5f5f5 solid;
+      padding: 15px;
+    }
+
+    &:after {
+      border-bottom: 2px #f5f5f5 solid;
+      padding-top: 25px;
+      content: "";
+      display: block;
+    }
   }
 }
