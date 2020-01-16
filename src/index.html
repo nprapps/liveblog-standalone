@@ -32,6 +32,17 @@
     <header>
       <div class="contain">
         <h1><%= t.smarty(config.headline) %></h1>
+
+        <%= t.include("_audioplayer.html", { config }) %>
+
+        <h2>Live results - Updated Feb. 3, 2020 at 9:45PM EST</h2>
+        <ul class="results-placeholder">
+          <% "Biden Warren Sanders Buttigieg Klobuchar Other".split(" ").forEach(function(candidate) { %>
+          <li>
+            <span><%= candidate %></span>
+            <span>XX%</span>
+          <% }) %>
+        </ul>
       </div>
     </header>
 

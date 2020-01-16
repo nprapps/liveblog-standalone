@@ -11,7 +11,7 @@
   <body class="embed">
 
     <header>
-
+      <%= t.include("_audioplayer.html", { config }) %>
     </header>
 
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>

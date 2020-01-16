@@ -1,4 +1,4 @@
-<div class="audio-player hidden">
+<div class="audio-player <% if (!config.audioText) { %>hidden<% } %>">
     <button aria-pressed="false" aria-label="play" class="play-stream">
         <svg viewBox="0 0 10 10" preserveAspectRatio="xMidYMid meet" class="play-icon" aria-hidden="true" hidden>
             <path d="M3,2 L8,5 L3,8 Z" fill="currentColor" />
@@ -14,5 +14,5 @@
         </svg>
     </button>
 
-    <span class="text"></span>
+    <span class="text"><%= config.audioText %></span>
 </div>
