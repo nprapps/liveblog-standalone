@@ -69,14 +69,15 @@ module.exports = function(grunt) {
     posts.forEach(function(post) {
       var { slug } = post;
       var there = grunt.data.json.project.url;
+      var firstImage = post.text.match(/http.+?.(jpg|png|gif)/);
       var data = Object.assign({}, post, {
         there,
         here: `${there}share/${slug}.html`,
         lede: post.text.trim().split("\n").shift().replace(/<[^>]+>/g, ""),
-        image: there + grunt.data.json.project.image
+        image: firstImage ? firstImage[0] : there + grunt.data.json.project.image
       });
       var output = share(data);
-      grunt.log.writeln(`Generated share card: #${slug}`);
+      grunt.log.writeln(`Generated share card: share/${slug}.html`);
       grunt.file.write(`build/share/${slug}.html`, output);
     })
   });
