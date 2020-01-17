@@ -1,12 +1,17 @@
 var $ = require("./lib/qsa");
-var track = require("./lib/tracking");
+var { track } = require("./lib/tracking");
 
 var playerURL = "https://cdn.jwplayer.com/libraries/JNfsuMc9.js";
 var ui = $.one(".audio-player");
 var playButton = ui.querySelector("button.play-stream");
 var playlist = ui.querySelector("span.text");
 
-var playTotal = 0;
+// tracking code
+var resumeTime = 0;
+var thresholds = [15, 30, 60, 120, 180, 240, 300];
+var hasPlayed = false;
+var trackingLabel = "liveblog-stream";
+var isPlaying = false;
 
 var loadPlayer = null;
 var getPlayer = function(src) {
@@ -34,13 +39,16 @@ var getPlayer = function(src) {
         playButton.addEventListener("click", function() {
           // play/pause the live stream
           if (player.getState() == "playing") {
+            resumeTime += player.getPosition();
+            isPlaying = false;
             player.pause();
-            track("liveblog-stream-state", "pause");
-            playTotal = 0; // timestamps will reset on each new stream play
+            track("audio actions", "pause audio", trackingLabel);
           } else {
             player.setVolume(100);
+            isPlaying = true;
             player.play();
-            track("liveblog-stream-state", "play");
+            track("audio actions", hasPlayed ? "resume audio" : "play audio", trackingLabel);
+            hasPlayed = true;
           }
         });
 
@@ -67,10 +75,20 @@ var getPlayer = function(src) {
         });
 
         player.on("time", function(e) {
-          var time = Math.floor(e.position / 30) * 30;
-          if (time > playTotal) {
-            playTotal = time;
-            track("liveblog-stream-duration", time + "s");
+          if (!isPlaying) return;
+          var position = player.getPosition();
+          var time = resumeTime + position;
+          var [ threshold ] = thresholds;
+          if (time > threshold) {
+            // move to the next time period
+            thresholds.shift();
+            // past the 5 minute threshold, add another 5
+            if (!thresholds.length) {
+              thresholds.unshift(threshold + 300);
+            }
+            // send the event
+            var action = threshold >= 60 ? `${threshold / 60} min ping` : `${threshold} sec ping`;
+            track("audio pings", action, trackingLabel);
           }
         });
 
@@ -118,5 +136,11 @@ var disable = function() {
   ui.classList.add("hidden");
   killPlayer();
 };
+
+// auto start if possible
+if (ui.dataset.stream) {
+  var presetText = playlist.innerHTML;
+  update(ui.dataset.stream, presetText);
+}
 
 module.exports = { update, disable }

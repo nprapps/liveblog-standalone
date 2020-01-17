@@ -1,8 +1,10 @@
 var $ = require("./lib/qsa");
+var track = require("./lib/tracking").trackApps;
 
 var enabled = window.Notification && window.Notification.permission == "granted" && localStorage.enableNotifications;
 
 var setEnabled = function(state) {
+  track("notifications-enabled", state);
   enabled = localStorage.enableNotifications = Number(state);
   document.body.classList.toggle("enabled-notifications", state);
 };

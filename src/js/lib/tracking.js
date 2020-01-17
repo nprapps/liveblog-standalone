@@ -14,16 +14,16 @@ var a = document.createElement("a");
 
 var slug = window.location.pathname.replace(/^\/|\/$/g, "");
 
-var track = function(eventAction, eventLabel, eventValue) {
+var track = function(eventCategory, eventAction, eventLabel, eventValue) {
   var event = {
+    eventCategory,
     eventAction,
     eventLabel,
     eventValue,
     hitType: "event",
-    eventCategory: "apps-" + slug
   }
 
-  console.log(`Tracking: ${eventAction} / ${eventLabel} / ${eventValue}`)
+  console.log(`Tracking: ${eventCategory} / ${eventAction} / ${eventLabel} / ${eventValue}`)
 
   var search = window.location.search.replace(/^\?/, "");
   var query = {};
@@ -39,6 +39,10 @@ var track = function(eventAction, eventLabel, eventValue) {
   event[DIMENSION_PARENT_HOSTNAME] = hostname;
 
   if (window.ga) ga("send", event);
+}
+
+var trackApps = function(eventAction, eventLabel, eventValue) {
+  track("apps-" + slug, eventAction, eventLabel, eventValue);
 };
 
-module.exports = track;
+module.exports = { track, trackApps };

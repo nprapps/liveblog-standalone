@@ -1,3 +1,5 @@
+var track = require("./lib/tracking").trackApps;
+
 var input = document.createElement("input");
 input.style.position = "absolute";
 input.style.left = "-1000px";
@@ -15,6 +17,7 @@ var copy = function(text) {
     input.select();
     document.execCommand("copy");
   }
+  track("copied-text", text);
 };
 
 module.exports = copy;
