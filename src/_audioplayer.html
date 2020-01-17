@@ -1,6 +1,6 @@
 <div
   class="audio-player <% if (!config.audioText) { %>hidden<% } %>"
-  data-stream="<%= config.audio %>"
+  data-stream="<%= config.audio || "" %>"
 >
 <button aria-pressed="false" aria-label="play" class="play-stream">
   <svg viewBox="0 0 10 10" preserveAspectRatio="xMidYMid meet" class="play-icon" aria-hidden="true" hidden>

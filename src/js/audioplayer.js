@@ -47,7 +47,7 @@ var getPlayer = function(src) {
             player.setVolume(100);
             isPlaying = true;
             player.play();
-            track("audio actions", hasPlayed ? "resume audio" : "play audio", trackingLabel);
+            track("audio actions", hasPlayed ? "resume audio" : "initiate audio", trackingLabel);
             hasPlayed = true;
           }
         });
@@ -137,7 +137,7 @@ var disable = function() {
   killPlayer();
 };
 
-// auto start if possible
+// autoload if stream is provided in the template
 if (ui.dataset.stream) {
   var presetText = playlist.innerHTML;
   update(ui.dataset.stream, presetText);
