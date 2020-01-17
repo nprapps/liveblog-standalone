@@ -100,6 +100,7 @@ var refresh = async function() {
   var unseen = $("article.post.hidden").length;
   if (unseen) {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
+    showUnseenButton.dataset.count = unseen;
     showUnseenButton.classList.remove("hidden");
     notifications.alert(`${unseen} new liveblog posts`, function() {
       window.focus();

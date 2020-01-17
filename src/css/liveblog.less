@@ -7,6 +7,9 @@ main.liveblog {
   background: #f24e40;
   color: white;
   .gotham();
+  padding: 16px;
+  border-radius: 8px;
+  margin: 8px 0;
   font-size: 22px;
   font-weight: bold;
   width: 100%;
@@ -15,6 +18,10 @@ main.liveblog {
 
   &.hidden {
     display: none;
+  }
+
+  &[data-count="1"] {
+    .plural { display: none; }
   }
 }
 
