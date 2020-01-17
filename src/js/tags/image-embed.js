@@ -30,6 +30,9 @@ img:after {
 }
 `;
 
+var NOT_READY = 0;
+var READY = 4;
+
 class ImageEmbed extends HTMLElement {
   constructor() {
     super();
@@ -39,16 +42,16 @@ class ImageEmbed extends HTMLElement {
     this.shadowRoot.appendChild(style);
     this.image = document.createElement("img");
     this.image.setAttribute("alt", "");
-    this.image.src = "broken";
+    this.image.src = "";
     this.shadowRoot.appendChild(this.image);
     this.credit = document.createElement("div");
     this.credit.className = "credit";
     this.shadowRoot.appendChild(this.credit);
     this.updateImage();
-    this.readyState = 0;
+    this.readyState = NOT_READY;
     this.observer = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting) return;
-      this.readyState = 4;
+      this.readyState = READY;
       this.updateImage();
     });
   }
@@ -66,13 +69,13 @@ class ImageEmbed extends HTMLElement {
     return ["src", "credit"]
   }
 
-  attributeChangedCallback() {
+  attributeChangedCallback(attr, pastValue, value) {
     this.updateImage();
   }
 
   updateImage() {
     this.credit.innerHTML = this.getAttribute("credit");
-    if (this.readyState == 4) {
+    if (this.readyState == READY) {
       this.image.src = this.getAttribute("src");
       this.observer.disconnect();
     }

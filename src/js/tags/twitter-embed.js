@@ -1,16 +1,6 @@
 class TwitterEmbed extends HTMLElement {
   constructor() {
     super();
-    // this.attachShadow({ mode: "open" });
-    // this.populate();
-    this.readyState = 0;
-    this.href = null;
-  }
-
-  connectedCallback() {
-    if (this.readyState == 4) return;
-    this.populate();
-    this.readyState = 4;
   }
 
   static get observedAttributes() {
@@ -18,17 +8,16 @@ class TwitterEmbed extends HTMLElement {
   }
 
   attributeChangedCallback(_, past, value) {
-    if (this.href != value) {
-      this.populate();
-      this.href = value;
+    if (past != value) {
+      this.populate(value);
     }
   }
 
-  populate() {
-    console.log(`Loading tweet: ${this.getAttribute("href")}`);
+  populate(href) {
+    console.log(`Loading tweet: ${href}`);
     this.innerHTML = `
 <blockquote class="twitter-tweet">
-<a href="${this.getAttribute("href")}">Embedded Tweet</a>
+<a href="${href}">Embedded Tweet</a>
 </blockquote>
     `;
     var script = document.createElement("script");
