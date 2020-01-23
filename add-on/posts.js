@@ -73,6 +73,7 @@ function addDraftPost(postData) {
   h4("editing: draft");
   p("slug: " + slug);
   if (postData.factcheck) p("factcheck: true");
+  if (postData.major) p("major: true");
   if (postData.tags) p("tags: " + postData.tags);
   p("text:");
   p();

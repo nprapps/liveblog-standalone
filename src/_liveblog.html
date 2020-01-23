@@ -108,6 +108,16 @@ posts.forEach(function(post, i) {
   </div>
   <div class="contents">
 
+    <div class="pillbox">
+      <% if (post.factcheck) { %>
+      <span class="fact-check pill">Fact check</span>
+      <% } %>
+
+      <% if (post.major) { %>
+      <span class="major pill">Major development</span>
+      <% } %>
+    </div>
+
     <h2><%= typogrify(post.headline) %></h2>
     
     <%= t.renderMarkdown(post.text) %>
