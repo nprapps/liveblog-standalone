@@ -41,14 +41,6 @@
       </div>
     </header>
 
-    <div class="notification-options">
-      <div class="contain">
-        We can notify you when new posts come in while this tab is open.
-        <input type="checkbox" id="enable-notifications">
-        <label for="enable-notifications">Enable notifications:</label>
-      </div>
-    </div>
-
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>
 
     <script src="app.js" async></script>

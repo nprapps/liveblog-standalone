@@ -6,6 +6,7 @@
   line-height: 1.6;
   color: #666;
   display: none;
+  text-align: right;
 
   .supports-notifications & {
     display: block;
@@ -16,27 +17,30 @@
   }
 
   input + label {
-    background: #fff;
-    border: 1px solid fade(@true, 80%);
-    color: @true;
     padding: 3px 8px;
-    border-radius: 4px;
     white-space: nowrap;
     display: inline-block;
+    color: @true;
+    font-weight: bold;
 
-    &:after {
+    &:before {
       content: "✘";
+      @box: 16px;
+      width: @box;
+      height: @box;
+      line-height: @box;
+      text-align: center;
       display: inline-block;
+      border: 1px solid @true;
       margin-left: 4px;
-      font-style: normal;
+      font-weight: normal;
+      font-size: 150%;
+      color: @true;
     }
   }
 
   input:checked + label {
-    background: @true;
-    color: #fff;
-
-    &:after {
+    &:before {
       content: "✔";
     }
   }
