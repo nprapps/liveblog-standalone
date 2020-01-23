@@ -14,7 +14,9 @@ var getDocument = require("./getDocument");
 var morphdom = require("morphdom");
 var notifications = require("./notification");
 
-var h1 = $.one("h1");
+var h1 = $.one("header h1");
+var h2 = $.one("header h2");
+var headerEmbed = $.one("header .html-embed");
 var showUnseenButton = $.one(".show-new");
 
 var onClickUnseen = function() {
@@ -43,7 +45,11 @@ var updateMisc = function(updated) {
   // update headline
   var headline = updated.querySelector("h1").innerHTML;
   h1.innerHTML = headline.trim();
-  // set "last updated" text?
+  var subhead = updated.querySelector("h2").innerHTML;
+  h2.innerHTML = subhead.trim();
+  // update header HTML chunk
+  var embed = updated.querySelector(".html-embed");
+  morphdom(headerEmbed, embed);
 };
 
 var updatePosts = function(articles) {

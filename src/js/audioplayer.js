@@ -111,6 +111,7 @@ var killPlayer = function() {
 
 var lastSrc = null;
 var update = function(src, text) {
+  if (!text) return;
   ui.classList.remove("hidden");
   ui.classList.toggle("no-audio", !src);
   if (src && lastSrc != src) {
