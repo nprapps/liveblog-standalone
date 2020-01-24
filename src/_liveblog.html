@@ -12,6 +12,10 @@
 <%
 var { typogrify } = require("typogr");
 var moment = require("moment-timezone");
+moment.fn.zoneName = function() {
+  var z = this.zoneAbbr();
+  return z.replace(/[SD]/, "");
+}
 var timezone = "America/New_York";
 
 // clean up and index posts
@@ -23,7 +27,7 @@ var posts = doc.posts.filter(function(post, index) {
   if (typeof post.published == "string") {
     post.published = post.published.trim() == "false" ? false : moment(post.published).tz(timezone);
     if (post.published) {
-      post.timeString = post.published.format("h:mm a z");
+      post.timeString = post.published.format("h:mm a zz");
       post.dateString = post.published.format("MMM. D, YYYY");
     }
   }
