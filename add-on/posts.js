@@ -85,10 +85,10 @@ function addDraftPost(postData) {
   doc.setSelection(builder.build());
 }
 
-function publishPost() {
+function publishPost(schedule) {
   var selection = doc.getSelection();
   var cursor = doc.getCursor();
-  var now = new Date();
+  var now = schedule || new Date();
   var date = now.toISOString();
   var replacer = "false|\\d[\\dT\\.:-]+Z";
   var element;
@@ -103,4 +103,25 @@ function publishPost() {
   var content = text.getText();
   if (!content.match(/published: /)) throw "Cursor is not placed on a publish line";
   text.replaceText(replacer, date);
+}
+
+function publishLater() {
+  var ui = DocumentApp.getUi();
+  
+  var dateResponse = ui.prompt("Input a date for the post as MM/DD/YYYY", ui.ButtonSet.OK_CANCEL);
+  if (dateResponse.getSelectedButton() == ui.Button.CANCEL) return;
+  var date = dateResponse.getResponseText();
+  var timeResponse = ui.prompt("Enter the time as 24-hour HH:MM", ui.ButtonSet.OK_CANCEL)
+  if (timeResponse.getSelectedButton() == ui.Button.CANCEL) return;
+  var time = timeResponse.getResponseText();
+  var dateParts = date.split("/");
+  var month = parseFloat(dateParts[0]);
+  var day = parseFloat(dateParts[1]);
+  var year = parseFloat(dateParts[2]);
+  var timeParts = time.split(":");
+  var hours = parseFloat(timeParts[0]);
+  var minutes = parseFloat(timeParts[1]);
+  
+  var then = new Date(year, month - 1, day, hours - 1, minutes);
+  publishPost(then);
 }

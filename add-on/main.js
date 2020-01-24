@@ -6,6 +6,7 @@ function onOpen() {
   menu.addItem("Add post", "openDraftPanel");
   menu.addItem("Add embed", "openEmbedPanel");
   menu.addItem("Set publication time", "publishPost");
+  menu.addItem("Schedule later publication", "publishLater");
   menu.addSeparator();
   menu.addItem("Configure liveblog add-on", "openConfigPanel");
   menu.addItem("Reset document", "resetDocument");
