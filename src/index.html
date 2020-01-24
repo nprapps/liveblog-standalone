@@ -36,12 +36,18 @@
 
         <%= t.include("_audioplayer.html", { config }) %>
 
-        
+
         <div class="html-embed"><%= config.headerHTML %></div>
       </div>
     </header>
 
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>
+
+    <% if (doc.config.footerCredits) { %>
+    <footer>
+      <p>Candidate photos: <%= t.smarty(doc.config.footerCredits) %></p>
+    </footer>
+    <% } %>
 
     <script src="app.js" async></script>
     <%= t.include("partials/_analytics.html") %>

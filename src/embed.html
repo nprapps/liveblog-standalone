@@ -16,7 +16,14 @@
 
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>
 
+    <% if (doc.config.footerCredits) { %>
+    <footer>
+      <p>Candidate photos: <%= t.smarty(doc.config.footerCredits) %></p>
+    </footer>
+    <% } %>
+
     <script src="embedded.js" async></script>
     <%= t.include("partials/_analytics.html") %>
+
   </body>
 </html>
