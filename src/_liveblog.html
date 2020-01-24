@@ -29,6 +29,9 @@ var posts = doc.posts.filter(function(post, index) {
     if (post.published) {
       post.timeString = post.published.format("h:mm a zz");
       post.dateString = post.published.format("MMM. D, YYYY");
+      if (post.published.isAfter()) {
+        post.timeString += " (scheduled)"
+      }
     }
   }
   if (typeof post.tags == "string") {
@@ -84,7 +87,7 @@ posts.forEach(function(post, i) {
 %>
 
 <article
-  class="post <%= post.published ? "published" : "draft" %> <%= post.tags.join(" ") %>"
+  class="post <%= post.published && post.published.isBefore() ? "published" : "draft" %> <%= post.tags.join(" ") %>"
   id="<%= post.slug %>"
 >
   <div class="metadata">
