@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/20200114-debate-standalone"
+      "path": "liveblogs/20200203-iowa"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/20200114-debate-standalone"
+      "path": "liveblogs/20200203-iowa"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/20200114-debate-standalone/",
+  "url": "https://apps.npr.org/liveblogs/20200203-iowa/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM"
+    "liveblog": "1FG6MJWTpezphMTLNHXEV685rPrbvfn04LyZ3zH3yO_A"
   },
   "embedded": false,
   "production": true
