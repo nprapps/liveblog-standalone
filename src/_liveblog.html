@@ -37,7 +37,7 @@ var posts = doc.posts.filter(function(post, index) {
   if (!post.tags) {
     post.tags = [];
   }
-  return flags.unpublished || post.published;
+  return flags.unpublished || post.published && post.published.isBefore();
 });
 posts.sort(function(a, b) {
   if (!a.published && !b.published) {
