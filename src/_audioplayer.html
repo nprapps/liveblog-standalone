@@ -1,5 +1,5 @@
 <div
-  class="audio-player <% if (!config.audioText) { %>hidden<% } %>"
+  class="audio-player <%= !config.audioText ? "hidden" : !config.audio ? "no-audio" : "" %>"
   data-stream="<%= config.audio || "" %>"
 >
 <button aria-pressed="false" aria-label="play" class="play-stream">
