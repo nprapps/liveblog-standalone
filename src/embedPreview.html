@@ -1,4 +1,14 @@
-<!doctype html>
+<%
+  var embed = `
+<p data-pym-liveblog-loader
+  data-child-src="${json.project.url}embed.html"
+  id="${json.project.url.split("/").filter(d => d).pop()}">
+    Loading...
+</p>
+<script src="https://pym.nprapps.org/npr-pym-liveblog-loader.v2.min.js"></script>
+`
+
+%><!doctype html>
 <html lang="en-US">
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -9,7 +19,7 @@ header {
   font-weight: bold;
 }
 
-side-chain {
+[data-pym-liveblog-loader] {
   max-width: 500px;
   margin: auto;
   border: 2px dashed blue;
@@ -23,11 +33,8 @@ side-chain {
       HELLO THIS IS A PREVIEW OF THE EMBED
     </header>
 
-    <textarea style="width: 100%;">&lt;p data-sidechain-src="<%= json.project.url %>embed.html"&gt;&lt;/p&gt;
-&lt;script src="<%= json.project.url %>loader.js" async defer&gt;&lt;/script&gt;</textarea>
+    <textarea style="width: 100%;" rows=3><%= embed.replace(/</g, "&lt;").replace(/\s+|\n/g, " ").trim() %></textarea>
 
-    <p data-sidechain-src="./embed.html">Loading...</p>
-
-    <script src="loader.js" async></script>
+    <%= embed %>
   </body>
 </html>

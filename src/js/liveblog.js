@@ -44,12 +44,12 @@ var updateMisc = function(updated) {
   document.title = title;
   // update headline
   var headline = updated.querySelector("h1").innerHTML;
-  h1.innerHTML = headline.trim();
+  if (h1) h1.innerHTML = headline.trim();
   var subhead = updated.querySelector("h2").innerHTML;
-  h2.innerHTML = subhead.trim();
+  if (h2) h2.innerHTML = subhead.trim();
   // update header HTML chunk
   var embed = updated.querySelector(".html-embed");
-  morphdom(headerEmbed, embed);
+  if (headerEmbed) morphdom(headerEmbed, embed);
 };
 
 var updatePosts = function(articles) {

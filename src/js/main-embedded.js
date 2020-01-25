@@ -8,6 +8,8 @@ var guest = Sidechain.registerGuest({
 });
 
 events.on("unseen-posts", function(unseen) {
-  // update the parent page
+  // update the host page
   guest.sendMessage({ unseen });
+  // update Pym parents
+  guest.sendLegacy("update-parent-title", unseen);
 });

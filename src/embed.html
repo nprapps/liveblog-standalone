@@ -16,7 +16,7 @@
 
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>
 
-    <% if (doc.config.footerCredits) { %>
+    <% if (false && doc.config.footerCredits) { %>
     <footer>
       <p>Candidate photos: <%= t.smarty(doc.config.footerCredits) %></p>
     </footer>
