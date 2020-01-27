@@ -41,7 +41,7 @@
       </div>
     </header>
 
-    <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>
+    <%= t.include("_liveblog.html", { doc, config, flags: { showAd: true } }) %>
 
     <% if (doc.config.footerCredits) { %>
     <footer>
