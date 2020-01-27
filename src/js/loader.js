@@ -12,27 +12,31 @@ var upgrade = function(element) {
 }
 $("[data-sidechain-src]").forEach(upgrade);
 
-var observer = new MutationObserver(function(events) {
-  events.forEach(function(mutation) {
-    if (mutation.type == "childList") {
-      var added = Array.from(mutation.addedNodes).filter(n => n.dataset.sidechainSrc);
-      added.forEach(upgrade);
-    }
+if (!window.liveblogObserved) {
+  window.liveblogObserved = true;
+
+  var observer = new MutationObserver(function(events) {
+    events.forEach(function(mutation) {
+      if (mutation.type == "childList") {
+        var added = Array.from(mutation.addedNodes).filter(n => n.dataset.sidechainSrc);
+        added.forEach(upgrade);
+      }
+    });
   });
-});
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
 
-// handle events from the inner frame
-var onMessage = Sidechain.matchMessage({
-  sentinel: "npr-liveblog"
-}, function(e) {
-  var { unseen } = e;
-  var clean = document.title.replace(/^\s*\(\d+\)\s*/, "");
-  document.title = unseen ? `(${unseen}) ${clean}` : clean;
-});
+  // handle events from the inner frame
+  var onMessage = Sidechain.matchMessage({
+    sentinel: "npr-liveblog"
+  }, function(e) {
+    var { unseen } = e;
+    var clean = document.title.replace(/^\s*\(\d+\)\s*/, "");
+    document.title = unseen ? `(${unseen}) ${clean}` : clean;
+  });
 
-window.addEventListener("message", onMessage);
+  window.addEventListener("message", onMessage);
+}
