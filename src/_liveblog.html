@@ -1,7 +1,8 @@
 <div class="metadata" hidden>
   <h1><%= doc.config.headline %></h1>
   <h2><%= doc.config.subhead %></h2>
-  <div class="html-embed"><%= doc.config.headerHTML %></div>
+  <div class="html-injection"><%= doc.config.headerHTML %></div>
+  <div class="embed-html-injection"><%= doc.config.embedHeaderHTML %></div>
   <% if (doc.config.audioText) { %>
   <audio class="stream-source" preload="none" hidden src="<%= doc.config.audio %>">
   <%= doc.config.audioText %>

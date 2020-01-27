@@ -7,6 +7,10 @@ require("@nprapps/sidechain");
 require("./clipboard");
 var audio = require("./audioplayer");
 
+// remove the useless metadata block
+var meta = $.one(".metadata");
+meta.parentElement.removeChild(meta);
+
 // load local dependencies
 var $ = require("./lib/qsa");
 var events = require("./events");
@@ -16,7 +20,8 @@ var notifications = require("./notification");
 
 var h1 = $.one("header h1");
 var h2 = $.one("header h2");
-var headerEmbed = $.one("header .html-embed");
+var headerInjection = $.one("header .html-injection");
+var embeddedHeaderInjection = $.one("header .embed-html-injection");
 var showUnseenButton = $.one(".show-new");
 
 var lastUnseen = 0;
@@ -49,8 +54,10 @@ var updateMisc = function(updated) {
   var subhead = updated.querySelector("h2").innerHTML;
   if (h2) h2.innerHTML = subhead.trim();
   // update header HTML chunk
-  var embed = updated.querySelector(".html-embed");
-  if (headerEmbed) morphdom(headerEmbed, embed);
+  var embed = updated.querySelector(".metadata .html-injection");
+  if (headerInjection) morphdom(headerInjection, embed);
+  var embedSquared = updated.querySelector(".metadata .embed-html-injection");
+  if (embeddedHeaderInjection) morphdom(embeddedHeaderInjection, embedSquared);
 };
 
 var updatePosts = function(articles) {

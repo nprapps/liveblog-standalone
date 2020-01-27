@@ -12,6 +12,7 @@
 
     <header id="top">
       <%= t.include("_audioplayer.html", { config }) %>
+      <div class="embed-html-injection"><%= config.embedHeaderHTML %></div>
     </header>
 
     <%= t.include("_liveblog.html", { doc, config, flags: {} }) %>
