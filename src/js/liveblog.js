@@ -19,6 +19,7 @@ var h2 = $.one("header h2");
 var headerEmbed = $.one("header .html-embed");
 var showUnseenButton = $.one(".show-new");
 
+var lastUnseen = 0;
 var onClickUnseen = function() {
   var hidden = $("article.post.hidden");
   hidden.forEach(el => el.classList.remove("hidden"));
@@ -108,11 +109,14 @@ var refresh = async function() {
     showUnseenButton.querySelector(".count").innerHTML = unseen;
     showUnseenButton.dataset.count = unseen;
     showUnseenButton.classList.remove("hidden");
-    notifications.alert(`${unseen} new liveblog posts`, function() {
-      window.focus();
-      onClickUnseen();
-      setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
-    });
+    if (unseen != lastUnseen) {
+      notifications.alert(`${unseen} new liveblog posts`, function() {
+        window.focus();
+        onClickUnseen();
+        setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
+      });
+      lastUnseen = unseen;
+    }
   }
   events.send("unseen-posts", unseen || 0);
 }
