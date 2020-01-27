@@ -110,7 +110,8 @@ var refresh = async function() {
     showUnseenButton.dataset.count = unseen;
     showUnseenButton.classList.remove("hidden");
     if (unseen != lastUnseen) {
-      notifications.alert(`${unseen} new liveblog posts`, function() {
+      var plural = unseen == 1 ? "post" : "posts";
+      notifications.alert(`${unseen} new liveblog ${plural}`, function() {
         window.focus();
         onClickUnseen();
         setTimeout(() => $.one("main.liveblog").scrollIntoView({ behavior: "smooth" }), 300);
