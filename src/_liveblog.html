@@ -25,7 +25,15 @@ var posts = doc.posts.filter(function(post, index) {
   post.index = index;
   // only do this one time through the template
   if (typeof post.published == "string") {
-    post.published = post.published.trim() == "false" ? false : moment(post.published).tz(timezone);
+    if (post.published.trim() == false) {
+      post.published = false;
+    } else {
+      try {
+        post.published = moment(post.published).tz(timezone)
+      } catch(err) {
+        post.published = false;
+      }
+    }
     if (post.published) {
       post.timeString = post.published.format("h:mm a zz");
       post.dateString = post.published.format("MMM. D, YYYY");
