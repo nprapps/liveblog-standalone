@@ -11,5 +11,6 @@ events.on("unseen-posts", function(unseen) {
   // update the host page
   guest.sendMessage({ unseen });
   // update Pym parents
+  guest.sendLegacy("update-parent-title", 0);
   guest.sendLegacy("update-parent-title", unseen);
 });
