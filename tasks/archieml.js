@@ -22,6 +22,17 @@ module.exports = function(grunt) {
       var name = path.basename(f).replace(/(\.docs)?\.txt$/, "");
       var contents = grunt.file.read(f);
 
+      // check for greedy text fields
+      var textRE = /^text:[\s\S]*?:end/gmi;
+      var match;
+      while (match = textRE.exec(contents)) {
+        var [ t ] = match;
+        if (t.match(/^headline:/m)) {
+          console.log("=======\n", t.trim(), "\n=======");
+          grunt.fail.fatal("Text seems to be missing an :end tag")
+        }
+      }
+
       // ignore false-positive keys inside of post text blocks
       var multiline = ["text", "headline"];
       for (var m of multiline) {

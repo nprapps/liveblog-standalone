@@ -19,36 +19,10 @@ moment.fn.zoneName = function() {
 }
 var timezone = "America/New_York";
 
-// clean up and index posts
+// Filter and create post lookup
 var lookup = {};
 var posts = doc.posts.filter(function(post, index) {
   lookup[post.slug] = post;
-  post.index = index;
-  // only do this one time through the template
-  if (typeof post.published == "string") {
-    if (post.published.trim() == false) {
-      post.published = false;
-    } else {
-      try {
-        post.published = moment(post.published).tz(timezone)
-      } catch(err) {
-        post.published = false;
-      }
-    }
-    if (post.published) {
-      post.timeString = post.published.format("h:mm a zz");
-      post.dateString = post.published.format("MMM. D, YYYY");
-      if (post.published.isAfter()) {
-        post.timeString += " (scheduled)"
-      }
-    }
-  }
-  if (typeof post.tags == "string") {
-    post.tags = post.tags.split(/,\s*/g);
-  }
-  if (!post.tags) {
-    post.tags = [];
-  }
   return flags.unpublished || post.published && post.published.isBefore();
 });
 posts.sort(function(a, b) {
