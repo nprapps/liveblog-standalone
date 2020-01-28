@@ -25,7 +25,19 @@ document.body.addEventListener("click", function(e) {
       e.preventDefault();
       e.stopImmediatePropagation();
       var element = document.querySelector(href);
-      if (element) element.scrollIntoView({ behavior: "smooth" });
+      if (element) {
+        if (navigator.userAgent.match(/safari/) || true) {
+          // safari is bad, scroll the parent manually there
+          var scrollY = element.getBoundingClientRect().top;
+          // for Pym hosts
+          guest.sendLegacy("scrollToChildPos", scrollY);
+          // Sidechain hosts
+          guest.sendMessage({ scrollY });
+        } else {
+          // standard browsers can just move the way we want them to
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
   }
 });
