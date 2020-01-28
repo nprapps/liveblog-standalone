@@ -7,7 +7,7 @@ var timezone = "America/New_York";
 
 module.exports = function(grunt) {
 
-  grunt.registerTask("validate", function() {
+  grunt.registerTask("validate", "Checks the liveblog doc structure for errors", function() {
 
     grunt.task.requires("archieml");
 

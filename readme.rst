@@ -31,10 +31,33 @@ Common tasks that you may want to run include:
 * ``google-auth`` - authenticates your account against Google for private files
 * ``static`` - rebuilds files but doesn't start the dev server
 * ``cron`` - runs builds and deploys on a timer (see ``tasks/cron.js`` for details)
+* ``local`` - starts a version of the server locally, updating the document every few seconds
 * ``publish`` - uploads files to the staging S3 bucket
 
   * ``publish:live`` uploads to production
   * ``publish:simulated`` does a dry run of uploaded files and their compressed sizes
+
+Deployment server
+-----------------
+
+We are currently deploying this on EC2 using SystemD to run it as a Linux
+service. This means the server will restart it when it crashes, and provide a
+standard mechanism for collecting/following log messages.
+
+You can create the systemd unit file by running ``grunt systemd``. This file
+includes instructions for installing and starting the service at the top. Once
+the service is installed, you can use the ``systemctl`` command to check on it
+and control its operation::
+
+    sudo systemctl start liveblog
+    sudo systemctl stop liveblog
+    sudo systemctl status liveblog
+
+To update the code running on the server, SSH into the EC2 box, enter the
+``liveblog`` directory, and ``git pull`` to get the latest source. To be safe,
+restart the server with ``sudo systemctl restart liveblog``--this will force
+the server to redeploy all resources (the schedule deployments only run HTML
+templating, not scripts or styles).
 
 Troubleshooting
 ---------------
