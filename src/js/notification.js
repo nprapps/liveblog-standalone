@@ -7,11 +7,13 @@ var enabled =
   flags.notifications &&
   window.Notification &&
   window.Notification.permission == "granted" &&
-  localStorage.enableNotifications;
+  localStorage.getItem("enableNotifications") * 1;
 
 var setEnabled = function(state) {
   track("notifications-enabled", state);
-  enabled = localStorage.enableNotifications = Number(state);
+  state = Number(state);
+  localStorage.setItem("enableNotifications", state);
+  enabled = state;
   document.body.classList.toggle("enabled-notifications", state);
 };
 
