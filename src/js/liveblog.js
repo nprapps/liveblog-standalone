@@ -6,6 +6,7 @@ require("@nprapps/sidechain");
 // load independent modules
 require("./clipboard");
 var audio = require("./audioplayer");
+var flags = require("./flags");
 
 // load local dependencies
 var $ = require("./lib/qsa");
@@ -126,4 +127,4 @@ var refresh = async function() {
   events.send("unseen-posts", unseen || 0);
 }
 
-setInterval(refresh, 1000 * 10);
+setInterval(refresh, flags.refresh * 1000);
