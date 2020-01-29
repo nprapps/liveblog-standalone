@@ -7,10 +7,6 @@ require("@nprapps/sidechain");
 require("./clipboard");
 var audio = require("./audioplayer");
 
-// remove the useless metadata block
-var meta = $.one(".metadata");
-meta.parentElement.removeChild(meta);
-
 // load local dependencies
 var $ = require("./lib/qsa");
 var events = require("./events");
@@ -54,10 +50,11 @@ var updateMisc = function(updated) {
   var subhead = updated.querySelector("h2").innerHTML;
   if (h2) h2.innerHTML = subhead.trim();
   // update header HTML chunk
-  var embed = updated.querySelector(".metadata .html-injection");
-  if (headerInjection) morphdom(headerInjection, embed);
-  var embedSquared = updated.querySelector(".metadata .embed-html-injection");
-  if (embeddedHeaderInjection) morphdom(embeddedHeaderInjection, embedSquared);
+  var morphInjected = { childrenOnly: true };
+  var embed = updated.querySelector(".metadata .injection-source");
+  if (headerInjection) morphdom(headerInjection, embed.content, morphInjected);
+  var embedSquared = updated.querySelector(".metadata .embed-injection-source");
+  if (embeddedHeaderInjection) morphdom(embeddedHeaderInjection, embedSquared.content, morphInjected);
 };
 
 var updatePosts = function(articles) {
