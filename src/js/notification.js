@@ -1,7 +1,13 @@
 var $ = require("./lib/qsa");
 var track = require("./lib/tracking").trackApps;
 
-var enabled = window.Notification && window.Notification.permission == "granted" && localStorage.enableNotifications;
+var flags = require("./flags");
+
+var enabled =
+  flags.notifications &&
+  window.Notification &&
+  window.Notification.permission == "granted" &&
+  localStorage.enableNotifications;
 
 var setEnabled = function(state) {
   track("notifications-enabled", state);
@@ -9,9 +15,9 @@ var setEnabled = function(state) {
   document.body.classList.toggle("enabled-notifications", state);
 };
 
-setEnabled(enabled);
+if (flags.notifications) setEnabled(enabled);
 
-if (window.Notification) {
+if (flags.notifications && window.Notification) {
   document.body.classList.add("supports-notifications");
 }
 
@@ -24,20 +30,21 @@ var request = async function() {
 };
 
 var alert = async function(text, callback) {
-  if (!window.Notification || !enabled) return console.log("Notifications not enabled");
+  if (!window.Notification || !enabled)
+    return console.log("Notifications not enabled");
   console.log(`Notification: ${text}`);
   var notification = new Notification(text, {
     tag: "NPR Liveblog",
     badge: "./assets/logo_lines.png",
-    icon: "./assets/logo_lines.png",
+    icon: "./assets/logo_lines.png"
     // requireInteraction: true
   });
-  if (callback) notification.onclick = function(e) {
-    notification.close();
-    callback(e);
-  }
+  if (callback)
+    notification.onclick = function(e) {
+      notification.close();
+      callback(e);
+    };
 };
-
 
 var checkbox = $.one("#enable-notifications");
 if (checkbox) {
