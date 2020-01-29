@@ -6,9 +6,30 @@ var ui = $.one(".audio-player");
 var playButton = ui.querySelector("button.play-stream");
 var playlist = ui.querySelector("span.text");
 
+var dimensions = {
+  streamStarts: "metric2",
+  totalListenerSeconds: "metric4"
+};
+
+var createDimensions = function(original) {
+  var output = {
+    dimension35: "from page"
+  };
+  for (var k in original) {
+    if (k in dimensions) {
+      output[dimensions[k]] = original[k];
+    } else {
+      output[k] = original[k];
+    }
+  }
+  console.log(output);
+  return output;
+};
+
 // tracking code
 var resumeTime = 0;
 var thresholds = [15, 30, 60, 120, 180, 240, 300];
+var elapsed = thresholds.map((t, i, a) => t - (a[i - 1] || 0));
 var hasPlayed = false;
 var trackingLabel = "liveblog-stream";
 var isPlaying = false;
@@ -47,7 +68,9 @@ var getPlayer = function(src) {
             player.setVolume(100);
             isPlaying = true;
             player.play();
-            track("audio actions", hasPlayed ? "resume audio" : "initiate audio", trackingLabel);
+            var action = hasPlayed ? "resume audio" : "initiate audio";
+            var dims = hasPlayed ? {} : createDimensions({ streamStarts: 1 });
+            track("audio actions", action, trackingLabel, undefined, dims);
             hasPlayed = true;
           }
         });
@@ -82,13 +105,15 @@ var getPlayer = function(src) {
           if (time > threshold) {
             // move to the next time period
             thresholds.shift();
+            var tls = elapsed.shift() || 300;
             // past the 5 minute threshold, add another 5
             if (!thresholds.length) {
               thresholds.unshift(threshold + 300);
             }
             // send the event
             var action = threshold >= 60 ? `${threshold / 60} min ping` : `${threshold} sec ping`;
-            track("audio pings", action, trackingLabel);
+            var dims = createDimensions({ totalListenerSeconds: tls });
+            track("audio pings", action, trackingLabel, undefined, dims);
           }
         });
 

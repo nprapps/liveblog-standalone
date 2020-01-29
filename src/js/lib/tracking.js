@@ -10,33 +10,29 @@ var DIMENSION_PARENT_URL = 'dimension1';
 var DIMENSION_PARENT_HOSTNAME = 'dimension2';
 var DIMENSION_PARENT_INITIAL_WIDTH = 'dimension3';
 
-var a = document.createElement("a");
-
 var slug = window.location.pathname.replace(/^\/|\/$/g, "");
 
-var track = function(eventCategory, eventAction, eventLabel, eventValue) {
+var track = function(eventCategory, eventAction, eventLabel, eventValue, extra) {
   var event = {
     eventCategory,
     eventAction,
     eventLabel,
     eventValue,
-    hitType: "event",
-  }
+    hitType: "event"
+  };
 
   console.log(`Tracking: ${eventCategory} / ${eventAction} / ${eventLabel} / ${eventValue}`)
 
-  var search = window.location.search.replace(/^\?/, "");
-  var query = {};
-  search.split("&").forEach(pair => {
-    var [key, value] = pair.split("=");
-    query[key] = value;
-  });
-  var parentURL = query.parentUrl;
-  a.href = parentURL;
-  var hostname = a.hostname;
+  var here = new URL(window.location);
+  var parentURL = here.searchParams.get("parentURL");
 
-  event[DIMENSION_PARENT_URL] = parentURL;
-  event[DIMENSION_PARENT_HOSTNAME] = hostname;
+  if (parentURL) {
+    var p = new URL(parentURL);
+    event[DIMENSION_PARENT_URL] = parentURL;
+    event[DIMENSION_PARENT_HOSTNAME] = p.hostname;
+  }
+
+  if (extra) Object.assign(event, extra);
 
   if (window.ga) ga("send", event);
 }
