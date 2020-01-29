@@ -6,7 +6,7 @@
 
   background: @blue;
   border-radius: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 25px;
   display: flex;
   align-items: center;
   color: white;
@@ -70,6 +70,10 @@
   .text {
     font-size: 18px;
     font-weight: 700;
+
+    @media @mobile {
+      font-size: 16px;
+    }
   }
 
   &.no-audio {
