@@ -58,7 +58,7 @@ module.exports = function(grunt) {
         post.published = parsed;
       }
       if (post.published) {
-        post.timeString = post.published.format("h:mm a zz");
+        post.timeString = post.published.format("h:mm a zz").replace(/\b([ap])m\b/, "$1.m.");
         post.dateString = post.published.format("MMM. D, YYYY");
         if (post.published.isAfter()) {
           post.timeString += " (scheduled)"
