@@ -1,4 +1,5 @@
 require("./liveblog");
+var track = require("./lib/tracking").trackApps;
 var events = require("./events");
 
 var Sidechain = require("@nprapps/sidechain");
@@ -24,6 +25,7 @@ document.body.addEventListener("click", function(e) {
     if (href[0] == "#") {
       e.preventDefault();
       e.stopImmediatePropagation();
+      track("internal-link-clicked", href.slice(1));
       var element = document.querySelector(href);
       if (element) {
         if (navigator.userAgent.match(/safari/) || true) {

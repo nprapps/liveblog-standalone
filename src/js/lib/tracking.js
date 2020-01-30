@@ -10,7 +10,7 @@ var DIMENSION_PARENT_URL = 'dimension1';
 var DIMENSION_PARENT_HOSTNAME = 'dimension2';
 var DIMENSION_PARENT_INITIAL_WIDTH = 'dimension3';
 
-var slug = window.location.pathname.replace(/^\/|\/$/g, "");
+var slug = window.location.pathname.split("/").filter(p => p && !p.match(/\.html$/)).pop();
 
 var track = function(eventCategory, eventAction, eventLabel, eventValue, extra) {
   var event = {
