@@ -79,7 +79,12 @@ module.exports = function(grunt) {
       var output = share(data);
       grunt.log.writeln(`Generated share card: share/${slug}.html`);
       grunt.file.write(`build/share/${slug}.html`, output);
-    })
+    });
+
+    // also create a public RSS feed
+    var doc = grunt.data.archieml.liveblog
+    var rss = template(grunt.file.read("src/feed.rss"))(data);
+    grunt.file.write("build/feed.rss", rss);
   });
 
 }

@@ -1,0 +1,25 @@
+<%
+var { config, posts } = archieml.liveblog;
+posts = posts.filter(p => p.published && p.published.isBefore());
+%><?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title><%= config.headline %></title>
+    <link><%= json.project.url %></link>
+    <description><%= config.socialDescription %></description>
+    <language>en</language>
+    <generator>NPR News Apps Team</generator>
+    <% posts.forEach(function(p) { %>
+      <item>
+      <title><%= p.headline %></title>
+      <link><%= json.project.url + "#" + p.slug %></link>
+      <description><![CDATA[<%= p.text %>]]></description>
+      <pubDate><%= p.published.format("ddd, DD MMM YYYY HH:mm:ss z") %></pubDate>
+      <guid><%= json.project.url + "#" + p.slug %></guid>
+      <% p.tags.forEach(function(t) { %>
+      <category><%= t %></category>
+      <% }) %>
+      </item>
+    <% }) %>
+  </channel>
+</rss>
