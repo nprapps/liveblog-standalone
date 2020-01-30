@@ -87,7 +87,8 @@ posts.forEach(function(post, i) {
       class="permalink"
       data-copy="<%= grunt.data.json.project.url + "share/" + post.slug +".html" %>">
         Copy link
-        <div class="copy-message" aria-hidden>Copied!</div>
+        <div class="copy-message success" aria-hidden>Copied!</div>
+        <div class="copy-message error" aria-hidden>Sorry, couldn't copy link</div>
     </a>
 
     <div class="tags">

@@ -168,7 +168,12 @@ article.post {
         pointer-events: none;
       }
 
-      &.copied .copy-message {
+      &.copied .copy-message.success {
+        display: block;
+      }
+
+      &.error .copy-message.error {
+        background: #533;
         display: block;
       }
     }
