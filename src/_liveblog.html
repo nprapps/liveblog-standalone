@@ -12,12 +12,6 @@
 
 <%
 var { typogrify } = require("typogr");
-var moment = require("moment-timezone");
-moment.fn.zoneName = function() {
-  var z = this.zoneAbbr();
-  return z.replace(/[SD]/, "");
-}
-var timezone = "America/New_York";
 
 // Filter and create post lookup
 var lookup = {};
