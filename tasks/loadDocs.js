@@ -37,7 +37,8 @@ module.exports = function(grunt) {
       2, // adjust this up or down based on rate limiting
       async function(key) {
         var documentId = config.docs[key];
-        var docResponse = await docs.get({ documentId });
+        var suggestionsViewMode = "PREVIEW_WITHOUT_SUGGESTIONS";
+        var docResponse = await docs.get({ documentId, suggestionsViewMode });
         console.log(`Got document response for ${key}`);
         var name = key + ".docs.txt";
         var body = docResponse.data.body.content;
