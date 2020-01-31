@@ -17,6 +17,7 @@ setTimeout(function() {
     var element = document.querySelector(hash);
     if (element);
     element.scrollIntoView({ behavior: "smooth" });
+    track("jump-on-load", hash.slice(1));
   }
 }, 2000);
 
