@@ -10,6 +10,7 @@
         <option value="twitter">Tweet</option>
         <option value="image">Image</option>
         <option value="sidechain">Graphic embed</option>
+        <option value="youtube">YouTube Video</option>
       </select>
     </fieldset>
     
@@ -46,6 +47,17 @@
         <input id="src">
       </fieldset>
       <button class="add-embed">Add graphic</button>
+    </form>
+    
+    <form id="youtube">
+      <h2>YouTube video</h2>
+      <p>
+      The ID is the part of the URL that comes after the "?v=" in the URL.
+      <fieldset>
+        <label for="video">Video ID</label>
+        <input id="video">
+      </fieldset>
+      <button class="add-embed">Add video</button>
     </form>
     
     <script>

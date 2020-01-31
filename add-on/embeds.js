@@ -3,7 +3,8 @@
 var embedTemplates = {
   twitter: '<twitter-embed href="%tweet" id="tw-%counter">\n</twitter-embed>',
   image: '<image-embed src="%src" credit="%credit" %narrow id="img-%counter">\n</image-embed>',
-  sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>'
+  sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
+  youtube: '<youtube-video video="%video" id="youtube-counter-%counter">\n</youtube-video>'
 };
 
 var prefixed = {
