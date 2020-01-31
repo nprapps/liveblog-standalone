@@ -51,6 +51,9 @@ function addDraftPost(postData) {
   var slug = postData.headline
     .toLowerCase()
     .trim()
+    .split(" ")
+    .slice(0, 5)
+    .join(" ")
     .replace(/\s+/g, "-")
     .replace(/[^\w-]+/g, "")
     .replace(/^[\d]+-/, "") + "-" + getCounterValue();
