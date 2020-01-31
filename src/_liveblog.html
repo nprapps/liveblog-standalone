@@ -109,10 +109,15 @@ posts.forEach(function(post, i) {
 
     <% if (post.page) { %>
     <div class="author">
-      &mdash; <a href="<%= post.page %>"><%= post.author %></a>
+      &mdash;
+      <a href="<%= post.page %>">
+        <%= post.author %><% if (post.role) { %>, <%= post.role %><% }%>
+      </a>
     </div>
     <% } else { %>
-    <div class="author">&mdash; <%= post.author %></div>
+    <div class="author">&mdash;
+      <%= post.author %><% if (post.role) { %>, <%= post.role %><% }%>
+    </div>
     <% } %>
 
   <a class="back-to-top" href="#top">&uarr; Back to top</a>
