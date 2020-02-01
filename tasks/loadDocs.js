@@ -57,7 +57,7 @@ module.exports = function(grunt) {
               var style = list.listProperties.nestingLevels[level];
               var bullet = "- ";
               if (style) {
-                if (style.glyphType == "DECIMAL" || style.glyphType.match(/%\d/)) {
+                if (style.glyphType == "DECIMAL") {
                   bullet = "1. ";
                 }
               }
