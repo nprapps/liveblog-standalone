@@ -13,6 +13,8 @@ events.on("unseen-posts", function(count) {
 setTimeout(function() {
   var hash = window.location.hash;
   if (hash) {
+    // unbreak SocialFlow links
+    hash = hash.replace(/\?.+$/, "");
     window.location = hash;
     var element = document.querySelector(hash);
     if (element) element.scrollIntoView({ behavior: "smooth" });
