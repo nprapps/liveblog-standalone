@@ -70,7 +70,7 @@ module.exports = function(grunt) {
       var { slug } = post;
       var there = grunt.data.json.project.url;
       var firstImage = post.text.match(/http.+?.(jpg|png|gif)/);
-      var socialImage = grunt.data.json.liveblog.config.socialImage;
+      var socialImage = grunt.data.archieml.liveblog.config.socialImage;
       var defaultImage = there + grunt.data.json.project.image;
       var data = Object.assign({}, post, {
         there,
