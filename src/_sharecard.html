@@ -34,7 +34,9 @@
 
   <script>
     // Make sure we capture any UTM query parameters passed
-    var redirectURL = '<%= there %>#<%= slug %>' + window.location.search;
+    var dest = new URL("<%= there %>#<%= slug %>");
+    dest.search = window.location.search;
+    var redirectURL = dest.toString();
 
     // Using `location.replace()` means that users won't be able to
     // navigate "back" to this stub page
