@@ -101,6 +101,8 @@ var refresh = async function() {
   events.send("updating");
   try {
     var updated = await getDocument(window.location.href);
+    // updated will be null if the response was a 304
+    if (!updated) return;
     // get updates in reverse order (so we can add in reverse chron)
     var posts = $("article.post", updated).reverse();
     if (!posts.length) return console.log("Remote document was missing liveblog content.");
@@ -108,6 +110,7 @@ var refresh = async function() {
     updateMisc(updated);
   } catch (err) {
     console.error(err);
+    return;
   }
   events.send("updated-liveblog");
   var unseen = $("article.post.hidden").length;
