@@ -4,6 +4,8 @@ var os = require("os");
 var path = require("path");
 var { authenticate } = require("./googleauth");
 
+var lastRevision = null;
+
 module.exports = function(grunt) {
   grunt.registerTask(
     "docs",
@@ -30,6 +32,8 @@ module.exports = function(grunt) {
         italic: text => `<i>${text}</i>`
       };
 
+      grunt.updated = {};
+
       /*
        * Large document sets may hit rate limits; you can find details on your quota at:
        * https://console.developers.google.com/apis/api/drive.googleapis.com/quotas?project=<project>
@@ -43,6 +47,13 @@ module.exports = function(grunt) {
           var suggestionsViewMode = "PREVIEW_WITHOUT_SUGGESTIONS";
           var docResponse = await docs.get({ documentId, suggestionsViewMode });
           console.log(`Got document response for ${key}`);
+
+          // flag stale document response
+          var { revisionId } = docResponse.data;
+          grunt.updated[key] = revisionId != lastRevision;
+          lastRevision = revisionId;
+
+
           var name = key + ".docs.txt";
           var body = docResponse.data.body.content;
           var text = "";
