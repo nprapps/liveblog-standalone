@@ -12,10 +12,10 @@ module.exports = function(url) {
     xhr.onload = function() {
       if (xhr.status == 304) {
         console.log("Liveblog hasn't changed since last request");
-        ok(null);
+        return ok(null);
       }
       if (xhr.status >= 400) {
-        fail(`Liveblog failed with status "${xhr.statusText}"`);
+        return fail(`Liveblog failed with status "${xhr.statusText}"`);
       }
       var response = xhr.response;
       var etag = xhr.getResponseHeader("ETag");
