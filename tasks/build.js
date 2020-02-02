@@ -53,13 +53,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask("build", "Processes index.html using shared data (if available)", function() {
 
-    // skip HTML build if the liveblog hasn't changed
-    // THIS BREAKS SCHEDULED POSTS
-    if (grunt.option("requireUpdate") && grunt.updated && !grunt.updated.liveblog) {
-      grunt.log.writeln("Liveblog hasn't changed, skipping build");
-      return;
-    }
-
     var files = grunt.file.expandMapping(["**/*.html", "!**/_*.html", "!js/**/*.html"], "build", { cwd: "src" });
     var data = Object.create(grunt.data || {});
     data.t = grunt.template;
