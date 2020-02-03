@@ -68,12 +68,18 @@ module.exports = function(grunt) {
           post.timeString += " (scheduled)"
         }
       }
+
       // handle tags
       if ("tags" in post) {
         post.tags = post.tags.split(/,\s*/g);
       } else {
         post.tags = [];
       }
+
+      // Add a JS-free alternative to image-embeds
+      post.text = post.text.replace(/<image-embed[\s\S]+?src="(.*?)"[\s\S]+?<\/image-embed>/g, function(all, src) {
+        return all + `<noscript><img loading="lazy" src="${src}" alt=""></noscript>`
+      });
     }
 
 
