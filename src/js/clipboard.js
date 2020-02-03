@@ -34,6 +34,7 @@ var copy = function(text, callback = noop) {
     var result = document.execCommand("copy");
     setTimeout(() => callback(result), 10);
     input.setAttribute("hidden", "");
+    currentFocus.focus();
   }
   track("copied-text", text);
 };
