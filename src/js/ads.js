@@ -5,7 +5,7 @@ var gptSetup = false;
 
 var slug = window.location.pathname.replace(/[^\/]+\.html$/, "").split("/").pop();
 var storyId = "liveblog-" + (slug || "localhost");
-var isStagingServer = true || window.location.hostname == "stage-apps.npr.org";
+var isStagingServer = window.location.hostname == "stage-apps.npr.org";
 var adSizeArray = ["fluid", [1300, 250]];
 var adUnitString = "/6735/n6735.npr/news_politics_elections";
 // Medium and small breakpoints
