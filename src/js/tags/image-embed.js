@@ -20,8 +20,10 @@ img:after {
 .credit {
   display: block;
   text-align: right;
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
+  color: #787878;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
 :host([narrow]) img {
