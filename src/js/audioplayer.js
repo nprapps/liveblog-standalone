@@ -57,7 +57,7 @@ var getPlayer = function(src) {
           file: src
         });
 
-        playButton.addEventListener("click", function() {
+        ui.addEventListener("click", function() {
           // play/pause the live stream
           if (player.getState() == "playing") {
             resumeTime += player.getPosition();
