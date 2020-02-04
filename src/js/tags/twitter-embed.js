@@ -1,6 +1,17 @@
+const READY = 4;
+const NOT_READY = 0;
+
 class TwitterEmbed extends HTMLElement {
   constructor() {
     super();
+    this.readyState = NOT_READY;
+    var observer = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      this.readyState = READY;
+      this.populate(this.getAttribute("href"));
+      observer.disconnect();
+    });
+    observer.observe(this);
   }
 
   static get observedAttributes() {
@@ -14,6 +25,7 @@ class TwitterEmbed extends HTMLElement {
   }
 
   populate(href) {
+    if (this.readyState != READY) return;
     console.log(`Loading tweet: ${href}`);
     this.innerHTML = `
 <blockquote class="twitter-tweet">
