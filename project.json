@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/20200203-iowa"
+      "path": "liveblogs/20200207-dem-debate"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/20200203-iowa"
+      "path": "liveblogs/20200207-dem-debate"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/20200203-iowa/",
+  "url": "https://apps.npr.org/liveblogs/20200207-dem-debate/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1FG6MJWTpezphMTLNHXEV685rPrbvfn04LyZ3zH3yO_A"
+    "liveblog": "1tWkRHd0JeqyAddNq4MuG8Qi-9lNOpxt5NW0bK6OvtXA"
   },
   "embedded": false,
   "production": true
