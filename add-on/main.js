@@ -42,6 +42,20 @@ function checkDocument() {
   var doc = DocumentApp.getActiveDocument();
   var body = doc.getBody();
   var text = body.getText();
+  
+  // ignore false-positive keys inside of post text blocks
+  var multiline = ["text", "headline"];
+  multiline.forEach(function(m) {
+    var replacer = new RegExp("^" + m + ": ?$([\\s\\S]*?):end$", "gm");
+    text = text.replace(replacer, function(all, inner) {
+      return [m, ":", inner.replace(/^(\S+:)/gm, "\\$1"), ":end"].join("");
+    });
+  });
+  
+  
+  // force fields to be lower-case
+  text = text.replace(/^[A-Z]\w+\:/gm, function(w) { return w[0].toLowerCase() + w.slice(1) });
+  
   var parsed = archieml.load(text);
   
   if (!parsed) throw "Document couldn't be parsed - talk to a dev";
