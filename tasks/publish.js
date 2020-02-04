@@ -60,7 +60,7 @@ module.exports = function(grunt) {
     }
 
     var bucketConfig = deploy != "simulated" ? config.s3[deploy] : {
-      path: "SIMULATION"
+      path: "SIMULATION/" + config.s3.live.path
     };
     //strip slashes for safety
     bucketConfig.path = bucketConfig.path.replace(/^\/|\/$/g, "");
