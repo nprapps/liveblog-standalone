@@ -23,7 +23,7 @@ module.exports = function(grunt) {
       var contents = grunt.file.read(f);
 
       // trim trailing whitespace
-      contents = contents.replace(/\s+$/gm, "");
+      contents = contents.replace(/(^|\S) +$/gm, "$1");
 
       // check for greedy text fields
       var textRE = /^text:[\s\S]*?:end/gmi;
