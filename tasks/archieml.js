@@ -22,6 +22,9 @@ module.exports = function(grunt) {
       var name = path.basename(f).replace(/(\.docs)?\.txt$/, "");
       var contents = grunt.file.read(f);
 
+      // trim trailing whitespace
+      contents = contents.replace(/(^|\S) +$/gm, "$1");
+
       // check for greedy text fields
       var textRE = /^text:[\s\S]*?:end/gmi;
       var match;
