@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/20200203-iowa"
+      "path": "liveblogs/liveblog-dev"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/20200203-iowa"
+      "path": "liveblogs/liveblog-dev"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/20200203-iowa/",
+  "url": "https://apps.npr.org/liveblogs/liveblog-dev/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1FG6MJWTpezphMTLNHXEV685rPrbvfn04LyZ3zH3yO_A"
+    "liveblog": "1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM"
   },
   "embedded": false,
   "production": true
