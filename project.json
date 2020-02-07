@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/20200203-iowa"
+      "path": "liveblogs/20200211-new-hampshire"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/20200203-iowa"
+      "path": "liveblogs/20200211-new-hampshire"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/20200203-iowa/",
+  "url": "https://apps.npr.org/liveblogs/20200211-new-hampshire/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1FG6MJWTpezphMTLNHXEV685rPrbvfn04LyZ3zH3yO_A"
+    "liveblog": "1JcQ4hgNS09W44TJ1Y83BmGJsEyVedCH1Sa3pSSN-H-o"
   },
   "embedded": false,
   "production": true
