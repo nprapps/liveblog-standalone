@@ -1,8 +1,4 @@
 <div class="metadata" hidden>
-  <h1><%= t.smarty(config.headline) %></h1>
-  <h2><%= t.smarty(config.subhead || "") %></h2>
-  <template class="injection-source"><%= doc.config.headerHTML %></template>
-  <template class="embed-injection-source"><%= doc.config.embedHeaderHTML %></template>
   <% if (doc.config.audioText) { %>
   <audio class="stream-source" preload="none" hidden src="<%= doc.config.audio %>">
   <%= doc.config.audioText %>
