@@ -47,16 +47,16 @@ var updateMisc = function(updated) {
   var title = updated.querySelector("title").innerHTML;
   document.title = title;
   // update headline
-  var headline = updated.querySelector("h1").innerHTML;
-  if (h1) h1.innerHTML = headline.trim();
-  var subhead = updated.querySelector("h2").innerHTML;
-  if (h2) h2.innerHTML = subhead.trim();
+  var headline = updated.querySelector("h1");
+  if (h1 && headline) h1.innerHTML = headline.innerHTML.trim();
+  var subhead = updated.querySelector("h2");
+  if (h2 && subhead) h2.innerHTML = subhead.innerHTML.trim();
   // update header HTML chunk
   var morphInjected = { childrenOnly: true };
-  var embed = updated.querySelector(".metadata .injection-source");
-  if (headerInjection) morphdom(headerInjection, embed.content, morphInjected);
-  var embedSquared = updated.querySelector(".metadata .embed-injection-source");
-  if (embeddedHeaderInjection) morphdom(embeddedHeaderInjection, embedSquared.content, morphInjected);
+  var embed = updated.querySelector("header .html-injection");
+  if (headerInjection && embed) morphdom(headerInjection, embed, morphInjected);
+  var embedSquared = updated.querySelector("header .embed-html-injection");
+  if (embeddedHeaderInjection && embedSquared) morphdom(embeddedHeaderInjection, embedSquared, morphInjected);
 };
 
 var updatePosts = function(articles) {
