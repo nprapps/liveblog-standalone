@@ -1,6 +1,6 @@
 <div class="metadata" hidden>
-  <h1><%= doc.config.headline %></h1>
-  <h2><%= doc.config.subhead %></h2>
+  <h1><%= t.smarty(config.headline) %></h1>
+  <h2><%= t.smarty(config.subhead || "") %></h2>
   <template class="injection-source"><%= doc.config.headerHTML %></template>
   <template class="embed-injection-source"><%= doc.config.embedHeaderHTML %></template>
   <% if (doc.config.audioText) { %>

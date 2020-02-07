@@ -33,7 +33,7 @@
     <header id="top">
       <div class="contain">
         <h1><%= t.smarty(config.headline) %></h1>
-        <h2><%= t.smarty(config.subhead) %></h2>
+        <h2><%= t.smarty(config.subhead || "") %></h2>
 
         <%= t.include("_audioplayer.html", { config }) %>
 
