@@ -48,7 +48,7 @@ function addEmbed(data) {
   var element = cursor.getElement();
   var offset = cursor.getOffset();
   var text = element.editAsText();
-  text.insertText(offset, t);
+  text.insertText(offset, t + "\n");
   text.setBackgroundColor(offset, offset + t.length - 1, "#7be6ff");
 //  text.setForegroundColor(offset, offset + embed.length - 1, "#33FF33");
 }
