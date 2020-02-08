@@ -3,10 +3,14 @@
 var embeds = {
   twitter: '<twitter-embed href="%tweet" id="tw-%counter">\n</twitter-embed>',
   image: {
-    template: '<image-embed src="%src" credit="%credit" %narrow id="img-%counter">\n</image-embed>',
+    template: '<image-embed src="%src" credit="%credit" %href %narrow id="img-%counter">\n</image-embed>',
     process: function(data) {
       data.src = getConfig("mediaPrefix") + data.src;
       data.narrow = data.narrow ? "narrow" : "";
+      data.href = "";
+      if (data.link) {
+        data.href = 'href="' + data.link + '"';
+      }
     }
   },
   sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
@@ -35,7 +39,7 @@ function addEmbed(data) {
   data.counter = getCounterValue();
   process(data);
   for (var k in data) {
-    var value = data[k];
+    var value = k in data ? data[k] : "";
     t = t.replace("%" + k, value);
   }
   var doc = DocumentApp.getActiveDocument();
