@@ -9,6 +9,9 @@
 ></iframe>
 */
 
+const READY = 4;
+const NOT_READY = 0;
+
 var stylesheet = `
 .container {
   position: relative;
@@ -48,6 +51,16 @@ class YouTube extends HTMLElement {
     style.innerHTML = stylesheet;
     this.shadowRoot.appendChild(style);
     this.style.position = "relative";
+    this.readyState = NOT_READY;
+
+    var observer = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      this.readyState = READY;
+      observer.disconnect();
+      console.log(this);
+      this.attributeChangedCallback("video", null, this.getAttribute("video"));
+    });
+    observer.observe(this);
   }
 
   get observedAttributes() {
@@ -57,6 +70,7 @@ class YouTube extends HTMLElement {
   attributeChangedCallback(attr, was, value) {
     switch (attr) {
       case "video":
+        if (this.readyState != READY) return;
         this.iframe.src = `https://www.youtube.com/embed/${value}`;
         break;
 
@@ -68,6 +82,7 @@ class YouTube extends HTMLElement {
   }
 
   connectedCallback() {
+    if (this.readyState != READY) return;
     var video = this.getAttribute("video");
     var src = `https://www.youtube.com/embed/${video}`;
     if (this.iframe.src != src) this.iframe.src = src;

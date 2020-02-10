@@ -42,13 +42,19 @@ class ImageEmbed extends HTMLElement {
     var style = document.createElement("style");
     style.innerHTML = stylesheet;
     this.shadowRoot.appendChild(style);
+
+    this.link = document.createElement("a");
+    this.shadowRoot.appendChild(this.link);
+
     this.image = document.createElement("img");
     this.image.setAttribute("alt", "");
     this.image.src = "";
-    this.shadowRoot.appendChild(this.image);
+    this.link.appendChild(this.image);
+    
     this.credit = document.createElement("div");
     this.credit.className = "credit";
     this.shadowRoot.appendChild(this.credit);
+    
     this.updateImage();
     this.readyState = NOT_READY;
     this.observer = new IntersectionObserver(([e]) => {
@@ -68,7 +74,7 @@ class ImageEmbed extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["src", "credit"]
+    return ["src", "credit", "href"]
   }
 
   attributeChangedCallback(attr, pastValue, value) {
@@ -77,6 +83,11 @@ class ImageEmbed extends HTMLElement {
 
   updateImage() {
     this.credit.innerHTML = this.getAttribute("credit");
+    if (this.hasAttribute("href")) {
+      this.link.href = this.getAttribute("href");
+    } else {
+      this.link.removeAttribute("href")
+    }
     if (this.readyState == READY) {
       this.image.src = this.getAttribute("src");
       this.observer.disconnect();

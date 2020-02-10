@@ -1,19 +1,26 @@
 // element functions (p, h3, h2) come from posts.gs, where they're used to add post
 
-var embedTemplates = {
+var embeds = {
   twitter: '<twitter-embed href="%tweet" id="tw-%counter">\n</twitter-embed>',
-  image: '<image-embed src="%src" credit="%credit" %narrow id="img-%counter">\n</image-embed>',
-  sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
-  youtube: '<youtube-video video="%video" id="youtube-counter-%counter">\n</youtube-video>'
-};
-
-var prefixed = {
-  image: "src"
-};
-
-var binary = {
   image: {
-    narrow: ["", "narrow"]
+    template: '<image-embed src="%src" credit="%credit" %href %narrow id="img-%counter">\n</image-embed>',
+    process: function(data) {
+      data.src = getConfig("mediaPrefix") + data.src;
+      data.narrow = data.narrow ? "narrow" : "";
+      data.href = "";
+      if (data.link) {
+        data.href = 'href="' + data.link + '"';
+      }
+    }
+  },
+  sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
+  youtube: {
+    template: '<youtube-video video="%video" id="youtube-counter-%counter">\n</youtube-video>',
+    process: function(data) {
+      if (data.video.match(/\?.*?v=/)) {
+        data.video = data.video.match(/v=([^&]+)/)[1];
+      }
+    }
   }
 };
 
@@ -25,14 +32,15 @@ function openEmbedPanel() {
 
 function addEmbed(data) {
   Logger.log(data);
-  var embed = embedTemplates[data.type];
+  var embed = embeds[data.type];
   if (!embed) throw "No template for that embed type";
+  var t = embed.template || embed;
+  var process = embed.process || noop;
   data.counter = getCounterValue();
+  process(data);
   for (var k in data) {
-    var value = data[k];
-    if (prefixed[data.type] == k) value = getConfig("mediaPrefix") + value;
-    if (binary[data.type] && binary[data.type][k]) value = binary[data.type][k][value * 1];
-    embed = embed.replace("%" + k, value);
+    var value = k in data ? data[k] : "";
+    t = t.replace("%" + k, value);
   }
   var doc = DocumentApp.getActiveDocument();
   var cursor = doc.getCursor();
@@ -40,7 +48,7 @@ function addEmbed(data) {
   var element = cursor.getElement();
   var offset = cursor.getOffset();
   var text = element.editAsText();
-  text.insertText(offset, embed);
-  text.setBackgroundColor(offset, offset + embed.length - 1, "#7be6ff");
+  text.insertText(offset, t + "\n");
+  text.setBackgroundColor(offset, offset + t.length - 1, "#7be6ff");
 //  text.setForegroundColor(offset, offset + embed.length - 1, "#33FF33");
 }
