@@ -34,7 +34,6 @@ class ShowMore extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("connected");
     if (this.clicked) return;
     var post = this.closest(".post");
     if (!post) return;
