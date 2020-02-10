@@ -7,10 +7,11 @@
     <fieldset>
       <label for="type">Select embed type:</label>
       <select id="type">
-        <option value="twitter">Tweet</option>
         <option value="image">Image</option>
+        <option value="twitter">Tweet</option>
         <option value="sidechain">Graphic embed</option>
         <option value="youtube">YouTube Video</option>
+        <option value="showmore">Show more button</option>
       </select>
     </fieldset>
     
@@ -62,6 +63,15 @@
         <input id="video">
       </fieldset>
       <button class="add-embed">Add video</button>
+    </form>
+    
+    <form id="showmore">
+      <h2>Show More button</h2>
+      <fieldset>
+        <label for="text">Button text (optional)</label>
+        <input id="text">
+      </fieldset>
+      <button class="add-embed">Add button</button>
     </form>
     
     <script>

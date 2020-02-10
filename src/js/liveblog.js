@@ -1,7 +1,9 @@
 // load custom element behaviors
-require("./tags/twitter-embed");
 require("./tags/image-embed");
+require("./tags/show-more");
+require("./tags/twitter-embed");
 require("./tags/youtube-video");
+
 require("@nprapps/sidechain");
 
 // load independent modules

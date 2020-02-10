@@ -21,7 +21,8 @@ var embeds = {
         data.video = data.video.match(/v=([^&]+)/)[1];
       }
     }
-  }
+  },
+  showmore: '<show-more text="%text" id="show-more-%counter">\n</show-more>'
 };
 
 function openEmbedPanel() {

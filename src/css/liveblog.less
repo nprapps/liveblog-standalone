@@ -92,6 +92,18 @@ article.post {
     .sr-only();
   }
 
+  show-more { display: none; }
+  
+  &.collapsed {
+    show-more {
+      display: block;
+    }
+
+    show-more ~ * {
+      display: none;
+    }
+  }
+
   .metadata {
     flex: 0 0 150px;
     color: #f03828;
