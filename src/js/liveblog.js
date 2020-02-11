@@ -28,6 +28,7 @@ var onClickUnseen = function() {
   hidden.forEach(el => el.classList.remove("hidden"));
   showUnseenButton.classList.add("hidden");
   events.send("unseen-posts", 0);
+  events.send("clicked-unseen");
 };
 
 showUnseenButton.addEventListener("click", onClickUnseen);
