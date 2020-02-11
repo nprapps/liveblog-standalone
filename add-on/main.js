@@ -8,7 +8,7 @@ function onOpen() {
   menu.addItem("Publish post", "publishPost");
   menu.addItem("Set custom publication time", "publishLater");
   menu.addSeparator();
-  menu.addItem("Check document for errors", "checkDocument");
+  // menu.addItem("Check document for errors", "checkDocument");
   menu.addItem("Configure liveblog add-on", "openConfigPanel");
   menu.addItem("Reset document", "resetDocument");
   menu.addToUi();
