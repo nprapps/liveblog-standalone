@@ -37,9 +37,9 @@ module.exports = function(grunt) {
       }
 
       // ignore false-positive keys inside of post text blocks
-      var multiline = ["text", "headline"];
+      var multiline = [ "headline", "text" ];
       for (var m of multiline) {
-        var replacer = new RegExp(`^${m}: ?$([\\s\\S]*?):end$`, "gm");
+        var replacer = new RegExp(`^${m}: *$([\\s\\S]*?):end$`, "gmi");
         contents = contents.replace(replacer, function(all, inner) {
           return `${m}:${inner.replace(/^(\S+:)/gm, "\\$1")}:end`;
         });
