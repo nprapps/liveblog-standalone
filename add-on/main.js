@@ -8,7 +8,7 @@ function onOpen() {
   menu.addItem("Publish post", "publishPost");
   menu.addItem("Set custom publication time", "publishLater");
   menu.addSeparator();
-  // menu.addItem("Check document for errors", "checkDocument");
+  menu.addItem("Check document for errors", "checkDocument");
   menu.addItem("Configure liveblog add-on", "openConfigPanel");
   menu.addItem("Reset document", "resetDocument");
   menu.addToUi();
@@ -43,20 +43,9 @@ function checkDocument() {
   var body = doc.getBody();
   var text = body.getText();
   
-  // ignore false-positive keys inside of post text blocks
-  var multiline = ["text", "headline"];
-  multiline.forEach(function(m) {
-    var replacer = new RegExp("^" + m + ": ?$([\\s\\S]*?):end$", "gm");
-    text = text.replace(replacer, function(all, inner) {
-      return [m, ":", inner.replace(/^(\S+:)/gm, "\\$1"), ":end"].join("");
-    });
+  var parsed = npm.betty.parse(text, {
+    onFieldName: function(t) { return t[0].toLowerCase() + t.slice(1) }
   });
-  
-  
-  // force fields to be lower-case
-  text = text.replace(/^[A-Z]\w+\:/gm, function(w) { return w[0].toLowerCase() + w.slice(1) });
-  
-  var parsed = archieml.load(text);
   
   if (!parsed) throw "Document couldn't be parsed - talk to a dev";
   
@@ -72,12 +61,17 @@ function checkDocument() {
     });
     
     // check for overflow
-    if (p.text.match(/^headline:/m)) {
-      throw p.slug + " may be missing a :end tag";
+    if (p.text.match(/^headline::/m)) {
+      throw p.slug + " may be missing a ::text tag";
+    }
+    
+    if (p.headline.match(/^slug:|^text::/m)) {
+      throw p.headline.split(/\n/).shift() + " may be missing a ::headline tag";
     }
     
     // check dates
     if (p.published.trim() != "false") {
+      Logger.log(p.published);
       // 2020-01-31T16:40:41.448Z
       if (!p.published.trim().match(/^\d{4}-\d{2}-\d{2}T\d{1,2}:\d{2}:\d{2}.\d+Z$/)) {
         throw p.slug + " timestamp doesn't seem to match required date format";
