@@ -17,31 +17,9 @@ main.liveblog {
   border: none;
   cursor: pointer;
 
-  .standalone & {
-    right: 0;
-    position: fixed;
-    bottom: 15px;
-    transform: translateX(0);
-    width: auto;
-    z-index: 9999;
-    margin: 0;
-    border-radius: 8px 0 0 8px;
-    font-size: 16px;
-    transition: transform 1s ease;
-
-    &.hidden {
-      transform: translateX(100%);
-      transition: none;
-    }
-  } 
-
-  .embed & {
-    &.hidden {
-      display: none;
-    }
-  } 
-
-
+  &.hidden {
+    display: none;
+  }
 
   &[data-count="1"] {
     .plural { display: none; }
@@ -112,18 +90,6 @@ article.post {
 
   &.hidden {
     .sr-only();
-  }
-
-  show-more { display: none; }
-  
-  &.collapsed {
-    show-more {
-      display: block;
-    }
-
-    show-more ~ * {
-      display: none;
-    }
   }
 
   .metadata {
