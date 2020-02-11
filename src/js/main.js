@@ -11,7 +11,7 @@ events.on("unseen-posts", function(count) {
 });
 
 events.on("clicked-unseen", function() { 
-  $.one(".post").scrollIntoView({ behavior: "smooth" });
+  $.one(".post.published").scrollIntoView({ behavior: "smooth" });
 });
 
 // catch slow rendering jumps
