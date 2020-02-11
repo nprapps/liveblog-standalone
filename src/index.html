@@ -11,7 +11,7 @@
       socialImage: config.socialImage
     })}) %>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="alternate" type="application/rss+xml" title="<%= config.socialHeadline %>" href="feed.rss"> 
+    <link rel="alternate" type="application/rss+xml" title="<%= config.socialHeadline %>" href="feed.rss">
   </head>
   <body class="standalone">
 
@@ -36,9 +36,9 @@
         <h2><%= t.smarty(config.subhead || "") %></h2>
 
         <%= t.include("_audioplayer.html", { config }) %>
-        
-        <div class="html-injection"><%= config.headerHTML %></div>
+
       </div>
+      <div class="html-injection"><%= config.headerHTML %></div>
     </header>
 
     <%= t.include("_liveblog.html", { doc, config, flags: { showAd: true } }) %>
