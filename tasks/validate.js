@@ -37,9 +37,9 @@ module.exports = function(grunt) {
         if (!required in post) {
           fail(`Missing field ${required}!`, post);
         }
-        if (!post[required].trim()) {
-          fail(`Field ${required} is empty`, post);
-        }
+        // if (!post[required].trim()) {
+        //   fail(`Field ${required} is empty`, post);
+        // }
       }
 
       // no duplicate slugs
