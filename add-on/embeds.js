@@ -13,7 +13,12 @@ var embeds = {
       }
     }
   },
-  sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
+  sidechain: {
+    template: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
+    process: function(data) {
+      data.src = data.src.replace(/preview.html$/, "");
+    }
+  },
   youtube: {
     template: '<youtube-video video="%video" id="youtube-counter-%counter">\n</youtube-video>',
     process: function(data) {
@@ -21,8 +26,7 @@ var embeds = {
         data.video = data.video.match(/v=([^&]+)/)[1];
       }
     }
-  },
-  showmore: '<show-more text="%text" id="show-more-%counter">\n</show-more>'
+  }
 };
 
 function openEmbedPanel() {
@@ -44,12 +48,16 @@ function addEmbed(data) {
     t = t.replace("%" + k, value);
   }
   var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
   var cursor = doc.getCursor();
   if (!cursor) throw "No cursor found";
   var element = cursor.getElement();
+  var index = body.getChildIndex(element);
   var offset = cursor.getOffset();
   var text = element.editAsText();
-  text.insertText(offset, t + "\n");
+  text.insertText(offset, t + "");
   text.setBackgroundColor(offset, offset + t.length - 1, "#7be6ff");
+  body.insertParagraph(index + 1, "");
+  body.insertParagraph(index, "");
 //  text.setForegroundColor(offset, offset + embed.length - 1, "#33FF33");
 }
