@@ -57,7 +57,7 @@ function addEmbed(data) {
   var text = element.editAsText();
   text.insertText(offset, t + "");
   text.setBackgroundColor(offset, offset + t.length - 1, "#7be6ff");
-  body.insertParagraph(index, "");
   body.insertParagraph(index + 1, "");
+  body.insertParagraph(index, "");
 //  text.setForegroundColor(offset, offset + embed.length - 1, "#33FF33");
 }
