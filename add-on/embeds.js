@@ -19,6 +19,7 @@ var embeds = {
       data.src = data.src.replace(/preview.html$/, "");
     }
   },
+  showmore: '<show-more text="%text" id="show-more-%counter">\n</show-more>',
   youtube: {
     template: '<youtube-video video="%video" id="youtube-counter-%counter">\n</youtube-video>',
     process: function(data) {
