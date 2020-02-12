@@ -66,7 +66,7 @@ function checkDocument() {
   parsed.posts.forEach(function(p, i) {
     var required = "headline author text published slug".split(" ");
     required.forEach(function(r) {
-      if (!(r in p) || !p[r].trim()) {
+      if (!(r in p)) {
         throw "Post #" + i + " (" + (p.headline || p.slug) + ") is missing field " + r;
       }
     });
