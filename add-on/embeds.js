@@ -13,7 +13,12 @@ var embeds = {
       }
     }
   },
-  sidechain: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
+  sidechain: {
+    template: '<side-chain src="%src" id="sidechain-%counter">\n</side-chain>',
+    process: function(data) {
+      data.src = data.src.replace(/preview.html$/, "");
+    }
+  },
   youtube: {
     template: '<youtube-video video="%video" id="youtube-counter-%counter">\n</youtube-video>',
     process: function(data) {
