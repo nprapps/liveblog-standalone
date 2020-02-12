@@ -48,12 +48,16 @@ function addEmbed(data) {
     t = t.replace("%" + k, value);
   }
   var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
   var cursor = doc.getCursor();
   if (!cursor) throw "No cursor found";
   var element = cursor.getElement();
+  var index = body.getChildIndex(element);
   var offset = cursor.getOffset();
   var text = element.editAsText();
-  text.insertText(offset, t + "\n");
+  text.insertText(offset, t + "");
   text.setBackgroundColor(offset, offset + t.length - 1, "#7be6ff");
+  body.insertParagraph(index, "");
+  body.insertParagraph(index + 1, "");
 //  text.setForegroundColor(offset, offset + embed.length - 1, "#33FF33");
 }
