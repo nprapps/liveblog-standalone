@@ -1,13 +1,4 @@
 <%
-  var results = `
-<p
-  data-pym-loader
-  data-child-src="https://apps.npr.org/elections20-primaries/embeds/iowa.html?link=${json.project.url}" 
-  id="responsive-embed-iowa-results">
-    Loading...
-</p>
-<script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
-  `;
 
   var liveblog = `
 <p data-pym-liveblog-loader
@@ -38,10 +29,6 @@ header {
     <title>Liveblog embed preview</title>
   </head>
   <body>
-
-    <textarea style="width: 100%" rows=3><%= results.replace(/</g, "&lt;").replace(/\s+|\n/g, " ").trim() %></textarea>
-
-    <%= results %>
 
     <textarea style="width: 100%;" rows=3><%= liveblog.replace(/</g, "&lt;").replace(/\s+|\n/g, " ").trim() %></textarea>
 
