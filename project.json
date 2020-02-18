@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/liveblog-dev"
+      "path": "liveblogs/20200222-nevada"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/liveblog-dev"
+      "path": "liveblogs/20200222-nevada"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/liveblog-dev/",
+  "url": "https://apps.npr.org/liveblogs/20200222-nevada/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM"
+    "liveblog": "1o-HtVdn3ww1wMiOuszXq8GJ8yLTODRPW203NaPzOSGs"
   },
   "embedded": false,
   "production": true
