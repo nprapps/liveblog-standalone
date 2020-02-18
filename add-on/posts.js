@@ -59,9 +59,9 @@ function addDraftPost(postData) {
     .replace(/^[\d]+-/, "") + "-" + getCounterValue();
   
   page();
-  p("headline:");
+  p("headline::");
   h3(postData.headline);
-  p(":end");
+  p("::headline");
   if (postData.author == "other") {
     p("author: " + postData.other);
   } else {
@@ -78,11 +78,11 @@ function addDraftPost(postData) {
   if (postData.factcheck) p("factcheck: true");
   if (postData.major) p("major: true");
   if (postData.tags) p("tags: " + postData.tags);
-  p("text:");
+  p("text::");
   p();
   var placeholder = p(postData.text || "[ post contents go here ]");
   p();
-  p(":end")//.editAsText().setForegroundColor("#FF0000");
+  p("::text")//.editAsText().setForegroundColor("#FF0000");
   var builder = doc.newRange();
   builder.addElement(placeholder);
   doc.setSelection(builder.build());
