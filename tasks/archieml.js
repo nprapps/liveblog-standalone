@@ -6,7 +6,7 @@ Anything that has a .txt extension in /data will be loaded
 */
 
 var path = require("path");
-var archieml = require("archieml");
+var betty = require("@nprapps/betty");
 
 module.exports = function(grunt) {
 
@@ -22,33 +22,10 @@ module.exports = function(grunt) {
       var name = path.basename(f).replace(/(\.docs)?\.txt$/, "");
       var contents = grunt.file.read(f);
 
-      // trim trailing whitespace
-      contents = contents.replace(/(^|\S) +$/gm, "$1");
-
-      // check for greedy text fields
-      var textRE = /^text:[\s\S]*?:end/gmi;
-      var match;
-      while (match = textRE.exec(contents)) {
-        var [ t ] = match;
-        if (t.match(/^headline:/m)) {
-          console.log("=======\n", t.trim(), "\n=======");
-          grunt.fail.fatal("Text seems to be missing an :end tag")
-        }
-      }
-
-      // ignore false-positive keys inside of post text blocks
-      var multiline = [ "headline", "text" ];
-      for (var m of multiline) {
-        var replacer = new RegExp(`^${m}: *$([\\s\\S]*?):end$`, "gmi");
-        contents = contents.replace(replacer, function(all, inner) {
-          return `${m}:${inner.replace(/^(\S+:)/gm, "\\$1")}:end`;
-        });
-      }
-
-      // force fields to be lower-case
-      contents = contents.replace(/^[A-Z]\w+\:/gm, w => w[0].toLowerCase() + w.slice(1));
-
-      var parsed = archieml.load(contents);
+      var parsed = betty.parse(contents, {
+        onFieldName: t => t[0].toLowerCase() + t.slice(1)
+      });
+      
       grunt.data.archieml[name] = parsed;
     });
 

@@ -69,6 +69,14 @@ module.exports = function(grunt) {
         }
       }
 
+      // make sure the multiline fields didn't absorb other fields
+      if (post.headline.match(/text::|slug:/i)) {
+        fail(`Post "${post.headline.split("\n").shift()}" is probably missing a ::headline tag`);
+      }
+      if (post.text.match(/headline::|slug:/i)) {
+        fail(`Post ${post.slug} is probably missing a ::text tag`);
+      }
+
       // handle tags
       if ("tags" in post) {
         post.tags = post.tags.split(/,\s*/g);
