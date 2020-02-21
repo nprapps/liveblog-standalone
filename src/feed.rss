@@ -19,6 +19,12 @@ posts = posts.filter(p => p.published && p.published.isBefore());
       <% p.tags.forEach(function(t) { %>
       <category><%= t %></category>
       <% }) %>
+      <% if (p.factcheck) { %>
+      <category domain="https://npr.org">Fact Check</category>
+      <% } %>
+      <% if (p.major) { %>
+      <category domain="https://npr.org">Major Development</category>
+      <% } %>
       </item>
     <% }) %>
   </channel>
