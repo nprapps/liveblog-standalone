@@ -37,9 +37,9 @@ module.exports = function(grunt) {
         if (!required in post) {
           fail(`Missing field ${required}!`, post);
         }
-        if (!post[required].trim()) {
-          fail(`Field ${required} is empty`, post);
-        }
+        // if (!post[required].trim()) {
+        //   fail(`Field ${required} is empty`, post);
+        // }
       }
 
       // no duplicate slugs
@@ -67,6 +67,14 @@ module.exports = function(grunt) {
         if (post.published.isAfter()) {
           post.timeString += " (scheduled)"
         }
+      }
+
+      // make sure the multiline fields didn't absorb other fields
+      if (post.headline.match(/text::|slug:/i)) {
+        fail(`Post "${post.headline.split("\n").shift()}" is probably missing a ::headline tag`);
+      }
+      if (post.text.match(/headline::|slug:/i)) {
+        fail(`Post ${post.slug} is probably missing a ::text tag`);
       }
 
       // handle tags

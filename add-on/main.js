@@ -43,20 +43,9 @@ function checkDocument() {
   var body = doc.getBody();
   var text = body.getText();
   
-  // ignore false-positive keys inside of post text blocks
-  var multiline = ["text", "headline"];
-  multiline.forEach(function(m) {
-    var replacer = new RegExp("^" + m + ": ?$([\\s\\S]*?):end$", "gm");
-    text = text.replace(replacer, function(all, inner) {
-      return [m, ":", inner.replace(/^(\S+:)/gm, "\\$1"), ":end"].join("");
-    });
+  var parsed = npm.betty.parse(text, {
+    onFieldName: function(t) { return t[0].toLowerCase() + t.slice(1) }
   });
-  
-  
-  // force fields to be lower-case
-  text = text.replace(/^[A-Z]\w+\:/gm, function(w) { return w[0].toLowerCase() + w.slice(1) });
-  
-  var parsed = archieml.load(text);
   
   if (!parsed) throw "Document couldn't be parsed - talk to a dev";
   
@@ -66,18 +55,23 @@ function checkDocument() {
   parsed.posts.forEach(function(p, i) {
     var required = "headline author text published slug".split(" ");
     required.forEach(function(r) {
-      if (!(r in p) || !p[r].trim()) {
+      if (!(r in p)) {
         throw "Post #" + i + " (" + (p.headline || p.slug) + ") is missing field " + r;
       }
     });
     
     // check for overflow
-    if (p.text.match(/^headline:/m)) {
-      throw p.slug + " may be missing a :end tag";
+    if (p.text.match(/^headline::/m)) {
+      throw p.slug + " may be missing a ::text tag";
+    }
+    
+    if (p.headline.match(/^slug:|^text::/m)) {
+      throw p.headline.split(/\n/).shift() + " may be missing a ::headline tag";
     }
     
     // check dates
     if (p.published.trim() != "false") {
+      Logger.log(p.published);
       // 2020-01-31T16:40:41.448Z
       if (!p.published.trim().match(/^\d{4}-\d{2}-\d{2}T\d{1,2}:\d{2}:\d{2}.\d+Z$/)) {
         throw p.slug + " timestamp doesn't seem to match required date format";

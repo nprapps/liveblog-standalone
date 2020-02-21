@@ -1,6 +1,6 @@
 <div class="metadata" hidden>
   <% if (doc.config.audioText) { %>
-  <audio class="stream-source" preload="none" hidden src="<%= doc.config.audio %>">
+  <audio class="stream-source" preload="none" hidden src="<%= doc.config.audio || "" %>">
   <%= doc.config.audioText %>
   </audio>
   <% } %>

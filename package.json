@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/polyfill": "^7.8.3",
     "@babel/preset-env": "^7.4.3",
+    "@nprapps/betty": "^1.0.6",
     "@nprapps/sidechain": "^1.0.12",
     "@webcomponents/custom-elements": "^1.3.1",
     "archieml": "^0.4.2",
