@@ -18,28 +18,30 @@ main.liveblog {
   cursor: pointer;
 
   .standalone & {
-    right: 0;
+    top: 10%;
+    left: 0;
+    // right: 0;
     position: fixed;
-    bottom: 15px;
+    // bottom: 15px;
     transform: translateX(0);
     width: auto;
     z-index: 9999;
     margin: 0;
-    border-radius: 8px 0 0 8px;
+    border-radius: 0 8px 8px 0;
     font-size: 16px;
     transition: transform 1s ease;
 
     &.hidden {
-      transform: translateX(100%);
+      transform: translateX(-100%);
       transition: none;
     }
-  } 
+  }
 
   .embed & {
     &.hidden {
       display: none;
     }
-  } 
+  }
 
 
 
@@ -115,7 +117,7 @@ article.post {
   }
 
   show-more { display: none; }
-  
+
   &.collapsed {
     show-more {
       display: block;
