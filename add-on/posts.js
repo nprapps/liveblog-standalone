@@ -125,6 +125,6 @@ function publishLater() {
   var hours = parseFloat(timeParts[0]);
   var minutes = parseFloat(timeParts[1]);
   
-  var then = new Date(year, month - 1, day, hours - 1, minutes);
+  var then = new Date(year, month - 1, day, hours, minutes);
   publishPost(then);
 }
