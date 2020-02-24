@@ -42,6 +42,14 @@ module.exports = function(grunt) {
         // }
       }
 
+      // make sure the multiline fields didn't absorb other fields
+      if (post.headline.match(/text::|slug:/i)) {
+        fail(`Post "${post.headline.split("\n").shift()}" is probably missing a ::headline tag`);
+      }
+      if (post.text.match(/headline::|slug:/i)) {
+        fail(`Post ${post.slug} is probably missing a ::text tag`);
+      }
+
       // no duplicate slugs
       if (slugs.has(post.slug)) {
         fail(`Duplicate slug: ${post.slug}`);
@@ -67,14 +75,6 @@ module.exports = function(grunt) {
         if (post.published.isAfter()) {
           post.timeString += " (scheduled)"
         }
-      }
-
-      // make sure the multiline fields didn't absorb other fields
-      if (post.headline.match(/text::|slug:/i)) {
-        fail(`Post "${post.headline.split("\n").shift()}" is probably missing a ::headline tag`);
-      }
-      if (post.text.match(/headline::|slug:/i)) {
-        fail(`Post ${post.slug} is probably missing a ::text tag`);
       }
 
       // handle tags
