@@ -12,6 +12,7 @@
       <fieldset>
         <label for="author">Author</label>
         <select id="author">
+          <option value="X">Select an author</option>
         <? data.authors.forEach(function(row) { ?>
           <option value="<?= row.key ?>"><?= row.name ?></option>
         <? }); ?>
@@ -54,6 +55,7 @@ addButton.addEventListener("click", function(e) {
   for (var input of inputs) {
     postData[input.id] = input.type == "checkbox" ? input.checked * 1 : input.value;
   }
+  if (postData.author == "X") return;
   console.log(postData);
   google.script.run
     .withSuccessHandler(function() {
