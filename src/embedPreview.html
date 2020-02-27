@@ -20,6 +20,11 @@ header {
   font-weight: bold;
 }
 
+body {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
 [data-pym-liveblog-loader] {
   max-width: 500px;
   margin: auto;
@@ -29,6 +34,20 @@ header {
     <title>Liveblog embed preview</title>
   </head>
   <body>
+
+
+    <textarea style="width: 100%" rows=3>&lt;p data-pym-loader data-child-src="https://apps.npr.org/elections20-primaries/embeds/super-tuesday.html?link=https://apps.npr.org/liveblogs/20200303-super-tuesday/" id="responsive-embed-super-tuesday-results"> Loading... &lt;/p> &lt;script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js">&lt;/script></textarea>
+
+
+<p
+  data-pym-loader
+  data-child-src="https://apps.npr.org/elections20-primaries/embeds/super-tuesday.html?link=https://apps.npr.org/liveblogs/20200303-super-tuesday/"
+  id="responsive-embed-super-tuesday-results">
+    Loading...
+</p>
+<script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
+
+
 
     <textarea style="width: 100%;" rows=3><%= liveblog.replace(/</g, "&lt;").replace(/\s+|\n/g, " ").trim() %></textarea>
 
