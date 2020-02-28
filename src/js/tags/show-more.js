@@ -10,6 +10,8 @@ button {
 }
 `
 
+var track = require("../lib/tracking").trackApps;
+
 class ShowMore extends HTMLElement {
   
   constructor() {
@@ -51,6 +53,7 @@ class ShowMore extends HTMLElement {
     if (!post) return;
     post.classList.remove("collapsed");
     this.clicked = true;
+    track("show-more-clicked", post.id);
   }
 
 }
