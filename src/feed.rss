@@ -1,6 +1,7 @@
 <%
 var { config, posts } = archieml.liveblog;
 posts = posts.filter(p => p.published && p.published.isBefore());
+var { smartypants } = require("typogr");
 %><?xml version="1.0"?>
 <rss version="2.0">
   <channel>
@@ -11,9 +12,9 @@ posts = posts.filter(p => p.published && p.published.isBefore());
     <generator>NPR News Apps Team</generator>
     <% posts.forEach(function(p) { %>
       <item>
-      <title><%= p.headline %></title>
+      <title><%= smartypants(p.headline) %></title>
       <link><%= json.project.url + "#" + p.slug %></link>
-      <description><![CDATA[<%= p.text %>]]></description>
+      <description><![CDATA[<%= t.renderMarkdown(p.text) %>]]></description>
       <pubDate><%= p.published.format("ddd, DD MMM YYYY HH:mm:ss z") %></pubDate>
       <guid><%= json.project.url + "#" + p.slug %></guid>
       <% p.tags.forEach(function(t) { %>
