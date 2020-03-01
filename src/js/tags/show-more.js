@@ -3,15 +3,22 @@ button {
   display: block;
   background: transparent;
   border: none;
-  font-weight: bold;
-  color: black;
-  padding: 8px 0;
   cursor: pointer;
+  font: normal 16px 'Knockout 31 4r','Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  color: #4774CC;
+  text-transform: uppercase;
+  line-height: 44px;
+  padding: 0 0 6px 0;
+}
+button:hover,
+button:active,
+button:focus {
+  color: #bccae5;
 }
 `
 
 class ShowMore extends HTMLElement {
-  
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -21,7 +28,7 @@ class ShowMore extends HTMLElement {
     this.shadowRoot.appendChild(stylesheet);
 
     this.button = document.createElement("button");
-    this.button.innerHTML = "Show more &raquo;";
+    this.button.innerHTML = "Continue Reading This Post ▼";
     this.shadowRoot.appendChild(this.button);
 
     this.onClick = this.onClick.bind(this);
@@ -42,7 +49,7 @@ class ShowMore extends HTMLElement {
 
   attributeChangedCallback(attr, was, value) {
     if (value.trim()) {
-      this.button.innerHTML = value + " &raquo;";
+      this.button.innerHTML = value + " ▼";
     }
   }
 
