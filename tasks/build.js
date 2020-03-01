@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 
     // also create a public RSS feed
     var doc = grunt.data.archieml.liveblog
-    var rss = template(grunt.file.read("src/feed.rss"))(data);
+    var rss = process(grunt.file.read("src/feed.rss"), data, "feed.rss");
     grunt.file.write("build/feed.rss", rss);
   });
 
