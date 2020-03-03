@@ -1,0 +1,10 @@
+// prevent some flicker when the header updates
+image-embed, side-chain {
+  display: block;
+}
+
+twitter-embed {
+  & > blockquote {
+    .knockout();
+  }
+}
