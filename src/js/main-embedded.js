@@ -1,3 +1,4 @@
+require("@webcomponents/custom-elements");
 require("./liveblog");
 var track = require("./lib/tracking").trackApps;
 var events = require("./events");
