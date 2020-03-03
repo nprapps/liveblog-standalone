@@ -6,15 +6,11 @@ img {
   display: block;
 }
 
-img:after {
-  content: "loading...";
+.placeholder {
   background: #DDD;
   color: #333;
   padding: 25% 0;
   text-align: center;
-  display: block;
-  z-index: 999;
-  position: relative;
 }
 
 .credit {
@@ -50,6 +46,11 @@ class ImageEmbed extends HTMLElement {
     this.image.setAttribute("alt", "");
     this.image.src = "";
     this.link.appendChild(this.image);
+
+    this.placeholder = document.createElement("div");
+    this.placeholder.className = "placeholder";
+    this.placeholder.innerHTML = "loading...";
+    this.shadowRoot.appendChild(this.placeholder);
     
     this.credit = document.createElement("div");
     this.credit.className = "credit";
@@ -57,11 +58,18 @@ class ImageEmbed extends HTMLElement {
     
     this.updateImage();
     this.readyState = NOT_READY;
-    this.observer = new IntersectionObserver(([e]) => {
+    var callback = ([e]) => {
       if (!e.isIntersecting) return;
       this.readyState = READY;
       this.updateImage();
-    });
+    };
+    var options = {
+      threshold: 0,
+      rootMargin: "0px 0px 100px 0px"
+    };
+    this.observer = new IntersectionObserver(callback, options);
+
+    this.image.onload = () => this.placeholder.style.display = "none";
   }
 
   connectedCallback() {
