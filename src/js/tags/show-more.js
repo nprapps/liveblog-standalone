@@ -62,4 +62,8 @@ class ShowMore extends HTMLElement {
 
 }
 
-window.customElements.define("show-more", ShowMore);
+try {
+  window.customElements.define("show-more", ShowMore);
+} catch (err) {
+  console.log(`Unable to define show-more tag: your browser may not support custom elements`);
+}

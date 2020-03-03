@@ -43,4 +43,8 @@ class TwitterEmbed extends HTMLElement {
   }
 }
 
-window.customElements.define("twitter-embed", TwitterEmbed);
+try {
+  window.customElements.define("twitter-embed", TwitterEmbed);
+} catch (err) {
+  console.log(`Unable to define twitter-embed tag: your browser may not support custom elements`);
+}

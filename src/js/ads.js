@@ -70,4 +70,8 @@ class GoogleAd extends HTMLElement {
   }
 }
 
-window.customElements.define("google-ad", GoogleAd);
+try {
+  window.customElements.define("google-ad", GoogleAd);
+} catch (err) {
+  console.log(`Unable to define google-ad tag: your browser may not support custom elements`);
+}

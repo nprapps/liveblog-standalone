@@ -94,4 +94,8 @@ class YouTube extends HTMLElement {
 
 }
 
-window.customElements.define("youtube-video", YouTube);
+try {
+  window.customElements.define("youtube-video", YouTube);
+} catch (err) {
+  console.log(`Unable to define youtube-video tag: your browser may not support custom elements`);
+}

@@ -103,4 +103,8 @@ class ImageEmbed extends HTMLElement {
   }
 }
 
-window.customElements.define("image-embed", ImageEmbed);
+try {
+  window.customElements.define("image-embed", ImageEmbed);
+} catch (err) {
+  console.log(`Unable to define image-embed tag: your browser may not support custom elements`);
+}
