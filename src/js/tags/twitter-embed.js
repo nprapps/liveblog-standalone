@@ -5,12 +5,17 @@ class TwitterEmbed extends HTMLElement {
   constructor() {
     super();
     this.readyState = NOT_READY;
-    var observer = new IntersectionObserver(([e]) => {
+    var callback = ([e]) => {
       if (!e.isIntersecting) return;
       this.readyState = READY;
       this.populate(this.getAttribute("href"));
       observer.disconnect();
-    });
+    };
+    var options = {
+      rootMargin: "0px 0px 100px 0px",
+      threshold: 0
+    };
+    var observer = new IntersectionObserver(callback, options);
     observer.observe(this);
   }
 
