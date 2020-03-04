@@ -3,7 +3,7 @@ window.googletag = window.googletag || {cmd: []};
 var gptLoaded = false;
 var gptSetup = false;
 
-var slug = window.location.pathname.replace(/[^\/]+\.html$/, "").split("/").pop();
+var slug = window.location.pathname.replace(/[^\/]+\.html$/, "").split("/").filter(s => s).pop();
 var storyId = "liveblog-" + (slug || "localhost");
 var isStagingServer = window.location.hostname == "stage-apps.npr.org";
 var adSizeArray = ["fluid", [1300, 250]];
