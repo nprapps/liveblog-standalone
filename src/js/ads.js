@@ -7,10 +7,10 @@ var slug = window.location.pathname.replace(/[^\/]+\.html$/, "").split("/").filt
 var storyId = "liveblog-" + (slug || "localhost");
 var isStagingServer = window.location.hostname == "stage-apps.npr.org";
 var adSizeArray = ["fluid", [1300, 250]];
-var adUnitString = "/6735/n6735.npr/news_politics_elections";
+var adUnitString = "/6735/n6735.npr/news_politics/news_politics_liveblog";
 // Medium and small breakpoints
 if (window.innerWidth < 1024) {
-  adUnitString = "/6735/n6735.nprmobile/news_politics_elections";
+  adUnitString = "/6735/n6735.nprmobile/news_politics/news_politics_liveblog";
   adSizeArray.push([300, 250]);
 }
 var advelvetTargeting = [String(Math.floor(Math.random() * 20) + 1)];
