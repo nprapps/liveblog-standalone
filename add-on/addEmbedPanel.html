@@ -12,6 +12,7 @@
         <option value="sidechain">Graphic embed</option>
         <option value="youtube">YouTube Video</option>
         <option value="showmore">Show more button</option>
+        <option value="election">Primary results table</option>
       </select>
     </fieldset>
     
@@ -78,6 +79,26 @@
         <input id="video">
       </fieldset>
       <button class="add-embed">Add video</button>
+    </form>
+    
+    <form id="election">
+      <h2>Primary results table</h2>
+      <p>
+        Select an election from the list below to embed its results table from the <a href="https://apps.npr.org/elections20-primaries/" target="_blank">primary results listings</a>.
+      <fieldset>
+        <select id="election">
+          <? data.races.forEach(function(r) { ?>
+          <option
+            value="<?= [r.office, r.filename, r.state, r.caucus].join(":") ?>"
+          >
+            <?= r.state ?> - 
+            <?= ({ P: "President", G: "Governor", H: "U.S. House", S: "U.S. Senate" })[r.office] ?> -
+            <?= [r.date.getMonth() + 1, r.date.getDate(), r.date.getFullYear()].join("/") ?>
+          </option>
+          <? }); ?>
+        </select>
+      </fieldset>
+      <button class="add-embed">Add table</button>
     </form>
     
     <script>

@@ -27,11 +27,32 @@ var embeds = {
         data.video = data.video.match(/v=([^&]+)/)[1];
       }
     }
+  },
+  election: {
+    template: '<side-chain src="%src" id="primary-%counter">\n</side-chain>',
+    process: function(data) {
+      var segments = data.election.split(":");
+      var office = segments[0];
+      var file = segments[1];
+      var state = segments[2];
+      var caucus = segments[3];
+      data.src = [
+        "https://apps.npr.org/elections20-primaries/embeds/?theme=padded&race=",
+        caucus ? "C" : office,
+        "&data=",
+        file,
+        "&link=https://apps.npr.org/elections20-primaries/states/",
+        state,
+        ".html"
+      ].join("");
+    }
   }
 };
 
 function openEmbedPanel() {
-  var html = HtmlService.createHtmlOutput(template("addEmbedPanel")).setTitle("Configure add-on");
+  var races = readSheetAsObjects("1OQjETCNrojeOulPutjoSX2mb8ZDvY_eBTU7N2XbQNCM", "races");
+  races = races.filter(function(r) { return !r.feedOnly && r.office != "R" });
+  var html = HtmlService.createHtmlOutput(template("addEmbedPanel", { races: races })).setTitle("Configure add-on");
   var ui = DocumentApp.getUi();
   ui.showSidebar(html);
 }
