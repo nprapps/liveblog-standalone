@@ -1,0 +1,134 @@
+
+footer.mega-nav {
+
+  @tiny: ~"(max-width: 400px)";
+  @mobile: ~"(max-width: 650px)";
+  @mobile-above: ~"(min-width: 651px)";
+  @tablet: ~"(max-width: 768px)";
+  @tablet-above: ~"(min-width: 769px)";
+  @desktop: ~"(max-width: 875px)";
+  @wide: ~"(max-width: 950px)";
+
+  .gotham();
+  color: #333;
+  padding: 20px 15px 0;
+  position: relative;
+  z-index: 999;
+  justify-content: flex-start;
+  border-top: 1px solid #EEE;
+
+  body.embedded & {
+    display: none;
+  }
+
+  h3 {
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    color: inherit;
+
+    &.state-hed {
+      border-top: 1px solid #EEE;
+      padding-top: 33px;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  a, a:link, a:visited {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover { color: #aaa; }
+  }
+
+  .constrained {
+    max-width: 900px;
+    margin: auto;
+
+    @media (min-width: 1200px) {
+      max-width: 1200px;
+      padding-right: 300px;
+    }
+  }
+
+  .npr {
+    margin-top: 44px;
+
+    ul {
+      border-top: 1px solid #EEE;
+      color: #888;
+      font-size: 0.8rem;
+      padding-top: 11px;
+
+      li {
+        display: inline-block;
+        margin: 0 22px 3px 0;
+        padding: 0;
+        text-indent: 0;
+        white-space: nowrap;
+
+        @media @mobile-above {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .state-nav {
+    column-count: 5;
+    margin: 20px 0 0 0;
+
+    @media @desktop {
+      column-count: 3;
+    }
+
+    @media @mobile {
+      column-count: 2;
+    }
+
+    @media @tiny {
+      font-size: 0.9em;
+    }
+
+    a { line-height: 1.8; }
+  }
+
+  .more-2020 {
+    column-count: 3;
+    margin: 20px 0 33px 0;
+
+    @media @mobile {
+      column-count: 1;
+    }
+
+    @media @tablet {
+      column-count: 2;
+    }
+
+    @media @tiny {
+      font-size: 0.9em;
+    }
+
+    a { line-height: 1.8; }
+  }
+
+  .credits {
+    font-size: 0.9em;
+    color: #ccc;
+
+    p.credit-text {
+      margin: 0;
+
+      @media @mobile {
+        margin: 0 0 2px 0;
+      }
+    }
+
+    p { line-height: 1.6; }
+  }
+}
