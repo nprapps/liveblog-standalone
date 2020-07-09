@@ -69,7 +69,7 @@ The ``morphdom`` diff is configured to ignore the contents of custom elements, w
 Creating a new liveblog
 -----------------------
 
-First, you'll want to set up a new Google Doc. You can start with a blank document and use `Clasp <https://https://developers.google.com/apps-script/guides/clasp>`_ to push the add-on code up to its script editor, but it's probably easier to simply duplicate our `base document <https://docs.google.com/document/d/1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM/edit>`_, which already has the add-on enabled, or a recent liveblog document. If there's content already in the document, use the Liveblog menu to reset it. You should also use the menu to configure the document with a media URL prefix and an author dictionary spreadsheet.
+First, you'll want to set up a new Google Doc. You can start with a blank document and use `Clasp <https://developers.google.com/apps-script/guides/clasp>`_ to push the add-on code up to its script editor, but it's probably easier to simply duplicate our `base document <https://docs.google.com/document/d/1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM/edit>`_, which already has the add-on enabled, or a recent liveblog document. If there's content already in the document, use the Liveblog menu to reset it. You should also use the menu to configure the document with a media URL prefix and an author dictionary spreadsheet.
 
 Locally, create a branch in this repo with your liveblog slug, and update the ``project.json`` file with matching S3 paths and liveblog URLs. Set the "docs" property in that config file to point to the ID of the Google Doc you just created. With that done, you should be able to run ``grunt docs default`` to test the page on your current machine.
 
