@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/liveblog-dev"
+      "path": "liveblogs/convention-testing"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/liveblog-dev"
+      "path": "liveblogs/convention-testing"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/liveblog-dev/",
+  "url": "https://apps.npr.org/liveblogs/convention-testing/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1YP-qSizjJc6vBUrUpyH74FQZ5GjZYO5MEoj4XvDMziM"
+    "liveblog": "1A0_P_erD9a68PUH12EA7JbJFsLpHTlybXaToy5B-d8o"
   },
   "embedded": false,
   "production": true
