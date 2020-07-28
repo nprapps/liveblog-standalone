@@ -31,14 +31,25 @@
     </nav>
 
     <header id="top">
-      <div class="contain">
-        <h1><%= t.smarty(config.headline) %></h1>
-        <h2><%= t.smarty(config.subhead || "") %></h2>
+      <div class="wrapper">
+        <div class="contain">
+          <h1><%= t.smarty(config.headline) %></h1>
+          <h2><%= t.smarty(config.subhead || "") %></h2>
 
-        <%= t.include("_audioplayer.html", { config }) %>
+          <%= t.include("_audioplayer.html", { config }) %>
 
+        </div>
+        <div class="html-injection"><%= config.headerHTML %></div>
       </div>
-      <div class="html-injection"><%= config.headerHTML %></div>
+
+      <div class="subnav-wrapper">
+        <div class="subnav">
+          <div class="tab selected clickable">Monday</div>
+          <div class="tab clickable">Tuesday</div>
+          <div class="tab">Wednesday</div>
+          <div class="tab">Thursday</div>
+        </div>
+      </div>
     </header>
 
     <%= t.include("_liveblog.html", { doc, config, flags: { showAd: true } }) %>
