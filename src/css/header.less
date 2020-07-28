@@ -20,6 +20,7 @@
   margin: auto;
   margin-right: 10px;
   flex: 1;
+  padding-top: 6px;
   font-weight: bold;
   text-align: center;
   background: #2d506a;
@@ -38,6 +39,19 @@
   }
   &.selected {
     background: #237bbd;
+  }
+
+  .mobile {
+    display: none;
+
+    @media @tiny {
+      display: inline-block;
+    }
+  }
+  .desktop {
+    @media @tiny {
+      display: none;
+    }
   }
 }
 
