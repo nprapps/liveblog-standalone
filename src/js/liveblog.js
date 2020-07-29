@@ -3,6 +3,7 @@ require("./tags/image-embed");
 require("./tags/show-more");
 require("./tags/twitter-embed");
 require("./tags/youtube-video");
+require("./tags/npr-video");
 
 require("@nprapps/sidechain");
 
