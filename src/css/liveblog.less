@@ -1,7 +1,7 @@
 main.liveblog {
   margin: auto;
   max-width: @max-width;
-  padding: 20px 0;
+  padding-bottom: 20px;
 }
 
 .show-new {
@@ -57,7 +57,7 @@ main.liveblog {
 
 article.post {
   display: flex;
-  padding: var(--side-margin);
+  margin: var(--side-margin);
   font-family: @serif;
   font-size: 16px;
 
@@ -79,11 +79,19 @@ article.post {
 
     h2 {
       font-size: 16px;
+      background: #333;
+      padding: 12px 20px 10px 20px;
+      color: white;
+      margin-bottom: 0;
     }
 
     ul {
       margin: 0;
       padding: 0;
+
+      + iframe {
+        margin-top: 20px;
+      }
     }
 
     li {
@@ -93,6 +101,7 @@ article.post {
       + li {
         margin-top: .5em;
       }
+
     }
 
     image-embed,
@@ -103,7 +112,8 @@ article.post {
         float: right;
         width: 50%;
         margin-left: var(--side-margin);
-        margin-bottom: calc(var(--side-margin) / 2);
+        // margin-bottom: calc(var(--side-margin) / 2);
+        margin-bottom: 20px;
       }
     }
   }
@@ -232,6 +242,7 @@ article.post {
 
   .contents {
     flex: 1;
+    padding: var(--side-margin);
   }
 
   .pillbox {
