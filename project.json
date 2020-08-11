@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/20200819-dnc"
+      "path": "liveblogs/20200820-dnc"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/20200819-dnc"
+      "path": "liveblogs/20200820-dnc"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/20200819-dnc/",
+  "url": "https://apps.npr.org/liveblogs/20200820-dnc/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1BDkXTkv9iGBwzmMC-EIIkQ9Ot9vahk7jeQQuu72wPC0"
+    "liveblog": "1D188lrXIfYBBdsbYnNh_HXiN7GonaCwLFmxRLasgqH4"
   },
   "embedded": false,
   "production": true
