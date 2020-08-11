@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/convention-testing"
+      "path": "liveblogs/20200817-dnc"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/convention-testing"
+      "path": "liveblogs/20200817-dnc"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/convention-testing/",
+  "url": "https://apps.npr.org/liveblogs/20200817-dnc/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1A0_P_erD9a68PUH12EA7JbJFsLpHTlybXaToy5B-d8o"
+    "liveblog": "1fvfmtxphpuFfwNnMHM9ym_Z1nzbLjEV_0T3VSKa7cHs"
   },
   "embedded": false,
   "production": true
