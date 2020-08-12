@@ -18,10 +18,9 @@
       <ul class="primary">
         <li class="npr"><a href="https://npr.org"><img src="assets/logo.svg" alt="NPR" /></a></li>
         <li class="election"><a href="https://www.npr.org/sections/elections/"><img src="assets/logo-2020-election.svg" alt="2020 Election" /></a></li>
-        <li><a href="https://www.npr.org/sections/elections/">News</a></li>
-        <li><a href="https://www.npr.org/series/758097234/election-2020-issue-tracker">Issues</a></li>
-        <li><a href="https://www.npr.org/podcasts/510310/npr-politics-podcast">Podcast</a></li>
-        <li><a href="https://www.npr.org/newsletter/politics">Newsletter</a></li>
+        <li><a href="https://www.npr.org/2020/08/03/897202359/2020-electoral-map-ratings-trump-slides-biden-advantage-expands-over-270-votes">Electoral Map</a></li>
+        <li><a href="https://apps.npr.org/elections20-primaries/">Key Dates & Results</a></li>
+        <li><a href="https://www.npr.org/2020/05/20/858347477/money-tracker-how-much-trump-and-biden-have-raised-in-the-2020-election">Money Tracker</a></li>
       </ul>
 
       <ul class="secondary">
@@ -30,14 +29,36 @@
     </nav>
 
     <header id="top">
-      <div class="contain">
-        <h1><%= t.smarty(config.headline) %></h1>
-        <h2><%= t.smarty(config.subhead) %></h2>
+      <div class="wrapper">
+        <div class="contain">
+          <h1><%= t.smarty(config.headline) %></h1>
+          <h2><%= t.smarty(config.subhead || "") %></h2>
 
-        <%= t.include("_audioplayer.html", { config }) %>
+          <%= t.include("_audioplayer.html", { config }) %>
 
-
+        </div>
         <div class="html-injection"><%= config.headerHTML %></div>
+      </div>
+
+      <div class="subnav-wrapper">
+        <div class="subnav">
+          <a class="tab clickable" href="https://apps.npr.org/liveblogs/20200817-dnc/">
+            <span class="desktop">Monday</span>
+            <span class="mobile">Mon.</span>
+          </a>
+          <a class="tab selected clickable" href="https://apps.npr.org/liveblogs/20200818-dnc/">
+            <span class="desktop">Tuesday</span>
+            <span class="mobile">Tues.</span>
+          </a>
+          <a class="tab clickable" href="https://apps.npr.org/liveblogs/20200819-dnc/">
+            <span class="desktop">Wednesday</span>
+            <span class="mobile">Wed.</span>
+          </a>
+          <a class="tab clickable" href="https://apps.npr.org/liveblogs/20200820-dnc/">
+            <span class="desktop">Thursday</span>
+            <span class="mobile">Thurs.</span>
+          </a>
+        </div>
       </div>
     </header>
 
