@@ -8,7 +8,9 @@
     <%= t.include("partials/_head.html", { project: Object.assign(grunt.data.json.project, {
       title: config.socialHeadline,
       description: config.socialDescription,
-      socialImage: config.socialImage
+      socialImage: config.socialImage,
+      published: doc.posts.map(p => p.published).sort().shift(),
+      event: config.event
     })}) %>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="<%= config.socialHeadline %>" href="feed.rss">
