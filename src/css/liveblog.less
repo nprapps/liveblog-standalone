@@ -63,6 +63,7 @@ article.post {
 
   + article.post {
     border-top: 1px solid #ddd;
+    padding-top: var(--side-margin);
   }
 
   @media @mobile {
@@ -247,6 +248,10 @@ article.post {
   .contents {
     flex: 1;
     padding: var(--side-margin);
+  }
+
+  &:not(.featured) .contents {
+    padding-top: 0;
   }
 
   .pillbox {
