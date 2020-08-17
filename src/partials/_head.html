@@ -74,9 +74,18 @@
   "about": {
     "@type": "Event",
     "name": "<%= project.event %>",
-    "location": "npr.org",
     "startDate": "<%= new Date(project.published || Date.now()).toISOString() %>"
-  }
+  },
+  "liveBlogUpdate": <%= JSON.stringify((project.posts || []).map(function(post) { 
+    return {
+      "@type": "BlogPosting",
+      "headline": post.headline,
+      "url": `${project.url}#${post.slug}`,
+      "datePublished": new Date(post.published).toISOString(),
+      "articleBody": post.text.replace(/<[^>]+>/g, "").trim().slice(0, 200) + "..."
+    }
+  })) %>
+  ]
 }
 </script>
 
