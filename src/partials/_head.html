@@ -44,6 +44,38 @@
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= project.url %>"
+  },
+  "headline": "<%= project.title %>",
+  "image": {
+    "@type": "ImageObject",
+    "url": "<%= project.url + project.image %>"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "NPR Staff"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NPR",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "<%= project.url %>assets/logo.png",
+      "width": 2176,
+      "height": 725
+    }
+  },
+  "description": "<%= project.description %>",
+  "dateModified": "<%= new Date().toISOString() %>",
+  "datePublished": "<%= new Date(project.published || Date.now()).toISOString() %>"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
   "@type": "LiveBlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
