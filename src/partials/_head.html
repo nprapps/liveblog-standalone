@@ -75,7 +75,7 @@
     "@type": "Event",
     "name": "<%= project.event %>",
     "location": "npr.org",
-    "startDate": <%= new Date(project.published || Date.now()).toISOString() %>
+    "startDate": "<%= new Date(project.published || Date.now()).toISOString() %>"
   }
 }
 </script>
