@@ -73,7 +73,9 @@
   "datePublished": "<%= new Date(project.published || Date.now()).toISOString() %>",
   "about": {
     "@type": "Event",
-    "name": "<%= project.event %>"
+    "name": "<%= project.event %>",
+    "location": "npr.org",
+    "startDate": <%= new Date(project.published || Date.now()).toISOString() %>
   }
 }
 </script>
