@@ -57,7 +57,7 @@ main.liveblog {
 
 article.post {
   display: flex;
-  padding: var(--side-margin);
+  margin: var(--side-margin);
   font-family: @serif;
   font-size: 16px;
 
@@ -247,11 +247,6 @@ article.post {
   .contents {
     flex: 1;
     padding: var(--side-margin);
-    padding-top: 0;
-
-    @media @mobile {
-      padding: 0;
-    }
   }
 
   .pillbox {
