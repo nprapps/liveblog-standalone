@@ -17,7 +17,7 @@ var copy = function(text, callback = noop) {
   if (window.navigator.clipboard) {
     window.navigator.clipboard.writeText(text).then(
       () => callback(true),
-      () => callback(false)
+      err => { console.log(err); callback(false) }
     );
   } else {
     var currentFocus = document.activeElement;
