@@ -44,7 +44,7 @@
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
-  "@type": "NewsArticle",
+  "@type": "LiveBlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "<%= project.url %>"
@@ -69,7 +69,12 @@
     }
   },
   "description": "<%= project.description %>",
-  "datePublished": "<%= new Date().toISOString() %>"
+  "dateModified": "<%= new Date().toISOString() %>"
+  "datePublished": "<%= new Date(project.published || Date.now()).toISOString() %>",
+  "about": {
+    "@type": "Event",
+    "name": "<%= project.event %>"
+  }
 }
 </script>
 
