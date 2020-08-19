@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/20200825-rnc"
+      "path": "liveblogs/20200826-rnc"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/20200825-rnc"
+      "path": "liveblogs/20200826-rnc"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/20200825-rnc/",
+  "url": "https://apps.npr.org/liveblogs/20200826-rnc/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
@@ -28,7 +28,7 @@
   },
   "sheets": [],
   "docs": {
-    "liveblog": "1FT-ri4e5PRev8IHNN30ijhBfi4H_yXdAbzisMk3XX-I"
+    "liveblog": "1QOajAkFFEpbXiN5RnvqxkB6jCq5ENyezi8uZrVeA-No"
   },
   "embedded": false,
   "production": true
