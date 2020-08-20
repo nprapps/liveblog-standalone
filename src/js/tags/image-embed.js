@@ -31,8 +31,9 @@ a {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
-:host([narrow]) img {
+:host([narrow]) {
   max-width: 400px;
+  margin: auto;
 }
 `;
 
