@@ -26,9 +26,13 @@ module.exports = function(grunt) {
 
       var formatters = {
         link: (text, style) => `[${text}](${style.link.url})`,
-        bold: text => `<b>${text}</b>`,
-        italic: text => `<i>${text}</i>`
+        bold: (text) => `<b>${text}</b>`,
+        italic: (text) => `<i>${text}</i>`
       };
+
+      var isNewLine = (paragraph) =>
+        paragraph.elements.length == 1 &&
+        paragraph.elements[0].textRun.content == "\n";
 
       /*
        * Large document sets may hit rate limits; you can find details on your quota at:
@@ -48,9 +52,11 @@ module.exports = function(grunt) {
           var text = "";
 
           var lists = docResponse.data.lists;
+          var wasBlockQuote = false;
 
-          body.forEach(function(block) {
+          body.forEach(function(block, index) {
             if (!block.paragraph) return;
+            if (isNewLine(block.paragraph)) return;
             if (block.paragraph.bullet) {
               var list = lists[block.paragraph.bullet.listId];
               var level = block.paragraph.bullet.nestingLevel || 0;
@@ -64,11 +70,20 @@ module.exports = function(grunt) {
               var indent = "  ".repeat(level);
               text += indent + bullet;
             }
-            block.paragraph.elements.forEach(function(element) {
-              // console.log(element);
+
+            var isBlockQuote =
+              block.paragraph.paragraphStyle.indentStart &&
+              block.paragraph.paragraphStyle.indentFirstLine.magnitude;
+            if (isBlockQuote && !wasBlockQuote) {
+              text += "<blockquote>\n";
+            } else if (!isBlockQuote && wasBlockQuote) {
+              text += "</blockquote>";
+            }
+
+            block.paragraph.elements.forEach(function(element, index) {
               if (!element.textRun) return;
               var { content, textStyle } = element.textRun;
-              if (content.trim())
+              if (content.replace(/[ \t\r]+/g, ""))
                 for (var f in formatters) {
                   if (textStyle[f]) {
                     var [_, before, inside, after] = content.match(
@@ -79,9 +94,14 @@ module.exports = function(grunt) {
                 }
               text += content;
             });
+            wasBlockQuote = isBlockQuote;
           });
 
+          if (wasBlockQuote) {
+            text += "</blockquote>";
+          }
           text = text.replace(/\x0b/g, "\n");
+          text = text.replace(/\n+/g, "\n\n");
 
           console.log(`Writing document as data/${name}`);
           grunt.file.write(path.join("data", name), text);
