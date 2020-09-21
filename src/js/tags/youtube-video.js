@@ -63,7 +63,7 @@ class YouTube extends HTMLElement {
     observer.observe(this);
   }
 
-  get observedAttributes() {
+  static get observedAttributes() {
     return ["video"];
   }
 

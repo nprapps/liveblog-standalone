@@ -1,7 +1,7 @@
 main.liveblog {
   margin: auto;
   max-width: @max-width;
-  padding: 20px 0;
+  padding-bottom: 20px;
 }
 
 .show-new {
@@ -57,16 +57,21 @@ main.liveblog {
 
 article.post {
   display: flex;
-  padding: var(--side-margin);
+  margin: var(--side-margin);
   font-family: @serif;
   font-size: 16px;
 
   + article.post {
     border-top: 1px solid #ddd;
+    padding-top: var(--side-margin);
   }
 
   @media @mobile {
     display: block;
+  }
+
+  iframe > .video.audio {
+    margin-bottom: 0;
   }
 
   &.featured {
@@ -77,13 +82,25 @@ article.post {
     overflow: hidden;
     font-size: 14px;
 
+    .contents {
+      padding: var(--side-margin);
+    }
+
     h2 {
       font-size: 16px;
+      background: #333;
+      padding: 12px 20px 10px 20px;
+      color: white;
+      margin-bottom: 0;
     }
 
     ul {
       margin: 0;
       padding: 0;
+
+      + iframe {
+        margin-top: 20px;
+      }
     }
 
     li {
@@ -93,6 +110,7 @@ article.post {
       + li {
         margin-top: .5em;
       }
+
     }
 
     image-embed,
@@ -103,7 +121,8 @@ article.post {
         float: right;
         width: 50%;
         margin-left: var(--side-margin);
-        margin-bottom: calc(var(--side-margin) / 2);
+        // margin-bottom: calc(var(--side-margin) / 2);
+        margin-bottom: 20px;
       }
     }
   }
@@ -170,6 +189,10 @@ article.post {
       color: #888;
       text-decoration: none;
 
+      .embed & {
+        display: none;
+      }
+
       @media @mobile {
         margin-top: 0;
       }
@@ -232,6 +255,13 @@ article.post {
 
   .contents {
     flex: 1;
+    padding: 0 var(--side-margin);
+
+    padding-top: 0;
+
+    @media @mobile {
+      padding: 0;
+    }
   }
 
   .pillbox {
@@ -272,6 +302,7 @@ article.post {
     .gotham();
     font-weight: bold;
     font-size: 14px;
+    margin-bottom: 10px;
 
     a {
       text-decoration: none;

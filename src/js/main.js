@@ -1,6 +1,6 @@
 require("./liveblog");
 require("./ads");
-var track = require("./lib/tracking").trackApps;
+var { track, trackApps } = require("./lib/tracking");
 var events = require("./events");
 var $ = require("./lib/qsa");
 
@@ -23,7 +23,7 @@ setTimeout(function() {
     window.location = hash;
     var element = $.one(hash);
     if (element) element.scrollIntoView({ behavior: "smooth" });
-    track("jump-on-load", hash.slice(1));
+    trackApps("jump-on-load", hash.slice(1));
   }
 }, 2000);
 
@@ -32,6 +32,13 @@ document.body.addEventListener("click", function(e) {
   if (!link) return;
   var href= link.getAttribute("href");
   if (href[0] != "#") return;
-  track("internal-link-clicked", href.slice(1));
+  trackApps("internal-link-clicked", href.slice(1));
 });
 
+var trackGlobalNav = function(e) {
+  var href = this.href;
+  var text = this.innerText || "logo";
+  track("global navigation", `clicked ${text}`, href);
+};
+
+$("nav .primary a").forEach(el => el.addEventListener("click", trackGlobalNav));

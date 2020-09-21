@@ -1,9 +1,18 @@
 var stylesheet = `
+:host {
+  display: block;
+}
+
 img {
   max-width: 100%;
   height: auto;
-  position: relative;
+  position: absolute;
   display: block;
+}
+
+a {
+  display: block;
+  position: relative;
 }
 
 .placeholder {
@@ -24,7 +33,6 @@ img {
 
 :host([narrow]) img {
   max-width: 400px;
-  width: 100%;
 }
 `;
 
@@ -69,7 +77,10 @@ class ImageEmbed extends HTMLElement {
     };
     this.observer = new IntersectionObserver(callback, options);
 
-    this.image.onload = () => this.placeholder.style.display = "none";
+    this.image.onload = () => {
+      this.placeholder.style.display = "none";
+      this.image.style.position = "relative";
+    };
   }
 
   connectedCallback() {

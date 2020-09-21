@@ -2,6 +2,7 @@
 
 var embeds = {
   twitter: '<twitter-embed href="%tweet" id="tw-%counter">\n</twitter-embed>',
+  nprvideo: '<npr-video media="%media" id="nprvideo-%counter">\n</npr-video>',
   image: {
     template: '<image-embed src="%src" credit="%credit" %href %narrow id="img-%counter">\n</image-embed>',
     process: function(data) {

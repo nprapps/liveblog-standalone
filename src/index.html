@@ -8,7 +8,10 @@
     <%= t.include("partials/_head.html", { project: Object.assign(grunt.data.json.project, {
       title: config.socialHeadline,
       description: config.socialDescription,
-      socialImage: config.socialImage
+      socialImage: config.socialImage,
+      published: doc.posts.map(p => p.published).sort().shift(),
+      event: config.event,
+      posts: doc.posts.filter(p => p.published)
     })}) %>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="<%= config.socialHeadline %>" href="feed.rss">
@@ -19,10 +22,9 @@
       <ul class="primary">
         <li class="npr"><a href="https://npr.org"><img src="assets/logo.svg" alt="NPR" /></a></li>
         <li class="election"><a href="https://www.npr.org/sections/elections/"><img src="assets/logo-2020-election.svg" alt="2020 Election" /></a></li>
-        <li><a href="https://www.npr.org/series/758097234/election-2020-issue-tracker">Issues</a></li>
-        <li><a href="https://www.npr.org/2019/04/16/711812314/tracking-the-money-race-behind-the-presidential-campaign">Money</a></li>
-        <li><a href="https://apps.npr.org/elections20-primaries/">Key&nbsp;Dates</a></li>
-        <li><a href="https://www.npr.org/2020/02/10/799979293/how-many-delegates-do-the-2020-presidential-democratic-candidates-have">Delegate Count</a></li>
+        <li><a href="https://www.npr.org/2020/08/03/897202359/2020-electoral-map-ratings-trump-slides-biden-advantage-expands-over-270-votes">Electoral Map</a></li>
+        <li><a href="https://apps.npr.org/elections20-primaries/">Key Dates & Results</a></li>
+        <li><a href="https://www.npr.org/2020/05/20/858347477/money-tracker-how-much-trump-and-biden-have-raised-in-the-2020-election">Money Tracker</a></li>
       </ul>
 
       <ul class="secondary">
@@ -31,14 +33,16 @@
     </nav>
 
     <header id="top">
-      <div class="contain">
-        <h1><%= t.smarty(config.headline) %></h1>
-        <h2><%= t.smarty(config.subhead || "") %></h2>
+      <div class="wrapper">
+        <div class="contain">
+          <h1><%= t.smarty(config.headline) %></h1>
+          <h2><%= t.smarty(config.subhead || "") %></h2>
 
-        <%= t.include("_audioplayer.html", { config }) %>
+          <%= t.include("_audioplayer.html", { config }) %>
 
+        </div>
+        <div class="html-injection"><%= config.headerHTML %></div>
       </div>
-      <div class="html-injection"><%= config.headerHTML %></div>
     </header>
 
     <%= t.include("_liveblog.html", { doc, config, flags: { showAd: true } }) %>

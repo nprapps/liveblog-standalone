@@ -69,7 +69,8 @@
     }
   },
   "description": "<%= project.description %>",
-  "datePublished": "<%= new Date().toISOString() %>"
+  "dateModified": "<%= new Date().toISOString() %>",
+  "datePublished": "<%= new Date(project.published || Date.now()).toISOString() %>"
 }
 </script>
 
