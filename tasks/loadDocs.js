@@ -73,12 +73,15 @@ module.exports = function(grunt) {
 
             var isBlockQuote =
               block.paragraph.paragraphStyle.indentStart &&
-              block.paragraph.paragraphStyle.indentFirstLine.magnitude;
+              block.paragraph.paragraphStyle.indentFirstLine.magnitude && 
+              !block.paragraph.bullet;
             if (isBlockQuote && !wasBlockQuote) {
               text += "<blockquote>\n";
             } else if (!isBlockQuote && wasBlockQuote) {
-              text += "</blockquote>";
+              text += "</blockquote>\n";
             }
+
+            var p = "";
 
             block.paragraph.elements.forEach(function(element, index) {
               if (!element.textRun) return;
@@ -92,16 +95,17 @@ module.exports = function(grunt) {
                     content = before + formatters[f](inside, textStyle) + after;
                   }
                 }
-              text += content;
+              p += content;
             });
+            text += p + "\n";
             wasBlockQuote = isBlockQuote;
           });
 
           if (wasBlockQuote) {
-            text += "</blockquote>";
+            text += "</blockquote>\n";
           }
           text = text.replace(/\x0b/g, "\n");
-          text = text.replace(/\n+/g, "\n\n");
+          // text = text.replace(/\n{2,}/g, "\n\n");
 
           console.log(`Writing document as data/${name}`);
           grunt.file.write(path.join("data", name), text);
