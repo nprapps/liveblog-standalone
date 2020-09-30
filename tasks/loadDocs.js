@@ -75,9 +75,9 @@ module.exports = function(grunt) {
               block.paragraph.paragraphStyle.indentStart &&
               block.paragraph.paragraphStyle.indentFirstLine.magnitude;
             if (isBlockQuote && !wasBlockQuote) {
-              text += "<blockquote>\n";
+              text += "<blockquote>\n\n";
             } else if (!isBlockQuote && wasBlockQuote) {
-              text += "</blockquote>";
+              text += "</blockquote>\n\n";
             }
 
             block.paragraph.elements.forEach(function(element, index) {
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
           });
 
           if (wasBlockQuote) {
-            text += "</blockquote>";
+            text += "</blockquote>\n\n";
           }
           text = text.replace(/\x0b/g, "\n");
           text = text.replace(/\n+/g, "\n\n");
