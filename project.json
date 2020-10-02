@@ -2,11 +2,11 @@
   "s3": {
     "stage": {
       "bucket": "stage-apps.npr.org",
-      "path": "liveblogs/20201006-debate"
+      "path": "liveblogs/20201007-debate"
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "liveblogs/20201006-debate"
+      "path": "liveblogs/20201007-debate"
     }
   },
   "styles": {
@@ -19,7 +19,7 @@
   },
   "title": "Liveblog",
   "description": "",
-  "url": "https://apps.npr.org/liveblogs/20201006-debate/",
+  "url": "https://apps.npr.org/liveblogs/20201007-debate/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
