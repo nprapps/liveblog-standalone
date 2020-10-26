@@ -77,7 +77,6 @@ function addDraftPost(postData) {
   p("slug: " + slug);
   if (postData.factcheck) p("factcheck: true");
   if (postData.major) p("major: true");
-  if (postData.tags) p("tags: " + postData.tags);
   p("text::");
   p();
   var placeholder = p(postData.text || "[ post contents go here ]");
