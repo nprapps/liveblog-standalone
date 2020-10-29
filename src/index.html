@@ -22,8 +22,10 @@
       <ul class="primary">
         <li class="npr"><a href="https://npr.org"><img src="assets/logo.svg" alt="NPR" /></a></li>
         <li class="election"><a href="https://www.npr.org/sections/elections/"><img src="assets/logo-2020-election.svg" alt="2020 Election" /></a></li>
-        <li><a href="https://www.npr.org/2020/10/09/921596963/npr-electoral-map-biden-lead-widens-again-with-less-than-a-month-to-go">Electoral Map</a></li>
-        <li><a href="https://apps.npr.org/elections20-primaries/">Key Dates & Results</a></li>
+        <% if (!config.disableResultsNav) { %>
+        <li><a href="https://apps.npr.org/elections20-interactive/">Election results</a></li>
+        <% } %>
+        <li><a href="https://www.npr.org/2020/10/09/921596963/npr-electoral-map-biden-lead-widens-again-with-less-than-a-month-to-go">Electoral Ratings</a></li>
         <li><a href="https://www.npr.org/2020/05/20/858347477/money-tracker-how-much-trump-and-biden-have-raised-in-the-2020-election">Money Tracker</a></li>
       </ul>
 
