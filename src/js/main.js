@@ -1,5 +1,6 @@
 require("./liveblog");
 require("./ads");
+require("./nav");
 var { track, trackApps } = require("./lib/tracking");
 var events = require("./events");
 var $ = require("./lib/qsa");

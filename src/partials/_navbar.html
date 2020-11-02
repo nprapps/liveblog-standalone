@@ -1,0 +1,120 @@
+<% 
+var states = [
+  ["AL", "Alabama"],
+  ["AK", "Alaska"],
+  ["AZ", "Arizona"],
+  ["AR", "Arkansas"],
+  ["CA", "California"],
+  ["CO", "Colorado"],
+  ["CT", "Connecticut"],
+  ["DC", "D.C."],
+  ["DE", "Delaware"],
+  ["FL", "Florida"],
+  ["GA", "Georgia"],
+  ["HI", "Hawaii"],
+  ["ID", "Idaho"],
+  ["IL", "Illinois"],
+  ["IN", "Indiana"],
+  ["IA", "Iowa"],
+  ["KS", "Kansas"],
+  ["KY", "Kentucky"],
+  ["LA", "Louisiana"],
+  ["ME", "Maine"],
+  ["MD", "Maryland"],
+  ["MA", "Massachusetts"],
+  ["MI", "Michigan"],
+  ["MN", "Minnesota"],
+  ["MS", "Mississippi"],
+  ["MO", "Missouri"],
+  ["MT", "Montana"],
+  ["NE", "Nebraska"],
+  ["NV", "Nevada"],
+  ["NH", "New Hampshire"],
+  ["NJ", "New Jersey"],
+  ["NM", "New Mexico"],
+  ["NY", "New York"],
+  ["NC", "North Carolina"],
+  ["ND", "North Dakota"],
+  ["OH", "Ohio"],
+  ["OK", "Oklahoma"],
+  ["OR", "Oregon"],
+  ["PA", "Pennsylvania"],
+  ["RI", "Rhode Island"],
+  ["SC", "South Carolina"],
+  ["SD", "South Dakota"],
+  ["TN", "Tennessee"],
+  ["TX", "Texas"],
+  ["UT", "Utah"],
+  ["VT", "Vermont"],
+  ["VA", "Virginia"],
+  ["WA", "Washington"],
+  ["WV", "West Virginia"],
+  ["WI", "Wisconsin"],
+  ["WY", "Wyoming"]
+];
+
+var results = "https://apps.npr.org/elections20-interactive/";
+%>
+
+<nav class="results-nav">
+
+  <div class="constrained">
+
+    <div class="results-logo">
+      <img src="./assets/logo.svg" alt="NPR" />
+      <hr aria-hidden="true" />
+      <img src="./assets/logo-2020-election.svg" class="full" alt="2020 Elections" />
+      <img src="./assets/logo-2020-e.svg" class="short" alt="2020 Elections" />
+    </div>
+
+    <button class="menu-toggle" aria-controls="main-menu">
+      More live results
+      <svg viewBox="0 0 5 5" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="currentColor" d="M1,1.5 L4,1.5 L2.5,4 Z" />
+      </svg>
+    </button>
+
+    <ul class="menu-contents" id="main-menu">
+
+      <li> <a href="https://apps.npr.org/liveblogs/20201103-election/">
+        <span class="full label">Live Coverage</span>
+        <span class="abbrev label">Live</span>
+      </a> </li>
+      <li> <a href="<%= results %>#/president">
+        <span class="full label">President</span>
+        <span class="abbrev label">Pres.</span>
+      </a> </li>
+      <li> <a href="<%= results %>#/house">House</a> </li>
+      <li> <a href="<%= results %>#/senate">Senate</a> </li>
+      <li> <a href="<%= results %>#/governor">
+        <span class="full label">Governor</span>
+        <span class="abbrev label">Gov.</span>
+      </a> </li>
+
+      <li class="state-nav">
+        <button class="menu-toggle" aria-controls="states-menu">
+          State <span class="full label">results</span>
+          <svg viewBox="0 0 5 5" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="currentColor" d="M1,1.5 L4,1.5 L2.5,4 Z" />
+          </svg>
+        </button>
+
+        <ul class="states menu-contents" id="states-menu">
+          <% for (var [state, name] of states) {%>
+          <li>
+            <a href="<%= results %>#/states/<%= state %>"><%= name %></a>
+          </li>
+          <%}%>
+        </ul>
+      </li>
+
+    </ul>
+
+    <div class="donate">
+      <a href="https://www.npr.org/donations/support">
+        Donate
+      </a>
+    </div>
+
+  </div>
+</nav>
