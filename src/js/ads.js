@@ -6,25 +6,27 @@ var gptSetup = false;
 var slug = window.location.pathname.replace(/[^\/]+\.html$/, "").split("/").filter(s => s).pop();
 var storyId = "liveblog-" + (slug || "localhost");
 var isStagingServer = window.location.hostname == "stage-apps.npr.org";
-var adSizeArray = ["fluid", [728, 90], [970, 250], [1300, 250]];
+var adSizeArray = ["fluid", [300, 250], [728, 90], [970, 250], [1300, 250]];
 var adUnitString = "/6735/n6735.npr/news_politics/news_politics_liveblog";
 // Medium and small breakpoints
 if (window.innerWidth < 1024) {
   adUnitString = "/6735/n6735.nprmobile/news_politics/news_politics_liveblog";
-  adSizeArray.push([300, 250]);
 }
 var advelvetTargeting = [String(Math.floor(Math.random() * 20) + 1)];
 
-var observer = new IntersectionObserver(function([event]) {
-  if (event.isIntersecting) {
-    observer.disconnect();
-    var gpt = document.createElement("script");
-    gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
-    gpt.async = true;
-    gpt.defer = true;
-    document.body.appendChild(gpt);
-    console.log("Lazy-loading ad code...");
-    gptLoaded = true;
+var observer = new IntersectionObserver(function([e]) {
+  if (e.isIntersecting) {
+    if (!gptLoaded) {
+      var gpt = document.createElement("script");
+      gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
+      gpt.async = true;
+      gpt.defer = true;
+      document.body.appendChild(gpt);
+      console.log("Lazy-loading ad code...");
+      gptLoaded = true;
+    }
+    observer.unobserve(e.target);
+    e.target.loadAd();
   }
 });
 
@@ -36,7 +38,7 @@ class GoogleAd extends HTMLElement {
     if (!gptLoaded) observer.observe(this);
   }
 
-  connectedCallback() {
+  loadAd() {
     var id = this.getAttribute("id");
     if (id) return;
     id = "google-ad-" + guid++;
@@ -46,7 +48,6 @@ class GoogleAd extends HTMLElement {
       var adService = googletag.pubads();
 
       if (!gptSetup) {
-        adService.enableSingleRequest();
         adService.collapseEmptyDivs();
         adService.setTargeting("advelvet", advelvetTargeting);
         adService.setTargeting("storyid", [storyId]);
