@@ -120,7 +120,7 @@ posts.forEach(function(post, i) {
   </div>
 </article>
 
-<% if (i == 0 && flags.showAd) { %>
+<% if ((i == 0 || i == 4) && flags.showAd) { %>
 <div class="ad-block" aria-hidden="true">
   <google-ad></google-ad>
 </div>

@@ -57,7 +57,6 @@ class YouTube extends HTMLElement {
       if (!e.isIntersecting) return;
       this.readyState = READY;
       observer.disconnect();
-      console.log(this);
       this.attributeChangedCallback("video", null, this.getAttribute("video"));
     });
     observer.observe(this);
